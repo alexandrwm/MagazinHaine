@@ -1,0 +1,224 @@
+﻿@{
+    ViewData["Title"] = "Pagina principala";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+
+}
+<article id="scroller">
+    
+    <section id="carouselMen" class="carousel slide bg-secondary bg-opacity-50">
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="alert alert-warning text-start" role="alert" style="z-index:10; position:absolute; width:100vw;">
+                @TempData["ErrorMessage"]
+            </div>
+        }
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success text-start" role="alert" style="z-index:10; position:absolute; width:100vw;">
+                @TempData["SuccessMessage"]
+            </div>
+        }
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselMen" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselMen" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselMen" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner vh-100">
+            <div class="carousel-item active" data-interval="340000">
+                <video autoplay loop muted disablePictureInPicture controlslist="nodownload" type="video/mp4" src="~/wwwroot/video/cool.mp4">
+                </video>
+                <div class="carousel-content" style="left:10%;">
+                    <h5>Cool și stilat pentru bărbați.</h5>
+                    <p>Am selectat special pentru tine cele mai exclusiviste haine. Alegeți să faceți cumpărături după cum doriți.</p>
+                    <a class="btn btn-danger" asp-action="men" asp-controller="Home">Detalii</a>
+                </div>
+            </div> 
+            <div class="carousel-item" data-interval="10000">
+                    <div class="row">
+                        <div class="col-md-7">
+                            <img src="~/wwwroot/carousel/P010.png" class="d-block w-100" alt="...">
+                        </div>
+                        <div class="col-md-5" style="right:10%;">
+                        <div class="carousel-content" style="right:10%; color:white">
+                            <h5>Jachetă din puf de rață</h5>
+                            <p>Purtați întotdeauna o jachetă de puf ultraușoară. Până când a devenit o jachetă de puf într-un design subțire, ușor și cald de țesătură, pentru ca tu să te distrezi îmbrăcându-te în stilul tău.</p>
+                                <a class="btn btn-danger" asp-action="show" asp-controller="Product" asp-route-id="P010-02-02">Detalii</a>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <div class="carousel-item" data-interval="10000">
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="carousel-content" style="left:10%; color:white">
+                            <h5>Blazer Miracle Air</h5>
+                            <p>sacou Fabricat din material elastic bidirecțional, este ușor, elastic și se usucă rapid pentru un confort excepțional. Gulerul este puțin mai gros și arată bine în orice stil, atât casual, cât și formal. Sunt 2 nasturi metalici in fata si 4 pe maneci.</p>
+                            <a class="btn btn-danger" asp-action="show" asp-controller="Product" asp-route-id="P013-02-02">Detalii</a>
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                        <img src="~/wwwroot/carousel/P013.png" class="d-block w-100" alt="...">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselMen" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Inapoi</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselMen" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Inainte</span>
+        </button>
+    </section>
+    
+    <section id="carauselWomen" class="carousel slide bg-secondary bg-opacity-50">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carauselWomen" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carauselWomen" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carauselWomen" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active" data-interval="340000">
+                <video autoplay loop muted disablePictureInPicture controlslist="nodownload" type="video/mp4" src="~/wwwroot/video/women.mp4"></video>
+                <div class="carousel-content" style="right:10%;">
+                    <div class="carousel-content text-end">
+                        <h5>Îmbunătățește-ți frumusețea cu propriul tău stil.</h5>
+                        <p>Întotdeauna luăm în considerare momentele tale speciale. Am selectat cele mai confortabile haine pentru tine. Alege magazinul care iti place.</p>
+                        <a class="btn btn-danger" asp-action="women" asp-controller="Home">Detalii</a>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item" data-interval="10000">
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="carousel-content" style="left:10%; color:white">
+                            <h5>Blazer Miracle Air</h5>
+                            <p>Sacou fabricat din material elastic bidirecțional, este ușor, elastic și se usucă rapid pentru un confort excepțional. Gulerul este puțin mai gros și arată bine în orice stil, atât casual, cât și formal. Sunt 2 nasturi metalici in fata si 4 pe maneci.</p>
+                            <a class="btn btn-danger" asp-action="show" asp-controller="Product" asp-route-id="P016-01-01">Detalii</a>
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                        <img src="~/wwwroot/carousel/P016.png" class="d-block w-100" alt="...">
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item" data-interval="10000">
+                <div class="row">
+                    <div class="col-md-7">
+                        <img src="~/wwwroot/carousel/P017.png" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="col-md-5" style="right:10%;">
+                        <div class="carousel-content" style="right:10%; color:white">
+                            <h5>Jachetă din puf de rață</h5>
+                            <p>Purtați întotdeauna o jachetă de puf ultraușoară. Până când a devenit o jachetă de puf într-un design subțire, ușor și cald de țesătură, pentru ca tu să te distrezi îmbrăcându-te în stilul tău.</p>
+                            <a class="btn btn-danger" asp-action="show" asp-controller="Product" asp-route-id="P017-01-01">Detalii</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carauselWomen" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Inapoi</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carauselWomen" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Inainte</span>
+        </button>
+    </section>
+
+    <section id="carauselKids" class="carousel slide bg-secondary bg-opacity-50">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carauselKids" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carauselKids" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carauselKids" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active " data-interval="340000">
+                <video autoplay loop muted disablePictureInPicture controlslist="nodownload" type="video/mp4" src="~/wwwroot/video/kids.mp4"></video>
+                <div class="carousel-content" style="left:10%;">
+                    <h5>Fiecare vârstă are sens pentru copii.</h5>
+                    <p>Acordăm atenție fiecărui moment al vieții selectând cu atenție Am selectat haine pentru copilul tău aici.</p>
+                    <a class="btn btn-danger" asp-action="kids" asp-controller="Home">Detalii</a>
+                </div>
+            </div>
+            <div class="carousel-item" data-interval="10000">
+                <div class="row">
+                    <div class="col-md-7">
+                        <img src="~/wwwroot/carousel/P018.png" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="col-md-5" style="right:10%;">
+                        <div class="carousel-content" style="right:10%; color:white">
+                            <h5>Jachetă din puf de rață</h5>
+                            <p>Purtați întotdeauna o jachetă de puf ultraușoară. Până când a devenit o jachetă de puf într-un design subțire, ușor și cald de țesătură, pentru ca tu să te distrezi îmbrăcându-te în stilul tău.</p>
+                            <a class="btn btn-danger" asp-action="show" asp-controller="Product" asp-route-id="P018-01-01">Detalii</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item" data-interval="10000">
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="carousel-content" style="left:10%; color:white">
+                            <h5>Blazer Miracle Air</h5>
+                            <p>Sacou fabricat din material elastic bidirecțional, este ușor, elastic și se usucă rapid pentru un confort excepțional. Gulerul este puțin mai gros și arată bine în orice stil, atât casual, cât și formal. Sunt 2 nasturi metalici in fata si 4 pe maneci.</p>
+                            <a class="btn btn-danger" asp-action="show" asp-controller="Product" asp-route-id="P019-03-01">Detalii</a>
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                        <img src="~/wwwroot/carousel/P019.png" class="d-block w-100" alt="...">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carauselKids" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Inapoi</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carauselKids" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Inainte</span>
+        </button>
+    </section>
+    <section id="carauselCollection" class="carousel slide">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carauselCollection" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carauselCollection" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carauselCollection" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active" data-interval="340000">
+                <video autoplay loop muted disablePictureInPicture controlslist="nodownload" type="video/mp4" src="~/wwwroot/video/mario.mp4"></video>
+                <div class="carousel-content" style="left:10%;">
+                    <h5>Colectie speciala de vara</h5>
+                    <p>Suntem mereu atenți la vremea caldă. Am conceput îmbrăcăminte confortabilă de purtat, care protejează de soare și are o bună ventilație. Cu cele mai premium materiale deja furnizate.</p>
+                </div>
+            </div>
+            <div class="carousel-item" data-interval="10000">
+                <img src="~/wwwroot/carousel/banner2.jpg" class="d-block w-100" alt="...">
+                <div class="carousel-content text-end" style="right:10%;">
+                    <h5>Hanorac AIRism UV Protection, material plasă, fermoar, mâneci lungi.</h5>
+                    <p>Confortabil de purtat cu materialul de plasă AIRism pentru o bună ventilație. Combină funcțiile Cool Touch și un design pliabil cu UPF50+</p>
+                    <a class="btn btn-danger" asp-action="show" asp-controller="Product" asp-route-id="P015-06-01">Detalii</a>
+                </div>
+            </div>
+            <div class="carousel-item" data-interval="10000">
+                <img src="~/wwwroot/carousel/banner3.jpg" class="d-block w-100" alt="...">
+                <div class="carousel-content text-start" style="left:10%">
+                    <h5>Hanorac cu gluga Ultra Stretch UV Protection</h5>
+                    <p>Se usucă rapid cu funcția „DRY-EX” pentru a menține confortul pe tot parcursul zilei. Tehnologie de protecție UV (UPF50＋)</p>
+                    <a class="btn btn-danger" asp-action="show" asp-controller="Product" asp-route-id="P014-02-03">Detalii</a>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carauselCollection" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Inapoi</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carauselCollection" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Inainte</span>
+        </button>
+    </section>
+</article>
