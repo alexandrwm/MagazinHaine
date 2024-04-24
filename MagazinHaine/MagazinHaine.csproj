@@ -1929,11 +1929,16 @@
     <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\BuyingController.cs" />
+    <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\BuyDtl.cs" />
+    <Compile Include="Models\Cart.cs" />
+    <Compile Include="Models\CartDtl.cs" />
+    <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Staff.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -1964,6 +1969,11 @@
     <Content Include="Views\Buying\Edit.cshtml" />
     <Content Include="Views\Buying\Index.cshtml" />
     <Content Include="Views\Buying\Show.cshtml" />
+    <Content Include="Views\Cart\List.cshtml" />
+    <Content Include="Views\Cart\Show.cshtml" />
+    <Content Include="Views\Customer\Edit.cshtml" />
+    <Content Include="Views\Customer\Index.cshtml" />
+    <Content Include="Views\Customer\Show.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

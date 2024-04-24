@@ -2,9 +2,9 @@
 using System;
 using System.Web.Mvc;
 using System.IO;
-using ClothesShop.Models;
+using MagazinHaine.Models;
 
-namespace ClothesShop.Controllers
+namespace MagazinHaine.Controllers
 {
     public class AdminController : Controller
     {
@@ -54,13 +54,12 @@ namespace ClothesShop.Controllers
             }
 
             var currentStfID = Session["StfId"];
-            if (currentStfID != id)
+            if (currentStfID as string != id)
             {
                 TempData["ErrorMessage"] = "Id numar incorect.";
                 return RedirectToAction("Show", "Admin", new { id = currentStfID });
             }
-
-
+           
             if (id == null)
             {
                 TempData["ErrorMessage"] = "Specificati Id Nr.";

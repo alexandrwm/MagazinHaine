@@ -1,0 +1,146 @@
+﻿@model ClothesShop.Models.Customer
+
+@{
+    ViewData["Title"] = "Profil";
+}
+
+<div class="container">
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            @TempData["ErrorMessage"]
+        </div>
+    }
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success" role="alert">
+            @TempData.Peek("SuccessMessage")
+        </div>
+    }
+
+    <div class="mt-2 text-muted">
+        <h1>Informații personale</h1>
+    </div>
+    <div class="row">
+        <div class="row mb-4">
+            <div class="col-xl-8 col-lg-7">
+
+            </div>
+            <div class="col-xl-4 col-lg-5">
+                <div class="position-relative">
+                    <div class="position-absolute bottom-0 end-0">
+                        <a class="btn btn-outline-primary" asp-controller="Home" asp-action="Index">Inapoi</a>
+                        <a class="btn btn-outline-primary" asp-action="Show">Actualizeaza</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="row center">
+        <div class="col">
+            <div class="card shadow mb-4">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-4 mr-4">
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-gray-800">Poza de profil</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="card" style="border: 1px dashed #9d9da0; border-spacing: 50px">
+                                        <div class="card-body">
+                                            @* <div class="card mx-auto" style="height: 23rem; width: 23rem"> *@
+                                            <div class="mx-auto">
+                                                <img src="@ViewBag.ImgFile" class="card-img-top" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr/>
+                                    <div class="col">
+                                        <dev class="row">
+                                            <form method="post" enctype="multipart/form-data" asp-action="ImgUpload">
+                                                <div class="mb-3">
+
+                                                    <input type="hidden" name="theid" value="@Model.CusId" />
+
+                                                    <label for="formFile" class="form-label">Selecteaza imaginea</label>
+                                                    <input name="imgfiles" class="form-control" type="file" accept="image/png" required>
+                                                    <br>
+                                                    <input class="btn btn-success" type="submit" value="Incarca" />
+                                                    @* <input class="form-control" type="file" id="formFile" accept="image/png" required value="@ViewBag.ImgFile"> *@
+
+                                                </div>
+                                            </form>
+                                            <div class="mb-3">
+                                                <a class="btn btn-danger" onclick="return confirm('ยืนยันการลบรูป')" asp-action="ImgDelete" asp-route-id="@Model.CusId">
+                                                    Sterge
+                                                </a>
+                                            </div>
+                                        </dev>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div class="d-sm-flex align-items-center justify-content-between mb-2">
+                                <h1 class="h3 mb-2 text-muted">Detalii</h1>
+                            </div>
+                            <form asp-action="Edit">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <div class="form-group  mb-2">
+                                    <input type="hidden" asp-for="CusId" class="form-control" />
+                                    <span asp-validation-for="CusId" class="text-danger"></span>
+                                </div>
+                                <div class="form-group  mb-2">
+                                    <label class="control-label">Numele și prenumele </label>
+                                    <input asp-for="CusName" class="form-control" placeholder="Nume și prenume" required />
+                                    <span asp-validation-for="CusName" class="text-danger"></span>
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label class="control-label">Username</label>
+                                    <input asp-for="CusLogin" class="form-control" disabled />
+                                    <span asp-validation-for="CusLogin" class="text-danger" placeholder="Username"></span>
+                                    <input type="hidden" asp-for="CusLogin" class="form-control" />
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label class="control-label">Parola</label>
+                                    <input asp-for="CusPass" class="form-control" placeholder="Parola" required />
+                                    <span asp-validation-for="CusPass" class="text-danger"></span>
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label class="control-label">Email</label>
+                                    <input type="email" asp-for="CusEmail" class="form-control" placeholder="Email" required />
+                                    <span asp-validation-for="CusEmail" class="text-danger"></span>
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label class="control-label">Adresa</label>
+                                    <textarea asp-for="CusAdd" class="form-control" rows="4" placeholder="Adresa"></textarea>
+                                    <span asp-validation-for="CusAdd" class="text-danger"></span>
+                                </div>
+                                <div class="form-group mb-2">
+                                    <input type="hidden" asp-for="StartDate" class="form-control" placeholder="yyyy-MM-dd" disabled />
+                                    <span asp-validation-for="StartDate" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-group mb-2">
+                                    <input type="hidden" asp-for=" LastLogin" class="form-control" placeholder="yyyy-MM-dd" disabled />
+                                    <span asp-validation-for="LastLogin" class="text-danger"></span>
+                                </div>
+                                <br>
+                                <div class="mb-3">
+                                    <input class="btn btn-success" type="submit" value="Salveaza" />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @section Scripts {
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
+    }

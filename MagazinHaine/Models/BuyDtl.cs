@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace ClothesShop.Models
+namespace MagazinHaine.Models
 {
 
     public partial class BuyDtl
