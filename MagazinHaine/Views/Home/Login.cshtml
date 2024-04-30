@@ -1,10 +1,10 @@
-﻿@{
+﻿@model MagazinHaine.Models.UserLogin
+
+@{
     Layout = null;
     // ViewData["Title"] = "Login Page";
     <title>Autetificare utilizator</title>
 }
-@using Microsoft.AspNetCore.Http;
-@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor;
 
 <!DOCTYPE html>
 <html lang="en">
@@ -19,9 +19,9 @@
 
     <title>SB Admin 2 - Login</title>
 
-    <link href="~/AdminTemplate/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="~/wwwroot/AdminTemplate/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-    <link href="~/AdminTemplate/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="~/wwwroot/AdminTemplate/css/sb-admin-2.min.css" rel="stylesheet">
 </head>
 
 <body class="bg-gradient-primary">
@@ -39,7 +39,7 @@
                 </div>
             }
 
-            @if (HttpContextAccessor.HttpContext.Session.GetString("CusId") == null)
+            @if (Session["CusId"] == null)
             {
                 <div class="row justify-content-center">
                     <div class="col-xl-10 col-lg-12 col-md-9">
@@ -53,14 +53,29 @@
                                                 <h1 class="h4 text-gray-900 mb-4">Bine a-ți venit!</h1>
                                             </div>
                                             <form class="user" asp-controller="Home" asp-action="Login" method="post">
+                                                @Html.AntiForgeryToken()
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control form-control-user"
+                                                    <!--<input type="text" class="form-control form-control-user"
                                                            id="exampleInputuserName" name="userName" aria-describedby="emailHelp"
-                                                           placeholder="Username Id">
+                                                           placeholder="Username Id">-->
+                                                    @Html.TextBoxFor(m => m.Username, new 
+                                               {
+                                                   @class = "form-control",
+                                                   placeholder = "Username Id",
+                                                   required = true,
+                                                   type = "text"
+                                               })
                                                 </div>
                                                 <div class="form-group">
-                                                    <input type="password" class="form-control form-control-user"
-                                                           id="exampleInputPassword" name="userPass" placeholder="Parola">
+                                                   <!-- <input type="password" class="form-control form-control-user"
+                                                           id="exampleInputPassword" name="userPass" placeholder="Parola">-->
+                                                    @Html.TextBoxFor(m=> m.Password, new
+                                               {
+                                                   @class = "form-control",
+                                                   placeholder = "Parola",
+                                                   required = true,
+                                                   type = "password"
+                                               } )
                                                 </div>
                                                 <br></br>
                                                 <button type="submit" class="btn btn-primary btn-user btn-block">
@@ -81,14 +96,14 @@
             }
             else
             {
-                <div class="display-4">Welcome @HttpContextAccessor.HttpContext.Session.GetString("CusName")</div>
+                <div class="display-4">Welcome @Session["CusName"]</div>
             }
         </div>
 
-        <script src="~/AdminTemplate/vendor/jquery/jquery.min.js"></script>
-        <script src="~/AdminTemplate/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <script src="~/AdminTemplate/vendor/jquery-easing/jquery.easing.min.js"></script>
-        <script src="~/AdminTemplate/js/sb-admin-2.min.js"></script>
+        <script src="~/wwwroot/AdminTemplate/vendor/jquery/jquery.min.js"></script>
+        <script src="~/wwwroot/AdminTemplate/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="~/wwwroot/AdminTemplate/vendor/jquery-easing/jquery.easing.min.js"></script>
+        <script src="~/wwwroot/AdminTemplate/js/sb-admin-2.min.js"></script>
 
     </body>
 </html>

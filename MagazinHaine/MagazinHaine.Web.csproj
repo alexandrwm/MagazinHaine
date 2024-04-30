@@ -1940,6 +1940,7 @@
     <Compile Include="Models\CartDtl.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Staff.cs" />
+    <Compile Include="Models\UserLogin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\BdVM.cs" />
     <Compile Include="ViewModels\BuyingVM.cs" />
@@ -2170,6 +2171,16 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MagazinHaine.BusinessLogic\MagazinHaine.BusinessLogic.csproj">
+      <Project>{6B45B66E-8715-42FE-A9A1-5EC1AC85D991}</Project>
+      <Name>MagazinHaine.BusinessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MagazinHaine.Domain\MagazinHaine.Domain.csproj">
+      <Project>{4892F166-E954-4EB0-B167-CE4CA0AC2A1F}</Project>
+      <Name>MagazinHaine.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

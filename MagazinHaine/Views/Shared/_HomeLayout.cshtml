@@ -25,27 +25,27 @@
                             <nav class="main-menu" style="display: block;">
                                 <ul>
                                     <li class="current-list-item">
-                                        <a asp-controller="Home" asp-action="Index">Acasă</a>
+                                        <a href=@Url.Action("Index")>Acasă</a>
                                     </li>
                                     <li>
-                                        <a asp-controller="Home" asp-action="men">Bărbați</a>
+                                        <a href=@Url.Action("men")>Bărbați</a>
                                     </li>
                                     <li>
-                                        <a asp-controller="Home" asp-action="women">Femei</a>
+                                        <a href=@Url.Action("women")>Femei</a>
                                     </li>
                                     <li>
-                                        <a asp-controller="Home" asp-action="kids">Copii</a>
+                                        <a href=@Url.Action("kids")>Copii</a>
                                     </li>
 
                                     @if (Session["CusId"] != null)
                                     {
                                         <li style="float:right;">
-                                            <a href="#"><i class="bi bi-person-fill me-2"></i>ION</a>
+                                            <a href="#"><i class="bi bi-person-fill me-2"></i>@Session["CusName"]</a>
                                             <ul class="sub-menu" style="z-index:9999; position:absolute;">
-                                                <li><a class="dropdown-item" asp-controller="Customer" asp-action="Show" asp-route-id="@Session["CusId"]">Informații personale</a></li>
-                                                <li><a class="dropdown-item" asp-controller="Cart" asp-action="List" asp-route-cusid="@Session["CusId"]">Istoric comenzi</a></li>
+                                                <li><a class="dropdown-item"  href=@Url.Action("Show", "Customer") asp-route-id="@Session["CusId"]">Informații personale</a></li>
+                                                <li><a class="dropdown-item"  href=@Url.Action("List", "Cart") asp-route-cusid="@Session["CusId"]">Istoric comenzi</a></li>
                                                 <li>
-                                                    <a class="dropdown-item" asp-controller="Home" asp-action="Logout" onclick="return confirm('Deconectați-mă')">
+                                                    <a class="dropdown-item"  href=@Url.Action("Logout") onclick="return confirm('Deconectați-mă')">
                                                         <i class="bi bi-box-arrow-right me-2"></i>Deconectare
                                                     </a>
                                                 </li>
@@ -55,13 +55,13 @@
                                     else
                                     {
                                         <li style="float:right">
-                                            <a asp-controller="home" asp-action="Login"><i class="bi bi-person-fill me-2"></i>Autentificare</a>
+                                            <a href=@Url.Action("Login")><i class="bi bi-person-fill me-2"></i>Autentificare</a>
                                         </li>
                                     }
                                     @if (Session["CartId"] != null)
                                     {
                                         <li style="float:right">
-                                            <a asp-controller="Cart" asp-action="Show" asp-route-cartid="@Session["CartId"]">
+                                            <a  href=@Url.Action("Show", "Cart") asp-route-cartid="@Session["CartId"]">
                                                 <i class="bi bi-bag-fill"></i>
                                                 Cos de cumpărături [@Session["CartMoney"]][@Session["CartQty"]]
                                             </a>

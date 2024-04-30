@@ -1,18 +1,4 @@
-﻿@using Microsoft.AspNetCore.Http;
-@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor;
-@{
-    bool noContainerClass = ViewBag.NoContainerClass ?? false;
-    var CartId = HttpContextAccessor.HttpContext.Session.GetString("CartId");
-    var CartMoney = HttpContextAccessor.HttpContext.Session.GetString("CartMoney");
-    var CartQty = HttpContextAccessor.HttpContext.Session.GetString("CartQty");
-
-    var CusId = HttpContextAccessor.HttpContext.Session.GetString("CusId");
-    var CusName = HttpContextAccessor.HttpContext.Session.GetString("CusName");
-
-    var StfId = HttpContextAccessor.HttpContext.Session.GetString("StfId");
-    var StfName = HttpContextAccessor.HttpContext.Session.GetString("StfName");
-}
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -52,13 +38,13 @@
                                         <a asp-controller="Home" asp-action="kids">Copii</a>
                                     </li>
 
-                                    @if (@HttpContextAccessor.HttpContext.Session.GetString("CusId") != null)
+                                    @if (Session["CusId"] != null)
                                     {
                                         <li style="float:right">
-                                            <a href="#"><i class="bi bi-person-fill me-2"></i>@CusName</a>
+                                            <a href="#"><i class="bi bi-person-fill me-2"></i>@Session["CusName"]</a>
                                             <ul class="sub-menu">
-                                                <li><a class="dropdown-item" asp-controller="Customer" asp-action="Show" asp-route-id="@CusId">Informații personale</a></li>
-                                                <li><a class="dropdown-item" asp-controller="Cart" asp-action="List" asp-route-cusid="@CusId">Istoric comenzi</a></li>
+                                                <li><a class="dropdown-item" asp-controller="Customer" asp-action="Show" asp-route-id="@Session["CusId"]">Informații personale</a></li>
+                                                <li><a class="dropdown-item" asp-controller="Cart" asp-action="List" asp-route-cusid="@Session["CusId"]">Istoric comenzi</a></li>
                                                 <li>
                                                     <a class="dropdown-item" asp-controller="Home" asp-action="Logout" onclick="return confirm('Deconectați-mă')">
                                                         <i class="bi bi-box-arrow-right me-2"></i>Deconectare
@@ -70,15 +56,15 @@
                                     else
                                     {
                                         <li style="float:right">
-                                            <a asp-controller="home" asp-action="Login"><i class="bi bi-person-fill me-2"></i>Autentificare</a>
+                                            <a href=@Url.Action("Login")><i class="bi bi-person-fill me-2"></i>Autentificare</a>
                                         </li>
                                     }
-                                    @if (@HttpContextAccessor.HttpContext.Session.GetString("CartId") != null)
+                                    @if (Session["CartId"] != null)
                                     {
                                         <li style="float:right">
                                             <a asp-controller="Cart" asp-action="Show" asp-route-cartid="@CartId">
                                                 <i class="bi bi-bag-fill"></i>
-                                                Cos de cumpărături [@CartMoney][@CartQty]
+                                                <!--Cos de cumpărături [@CartMoney][@CartQty]-->
                                             </a>
                                         </li>
                                     }
