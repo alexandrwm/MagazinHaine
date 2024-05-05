@@ -11,7 +11,7 @@ namespace MagazinHaine.BusinessLogic.Core
     {
         public bool UserLoginAction(ULoginData data)
         {
-            return true;
+            return data.Username == "sanda" && data.Password == "sanda";
         }
     }
 }

@@ -31,10 +31,6 @@ namespace MagazinHaine.Controllers
             return View();
         }
 
-        public ActionResult Error()
-        {
-            return View();
-        }
         public ActionResult Login()
         {
             return View();
@@ -57,7 +53,7 @@ namespace MagazinHaine.Controllers
                 if (userLogin)
                 {
                     Session["CusName"] = data.Username;
-                    Session["CusId"] = 1;
+                    Session["CusId"] = "1";
                     return RedirectToAction("Index", "Home");
                 }
                 else return HttpNotFound();

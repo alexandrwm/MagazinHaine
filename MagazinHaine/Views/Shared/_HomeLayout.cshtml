@@ -42,7 +42,7 @@
                                         <li style="float:right;">
                                             <a href="#"><i class="bi bi-person-fill me-2"></i>@Session["CusName"]</a>
                                             <ul class="sub-menu" style="z-index:9999; position:absolute;">
-                                                <li><a class="dropdown-item"  href=@Url.Action("Show", "Customer") asp-route-id="@Session["CusId"]">Informații personale</a></li>
+                                                <li><a class="dropdown-item"  href=@Url.Action("Show", "Customer", new {id = Session["CusId"] }) asp-route-id="@Session["CusId"]">Informații personale</a></li>
                                                 <li><a class="dropdown-item"  href=@Url.Action("List", "Cart") asp-route-cusid="@Session["CusId"]">Istoric comenzi</a></li>
                                                 <li>
                                                     <a class="dropdown-item"  href=@Url.Action("Logout") onclick="return confirm('Deconectați-mă')">

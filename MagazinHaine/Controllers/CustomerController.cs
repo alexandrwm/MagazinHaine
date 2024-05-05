@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Web.Mvc;
 using MagazinHaine.Models;
@@ -29,8 +30,15 @@ namespace MagazinHaine.Controllers
             {
                 TempData["ErrorMessage"] = "Nu aveți permisiunea de a accesa datele.";
                 return RedirectToAction("Show", new { id = Session["CusId"] });
-            }
-			var obj = new Customer();
+			}
+			var obj = new Customer()
+			{
+				CusId = 1.ToString(),
+				CusName = "Sanda",
+				CusEmail = "test@gmail.com",
+				LastLogin = DateTime.Now,
+			};
+
 			if (obj == null)
 			{
 				TempData["ErrorMessage"] = "Id Nr. nu este găsit.";
@@ -87,24 +95,6 @@ namespace MagazinHaine.Controllers
 			}
 			TempData["SuccessMessage"] = "Imagine stearsa cu succes!";
 			return RedirectToAction("Show", new { id = id });
-		}
-
-		public ActionResult ImgUpload(string theid)
-		{
-			var FileName = theid;
-			//var FileExtension = Path.GetExtension(imgfiles.FileName);
-			var FileExtension = ".png";
-			var SaveFileName = FileName + FileExtension;
-			var SavePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\imgcus");
-			var SaveFilePath = Path.Combine(SavePath, SaveFileName);
-
-			using (FileStream fs = System.IO.File.Create(SaveFilePath))
-			{
-				//imgfiles.CopyTo(fs);
-				fs.Flush();
-			}
-			TempData["SuccessMessage"] = "Imagine incarcata cu succes!";
-            return RedirectToAction("Show", new { id = theid });
-		}
-	}
+		} 
+    }
 }

@@ -1988,6 +1988,8 @@
     <Content Include="Views\Customer\Edit.cshtml" />
     <Content Include="Views\Customer\Index.cshtml" />
     <Content Include="Views\Customer\Show.cshtml" />
+    <Content Include="Views\_ViewImports.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
