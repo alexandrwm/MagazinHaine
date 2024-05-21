@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MagazinHaine.Helpers
+namespace BeStreet.Helpers
 {
     public class Class1
     {

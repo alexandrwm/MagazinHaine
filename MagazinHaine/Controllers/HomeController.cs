@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Runtime.Remoting.Messaging;
 using System.Web.Mvc;
-using MagazinHaine.BusinessLogic;
-using MagazinHaine.BusinessLogic.Interfaces;
-using MagazinHaine.Domain.Entities.User;
-using MagazinHaine.Models;
+using BeStreet.BusinessLogic;
+using BeStreet.BusinessLogic.Interfaces;
+using BeStreet.Domain.Entities.User;
+using BeStreet.Models;
 
 
-namespace MagazinHaine.Controllers
+namespace BeStreet.Controllers
 {
     public class HomeController : Controller
     {
@@ -19,7 +19,7 @@ namespace MagazinHaine.Controllers
         public ActionResult Index()
         {
             ViewData["NoContainerClass"] = true;
-            
+            var recommend = _session.GetRecommendation();
 
             ViewBag.ErrorMessage = TempData["ErrorMessage"];
             return View();
@@ -86,6 +86,7 @@ namespace MagazinHaine.Controllers
 
 			return View();
         }
+
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		public ActionResult men(string stext)

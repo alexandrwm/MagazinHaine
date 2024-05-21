@@ -1,4 +1,4 @@
-﻿using MagazinHaine.Models;
+﻿using BeStreet.Models;
 using System;
 using System.Dynamic;
 using System.Globalization;

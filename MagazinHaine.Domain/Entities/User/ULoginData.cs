@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MagazinHaine.Domain.Entities.User
+namespace BeStreet.Domain.Entities.User
 {
     public class ULoginData
     {

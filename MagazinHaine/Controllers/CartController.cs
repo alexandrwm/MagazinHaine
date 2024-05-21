@@ -1,10 +1,10 @@
 ﻿using System.Globalization;
-using MagazinHaine.Models;
+using BeStreet.Models;
 using System.Dynamic;
 using System.Web.Mvc;
 using System;
 using System.Collections.Generic;
-namespace MagazinHaine.Controllers
+namespace BeStreet.Controllers
 {
     public class CartController : Controller
     {

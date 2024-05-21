@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace MagazinHaine.Controllers
+namespace BeStreet.Controllers
 {
     public class AboutController : Controller
     {

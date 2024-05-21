@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace MagazinHaine.Models
+namespace BeStreet.Models
 {
 
 

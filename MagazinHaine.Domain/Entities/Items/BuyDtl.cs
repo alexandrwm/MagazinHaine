@@ -2,15 +2,17 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace MagazinHaine.Models
+namespace BeStreet.Models
 {
 
-    public partial class BuyDtl
+    public class BuyDtl
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Display(Name = "Buying ID")]
-        public string BuyId { get; set; } = null;
+        public int BuyId { get; set; }
 
         [Display(Name = "Product")]
         public string PdId { get; set; } = null;

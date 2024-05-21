@@ -1,4 +1,4 @@
-﻿namespace ClothesShop.ViewModels
+﻿namespace BeStreet.ViewModels
 {
     public class DtlsVM
     {

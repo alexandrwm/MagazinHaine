@@ -1,4 +1,4 @@
-﻿namespace MagazinHaine.Models
+﻿namespace BeStreet.Models
 {
     public partial class CartDtl
     {

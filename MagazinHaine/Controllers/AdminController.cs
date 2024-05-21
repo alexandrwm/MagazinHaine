@@ -2,9 +2,9 @@
 using System;
 using System.Web.Mvc;
 using System.IO;
-using MagazinHaine.Models;
+using BeStreet.Models;
 
-namespace MagazinHaine.Controllers
+namespace BeStreet.Controllers
 {
     public class AdminController : Controller
     {

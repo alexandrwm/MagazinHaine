@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ClothesShop.ViewModels
+namespace BeStreet.ViewModels
 {
     public class PdVM
     {

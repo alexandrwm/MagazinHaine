@@ -2,9 +2,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Web.Mvc;
-using MagazinHaine.Models;
+using BeStreet.Models;
 
-namespace MagazinHaine.Controllers
+namespace BeStreet.Controllers
 {
     public class CustomerController : Controller
     {

@@ -1,17 +1,24 @@
-﻿using MagazinHaine.Domain.Entities.User;
+﻿using BeStreet.Domain.Entities.User;
+using BeStreet.BusinessLogic.DbContexts;
+using BeStreet.Domain.Entities.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MagazinHaine.BusinessLogic.Core
+namespace BeStreet.BusinessLogic.Core
 {
     public class UserApi
     {
         public bool UserLoginAction(ULoginData data)
         {
-            return data.Username == "sanda" && data.Password == "sanda";
+            UDbTable user;
+            using (var db = new UserContext())
+            {
+                user = db.Users.FirstOrDefault(u => u.Username == data.Username && u.Password == data.Password);
+            }
+            return user != null;
         }
     }
 }

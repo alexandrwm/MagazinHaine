@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ClothesShop.ViewModels
+namespace BeStreet.ViewModels
 {
     public class OrderDtl
     {
