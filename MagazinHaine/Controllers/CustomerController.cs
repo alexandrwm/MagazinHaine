@@ -1,8 +1,7 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Web.Mvc;
-using BeStreet.Models;
+using BeStreet.Domain.Entities.Items;
 
 namespace BeStreet.Controllers
 {
@@ -31,13 +30,7 @@ namespace BeStreet.Controllers
                 TempData["ErrorMessage"] = "Nu aveți permisiunea de a accesa datele.";
                 return RedirectToAction("Show", new { id = Session["CusId"] });
 			}
-			var obj = new Customer()
-			{
-				CusId = 1.ToString(),
-				CusName = "Sanda",
-				CusEmail = "test@gmail.com",
-				LastLogin = DateTime.Now,
-			};
+			Customer obj = null;
 
 			if (obj == null)
 			{

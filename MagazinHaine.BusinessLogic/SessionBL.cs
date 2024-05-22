@@ -15,5 +15,10 @@ namespace BeStreet.BusinessLogic
         {
             return UserLoginAction(data);
         }
+
+        public bool UserReg(URegData data)
+        {
+            return UserRegAction(data);
+        }
     }
 }

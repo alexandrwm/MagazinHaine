@@ -8,11 +8,9 @@ namespace BeStreet.Models
     // HAS FOREIGN KEY CUSID
     public class Cart
     {
-        // public string CartId { get; set; } = null;
+         public string CartId { get; set; } = null;
 
-        [Key, ForeignKey("Customer")]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int CusId { get; set; }
+        public string CusId { get; set; }
 
         public DateTime CartDate { get; set; }
 

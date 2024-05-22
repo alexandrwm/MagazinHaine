@@ -6,11 +6,15 @@ using System.Threading.Tasks;
 
 namespace BeStreet.Domain.Entities.User
 {
-    public class ULoginData
+    public class URegData
     {
+        public string CusName { get; set; }
         public string CusLogin { get; set; }
         public string CusPass { get; set; }
-        public DateTime  LastLogin {  get; set; }
+        public string CusEmail { get; set; }
+        public string CusAdd { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime LastLogin { get; set; }
 
     }
 }

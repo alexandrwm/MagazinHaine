@@ -1,17 +1,8 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
-@model ClothesShop.Models.Customer
+﻿@model BeStreet.Models.UserRegister
 @{
     Layout = null;
     <title>Inregistrarea utilizatorului</title>
-
 }
-@using Microsoft.AspNetCore.Http;
-@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor;
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -24,9 +15,9 @@
 
     <title>SB Admin 2 - Register</title>
 
-    <link href="~/AdminTemplate/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="~/wwwroot/AdminTemplate/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-    <link href="~/AdminTemplate/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="~/wwwroot/AdminTemplate/css/sb-admin-2.min.css" rel="stylesheet">
 
 </head>
 
@@ -48,48 +39,65 @@
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Creaza un cont!</h1>
                             </div>
-                            <form class="user"  asp-action="register">
-                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                    <div class="form-group">
-                                        <input type="hidden" asp-for="CusId" value="CXXX" class="form-control form-control-user"/>
-                                        <span asp-validation-for="CusId" class="text-danger"></span>
-                                    </div>
-                                    <div class="form-group">
-                                        <input asp-for="CusName" class="form-control form-control-user" placeholder="Introduce numele și prenumele" required />
-                                        <span asp-validation-for="CusName" class="text-danger"></span>
-                                    </div>
+                            @using (Html.BeginForm("Register", "Home", FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.ValidationMessage("ModelOnly", new { @class = "text-danger" })
 
-                                    <div class="form-group">
-                                        <input asp-for="CusLogin" class="form-control form-control-user" placeholder="Introduce Username Id" required />
-                                        <span asp-validation-for="CusLogin" class="text-danger"></span>
-                                    </div>
+                                <div class="form-group">
+                                    @Html.TextBoxFor(m => m.CusName, new
+                                        {
+                                        @class = "form-control form-control-user",
+                                        placeholder = "Introduce numele și prenumele",
+                                        required = true,
+                                        type = "text"
+                                        })
+                                    @Html.ValidationMessageFor(m => m.CusName, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.TextBoxFor(m => m.CusLogin, new
+                                        {
+                                        @class = "form-control form-control-user",
+                                        placeholder = "Introduce Username Id",
+                                        required = true,
+                                        type = "text"
+                                        })
+                                    @Html.ValidationMessageFor(m => m.CusLogin, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
 
-                                    <div class="form-group">
-                                        <input asp-for="CusPass" class="form-control form-control-user" placeholder="Parola" required />
-                                        <span asp-validation-for="CusPass" class="text-danger"></span>
-                                    </div>
+                                    @Html.TextBoxFor(m => m.CusPass, new
+                                        {
+                                        @class = "form-control form-control-user",
+                                        placeholder = "Parola",
+                                        required = true,
+                                        type = "password"
+                                        })
+                                    @Html.ValidationMessageFor(m => m.CusPass, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
 
-                                    <div class="form-group">
-                                        <input type="email" asp-for="CusEmail" class="form-control form-control-user" placeholder="Introduce email" required />
-                                        <span asp-validation-for="CusEmail" class="text-danger"></span>
-                                    </div>
+                                    @Html.TextBoxFor(m => m.CusEmail, new
+                                        {
+                                        @class = "form-control form-control-user",
+                                        placeholder = "Introduce email",
+                                        required = true,
+                                        type = "text"
+                                        })
+                                    @Html.ValidationMessageFor(m => m.CusEmail, "", new { @class = "text-danger" })
+                                </div>
 
-                                    <div class="form-group">
-                                        <input type="hidden" asp-for="StartDate" value="@DateTime.Today.ToString("yyyy-MM-dd")" class="form-control" />
-                                        <span asp-validation-for="StartDate" class="text-danger"></span>
-                                    </div>
-                                    <br>
-                                    <div class="mb-3">
-                                        <input class="btn btn-primary btn-user btn-block" type="submit" value="Inregistrare cont" />
-                                    </div>
-                                    <br>
-                                </form>
+                                <div class="mb-3">
+                                    <input class="btn btn-primary btn-user btn-block" type="submit" value="Inregistrare cont" />
+                                </div>
+                                <br>
+                            }
                             <hr>
                             <div class="text-center">
-                                <a class="small" asp-area="" asp-controller="Home" asp-action="Login">Deja ai un cont? Autentifica!</a>
+                                <a class="small" href=@Url.Action("Login")>Deja ai un cont? Autentifica!</a>
                             </div>
                         </div>
-                    </div>
+                            </div>
                 </div>
             </div>
         </div>

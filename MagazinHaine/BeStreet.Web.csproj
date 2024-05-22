@@ -1952,6 +1952,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\UserLogin.cs" />
+    <Compile Include="Models\UserRegister.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\BdVM.cs" />
     <Compile Include="ViewModels\BuyingVM.cs" />
@@ -1975,7 +1976,7 @@
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\men.cshtml" />
     <Content Include="Views\Home\Privacy.cshtml" />
-    <Content Include="Views\Home\register.cshtml" />
+    <Content Include="Views\Home\Register.cshtml" />
     <Content Include="Views\Home\Shop.cshtml" />
     <Content Include="Views\Home\women.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />

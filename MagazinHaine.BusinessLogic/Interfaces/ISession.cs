@@ -10,5 +10,6 @@ namespace BeStreet.BusinessLogic.Interfaces
     public interface ISession
     {
         bool UserLogin(ULoginData data);
+        bool UserReg(URegData data);
     }
 }

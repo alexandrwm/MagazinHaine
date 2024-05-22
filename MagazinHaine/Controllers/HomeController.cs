@@ -5,6 +5,7 @@ using BeStreet.BusinessLogic;
 using BeStreet.BusinessLogic.Interfaces;
 using BeStreet.Domain.Entities.User;
 using BeStreet.Models;
+using BeStreet.ViewModels;
 
 
 namespace BeStreet.Controllers
@@ -19,7 +20,7 @@ namespace BeStreet.Controllers
         public ActionResult Index()
         {
             ViewData["NoContainerClass"] = true;
-            var recommend = _session.GetRecommendation();
+            //var recommend = _session.GetRecommendation();
 
             ViewBag.ErrorMessage = TempData["ErrorMessage"];
             return View();
@@ -44,15 +45,14 @@ namespace BeStreet.Controllers
             {
                 ULoginData data = new ULoginData()
                 {
-                    Username = login.Username,
-                    Password = login.Password,
-                    Ip = Request.UserHostAddress,
-                    LoginTime = DateTime.Now
+                    CusLogin = login.CusLogin,
+                    CusPass = login.CusPass,
+                    LastLogin = DateTime.Now
                 };
                 var userLogin = _session.UserLogin(data);
                 if (userLogin)
                 {
-                    Session["CusName"] = data.Username;
+                    Session["CusName"] = data.CusLogin;
                     Session["CusId"] = "1";
                     return RedirectToAction("Index", "Home");
                 }
@@ -81,7 +81,7 @@ namespace BeStreet.Controllers
          
             return View();
         }
-        public ActionResult men()
+        public ActionResult Men()
         {
 
 			return View();
@@ -89,7 +89,7 @@ namespace BeStreet.Controllers
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult men(string stext)
+        public ActionResult Men(string stext)
 		{
 			if (stext == null)
 			{
@@ -99,13 +99,13 @@ namespace BeStreet.Controllers
 			return View();
 		}
 
-		public ActionResult women()
+        public ActionResult Women()
         {
 			
 			return View();
         }
 
-        public ActionResult kids()
+        public ActionResult Kids()
         {
 			
 			return View();
@@ -116,6 +116,46 @@ namespace BeStreet.Controllers
             return View();
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Register(UserRegister obj)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    URegData data = new URegData
+                    {
+                        CusName = obj.CusName,
+                        CusLogin = obj.CusLogin,
+                        CusPass = obj.CusPass,
+                        CusEmail = obj.CusEmail,
+                        StartDate = DateTime.Now,
+                        LastLogin = DateTime.Now
+                    };
+
+                    var userReg = _session.UserReg(data);
+
+                    if (!userReg)
+                    {
+                        ViewBag.ErrorMessage = "Numele de utilizator deja există.";
+                        return View(obj);
+                    }
+
+                    TempData["SuccessMessage"] = "Inregistrat cu succes!";
+
+                    return RedirectToAction("Login", "Home");
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.ErrorMessage = ex.Message;
+                return View(obj);
+            }
+
+            ViewBag.ErrorMessage = "Eroare la înregistrare.";
+            return View(obj);
+        }
     }
 }
     
