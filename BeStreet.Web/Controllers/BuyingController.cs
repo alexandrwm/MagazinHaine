@@ -1,4 +1,5 @@
-﻿using BeStreet.Models;
+﻿using BeStreet.Domain.Entities.Items;
+using BeStreet.Models;
 using System;
 using System.Dynamic;
 using System.Globalization;

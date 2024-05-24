@@ -15,12 +15,12 @@ namespace BeStreet.BusinessLogic.DbContexts
         public virtual DbSet<Target> Targets { get; set; }
         public virtual DbSet<Status> Statuses { get; set; }
 
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Product>()
-                        .HasRequired<Color>(e => e.Product)
+        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        //{
+        //    modelBuilder.Entity<Product>()
+        //                .HasRequired<Color>(e => e.Product)
 
-            base.OnModelCreating(modelBuilder);
-        }
+        //    base.OnModelCreating(modelBuilder);
+        //}
     }
 }

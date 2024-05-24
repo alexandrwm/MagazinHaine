@@ -93,47 +93,47 @@ namespace BeStreet.BusinessLogic.Core
             return cusId;
         }
 
-        public  LoadMenProductsAction()
-        {
-            using (var db = new BeStreetContext())
-            {
-                var pdvm = from p in db.Products
+        //public  LoadMenProductsAction()
+        //{
+        //    using (var db = new BeStreetContext())
+        //    {
+        //        var pdvm = from p in db.Products
 
-                           join pt in db.ProductTypes on p.PdtId equals pt.PdtId into join_p_pt
+        //                   join pt in db.ProductTypes on p.PdtId equals pt.PdtId into join_p_pt
 
-                           from p_pt in join_p_pt.DefaultIfEmpty()
+        //                   from p_pt in join_p_pt.DefaultIfEmpty()
 
-                           join color in db.Colors on p.ColorId equals color.ColorId into join_p_color
-                           from p_color in join_p_color.DefaultIfEmpty()
+        //                   join color in db.Colors on p.ColorId equals color.ColorId into join_p_color
+        //                   from p_color in join_p_color.DefaultIfEmpty()
 
-                           join size in db.Sizes on p.SizeId equals size.SizeId into join_p_size
-                           from p_size in join_p_size.DefaultIfEmpty()
+        //                   join size in db.Sizes on p.SizeId equals size.SizeId into join_p_size
+        //                   from p_size in join_p_size.DefaultIfEmpty()
 
-                           join target in db.Targets on p.TargetId equals target.TargetId into join_p_target
-                           from p_target in join_p_target.DefaultIfEmpty()
+        //                   join target in db.Targets on p.TargetId equals target.TargetId into join_p_target
+        //                   from p_target in join_p_target.DefaultIfEmpty()
 
-                           join status in db.Statuses on p.StatusId equals status.StatusId into join_p_status
-                           from p_status in join_p_status.DefaultIfEmpty()
+        //                   join status in db.Statuses on p.StatusId equals status.StatusId into join_p_status
+        //                   from p_status in join_p_status.DefaultIfEmpty()
 
-                           where p_target.TargetName.Equals("Barbati")
+        //                   where p_target.TargetName.Equals("Barbati")
 
-                           select new PdFilterVM
-                           {
-                               PdId = p.PdId,
-                               ColorId = p.ColorId,
-                               ColorName = p_color.ColorName,
-                               SizeId = p_size.SizeId,
-                               SizeName = p_size.SizeName,
-                               TargetName = p_target.TargetName,
-                               PdName = p.PdName,
-                               PdtName = p_pt.PdtName,
-                               PdPrice = p.PdPrice,
-                               PdCost = p.PdCost,
-                               PdStk = p.PdStk,
-                               StatusName = p_status.StatusName,
-                           };
-                return pdvm;
-            }
-        }
+        //                   select new PdFilterVM
+        //                   {
+        //                       PdId = p.PdId,
+        //                       ColorId = p.ColorId,
+        //                       ColorName = p_color.ColorName,
+        //                       SizeId = p_size.SizeId,
+        //                       SizeName = p_size.SizeName,
+        //                       TargetName = p_target.TargetName,
+        //                       PdName = p.PdName,
+        //                       PdtName = p_pt.PdtName,
+        //                       PdPrice = p.PdPrice,
+        //                       PdCost = p.PdCost,
+        //                       PdStk = p.PdStk,
+        //                       StatusName = p_status.StatusName,
+        //                   };
+        //        return pdvm;
+        //    }
+        //}
     }
 }
