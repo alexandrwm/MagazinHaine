@@ -1,0 +1,66 @@
+﻿@model BeStreet.Domain.Entities.User.UserProfile
+
+@{
+    ViewData["Title"] = "Editare profil";
+}
+<div class="card shadow w-50 mx-auto ">
+    <div class="card-header p-5">
+        <h1>Editare Client</h1>
+    </div>
+    <div class="card-body d-flex justify-content-center align-items-center">
+        <div class="col-md-4">
+            @using (Html.BeginForm("Edit", "Customer", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationMessage("ModelOnly", new { @class = "text-danger" })
+                <div class="form-group">
+                    <label class="control-label">Numele și prenumele </label>
+                    @Html.TextBoxFor(m => m.CusName, new
+               {
+                   @class = "form-control",
+               })
+                    @Html.ValidationMessageFor(m => m.CusName, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Username</label>
+                    @Html.TextBoxFor(m => m.CusLogin, new
+               {
+                   @class = "form-control",
+                   disabled = true,
+               })
+                    @Html.ValidationMessageFor(m => m.CusLogin, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Parola</label>
+                    @Html.TextBoxFor(m => m.CusPass, new
+               {
+                   @class = "form-control",
+                   type = "password"
+               })
+                    @Html.ValidationMessageFor(m => m.CusPass, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Email</label>
+                    @Html.TextBoxFor(m => m.CusEmail, new
+               {
+                   @class = "form-control",
+                   type = "email"
+               })
+                    @Html.ValidationMessageFor(m => m.CusEmail, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Adresa</label>
+                    @Html.TextAreaFor(m => m.CusAdd, new
+               {
+                   @class = "form-control",
+               })
+                    @Html.ValidationMessageFor(m => m.CusAdd, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group mt-2">
+                    <input type="submit" value="Salveaza" class="btn btn-primary" onclick="return confirm('Informatia este corecta?')" />
+                    <a class="btn btn-light" href=@Url.Action("Show", "Customer", new { id = (int)Session["CusId"] })>Anuleaza</a>
+                </div>
+            }
+        </div>
+    </div>
+</div>

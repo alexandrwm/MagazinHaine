@@ -1,15 +1,14 @@
-﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeStreet.Web", "MagazinHaine\BeStreet.Web.csproj", "{A851D675-1B9B-4D62-9C40-E2895FA59D69}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeStreet.Web", "BeStreet.Web\BeStreet.Web.csproj", "{A851D675-1B9B-4D62-9C40-E2895FA59D69}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeStreet.BusinessLogic", "MagazinHaine.BusinessLogic\BeStreet.BusinessLogic.csproj", "{6B45B66E-8715-42FE-A9A1-5EC1AC85D991}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeStreet.BusinessLogic", "BeStreet.BusinessLogic\BeStreet.BusinessLogic.csproj", "{6B45B66E-8715-42FE-A9A1-5EC1AC85D991}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeStreet.Domain", "MagazinHaine.Domain\BeStreet.Domain.csproj", "{4892F166-E954-4EB0-B167-CE4CA0AC2A1F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeStreet.Domain", "BeStreet.Domain\BeStreet.Domain.csproj", "{4892F166-E954-4EB0-B167-CE4CA0AC2A1F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeStreet.Helpers", "MagazinHaine.Helpers\BeStreet.Helpers.csproj", "{03668E78-FF92-47F9-B73B-11A13610B91A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeStreet.Helpers", "BeStreet.Helpers\BeStreet.Helpers.csproj", "{03668E78-FF92-47F9-B73B-11A13610B91A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

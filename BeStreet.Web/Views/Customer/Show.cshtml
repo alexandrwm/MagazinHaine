@@ -1,0 +1,132 @@
+﻿@model BeStreet.Domain.Entities.User.UserProfile
+
+@{
+    ViewData["Title"] = "Profil";
+}
+
+<div class="container">
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            @TempData["ErrorMessage"]
+        </div>
+    }
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success" role="alert">
+            @TempData.Peek("SuccessMessage")
+        </div>
+    }
+
+    <div class="mt-2 text-muted">
+        <h1>Informații personale</h1>
+    </div>
+    <div class="row">
+        <div class="row mb-4">
+            <div class="col-xl-8 col-lg-7">
+
+            </div>
+            <div class="col-xl-4 col-lg-5">
+                <div class="position-relative">
+                    <div class="position-absolute bottom-0 end-0">
+                        <a class="btn btn-outline-primary" href = @Url.Action("Index", "Home")>Inapoi</a>
+                        <a class="btn btn-outline-primary" href = @Url.Action("Show")>Actualizeaza</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="row center">
+        <div class="col">
+            <div class="card shadow mb-4">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="d-sm-flex align-items-center justify-content-between mb-2">
+                                <h1 class="h3 mb-2 text-muted">Detalii</h1>
+                            </div>
+                            @using (Html.BeginForm("Edit", "Customer", FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.ValidationMessage("ModelOnly", new { @class = "text-danger" })
+                                <div class="form-group  mb-2">
+                                    <label class="control-label">Numele și prenumele </label>
+                                    @Html.TextBoxFor(m => m.CusName, new
+                               {
+                                   @class = "form-control",
+                                   placeholder = "Nume și prenume",
+                                   required = true,
+                                   type = "text"
+                               })
+                                    @Html.ValidationMessageFor(m => m.CusName, "", new { @class = "text-danger" })
+                                    @*<input asp-for="CusName" class="form-control" placeholder="Nume și prenume" required />*@
+                                    @*<span asp-validation-for="CusName" class="text-danger"></span>*@
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label class="control-label">Username</label>
+                                    @Html.TextBoxFor(m => m.CusLogin, new
+                               {
+                                   @class = "form-control",
+                                   placeholder = "Username",
+                                   @readonly = true,
+                                   required = true,
+                                   type = "text"
+                               })
+                                    @Html.ValidationMessageFor(m => m.CusLogin, "", new { @class = "text-danger" })
+                                    @*<input asp-for="CusLogin" class="form-control" disabled />*@
+                                    @*<span asp-validation-for="CusLogin" class="text-danger" placeholder="Username"></span>*@
+                                    @*<input type="hidden" asp-for="CusLogin" class="form-control" />*@
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label class="control-label">Parola</label>
+                                    @Html.TextBoxFor(m => m.CusPass, new
+                               {
+                                   @class = "form-control",
+                                   placeholder = "Parola",
+                                   required = true,
+                                   type = "password"
+                               })
+                                    @Html.ValidationMessageFor(m => m.CusPass, "", new { @class = "text-danger" })
+                                    @*<input asp-for="CusPass" class="form-control" placeholder="Parola" required />*@
+                                    @*<span asp-validation-for="CusPass" class="text-danger"></span>*@
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label class="control-label">Email</label>
+                                    @Html.TextBoxFor(m => m.CusEmail, new
+                               {
+                                   @class = "form-control",
+                                   placeholder = "Email",
+                                   required = true,
+                                   type = "email"
+                               })
+                                    @Html.ValidationMessageFor(m => m.CusEmail, "", new { @class = "text-danger" })
+                                    @*<input type="email" asp-for="CusEmail" class="form-control" placeholder="Email" required />*@
+                                    @*<span asp-validation-for="CusEmail" class="text-danger"></span>*@
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label class="control-label">Adresa</label>
+                                    @Html.TextAreaFor(m => m.CusAdd, new
+                               {
+                                   @class = "form-control",
+                                   placeholder = "Adresa",
+                                   rows = "4",
+                                   type = "text"
+                               })
+                                    @Html.ValidationMessageFor(m => m.CusAdd, "", new { @class = "text-danger" })
+                                    @*<textarea asp-for="CusAdd" class="form-control" rows="4" placeholder="Adresa"></textarea>
+        <span asp-validation-for="CusAdd" class="text-danger"></span>*@
+                                </div>
+                                <br>
+                                <div class="mb-3">
+                                    <input class="btn btn-success" type="submit" value="Salveaza" />
+                                </div>
+                            }
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
