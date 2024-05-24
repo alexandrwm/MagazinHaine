@@ -58,7 +58,7 @@
                 </div>
                 <div class="form-group mt-2">
                     <input type="submit" value="Salveaza" class="btn btn-primary" onclick="return confirm('Informatia este corecta?')" />
-                    <a class="btn btn-light" href=@Url.Action("Show", "Customer", new { id = (int)Session["CusId"] })>Anuleaza</a>
+                    <a class="btn btn-light" href=@Url.Action("Show", "Customer", new { id = (int)Session["UserId"] })>Anuleaza</a>
                 </div>
             }
         </div>

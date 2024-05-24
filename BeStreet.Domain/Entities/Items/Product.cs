@@ -1,50 +1,51 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace BeStreet.Models
+namespace BeStreet.Domain.Entities.Items
 {
-    public partial class Product
+    public class Product
     {
         [Key]
-        [Required(ErrorMessage = "Required Product ID")]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Display(Name = "Product ID")]
-        public string PdId { get; set; } = null;
+        public int PdId { get; set; }
 
         [Required(ErrorMessage = "Required Color")]
         [Display(Name = "Color")]
-        public byte ColorId { get; set; }
+        public int ColorId { get; set; }
 
         [Required(ErrorMessage = "Required Size")]
         [Display(Name = "Size")]
-        public byte SizeId { get; set; }
+        public int SizeId { get; set; }
 
         [Required(ErrorMessage = "Required Product Name")]
         [Display(Name = "Product Name")]
-        public string PdName { get; set; } = null;
+        public string PdName { get; set; }
 
         [Display(Name = "Product Detail")]
         public string PdDtls { get; set; }
 
         [Required(ErrorMessage = "Required Price")]
         [Display(Name = "Price")]
-        public double? PdPrice { get; set; }
+        public double PdPrice { get; set; }
 
-        [Required(ErrorMessage = "Required Cost")]
-        [Display(Name = "Cost")]
-        public double? PdCost { get; set; }
+        //[Required(ErrorMessage = "Required Cost")]
+        //[Display(Name = "Cost")]
+        //public double PdCost { get; set; }
 
         [Display(Name = "Inventories")]
-        public int? PdStk { get; set; }
+        public int PdStk { get; set; }
 
         [Display(Name = "Type")]
-        public byte? PdtId { get; set; }
+        public int PdtId { get; set; }
 
         [Display(Name = "Status")]
-        public byte? StatusId { get; set; }
+        public int StatusId { get; set; }
 
         [Display(Name = "Target")]
-        public byte? TargetId { get; set; }
+        public int TargetId { get; set; }
 
         [Display(Name = "Suppliers")]
         public string SupId { get; set; }

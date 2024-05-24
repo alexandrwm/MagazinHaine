@@ -1,4 +1,11 @@
-﻿<!DOCTYPE html>
+﻿@{
+    bool noContainerClass = ViewBag.NoContainerClass ?? false;
+    var CartId = Session["CartId"] as string;
+    var CartMoney = Session["CartMoney"] as string;
+    var CartQty = Session["CartQty"] as string;
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -28,7 +35,7 @@
                                         <a href=@Url.Action("Index", "Home")>Acasă</a>
                                     </li>
                                     <li>
-                                        <a href=@Url.Action("men", "Home")>Barbați</a>
+                                        <a href=@Url.Action("Men", "Home")>Barbați</a>
                                     </li>
                                     <li>
                                         <a href=@Url.Action("women", "Home")>Femei</a>
@@ -37,23 +44,23 @@
                                         <a @Url.Action("kids", "Home")>Copii</a>
                                     </li>
 
-                                    @if (Session["CusId"] != null)
+                                    @if (Session["UserId"] != null)
                                     {
                                         <li style="float:right">
-                                            <a href="#"><i class="bi bi-person-fill me-2"></i>@Session["CusName"]</a>
+                                            <a href="#"><i class="bi bi-person-fill me-2"></i>@Session["UserName"]</a>
                                             <ul class="sub-menu">
-                                                <li><a class="dropdown-item" href=@Url.Action("Show", "Customer", new {id = Session["CusId"] })>Informații personale</a></li>
-                                                <li><a class="dropdown-item" href=@Url.Action("List", "Cart", new { cusid = Session["CusId"] })>Istoric comenzi</a></li>
+                                                <li><a class="dropdown-item" href=@Url.Action("Show", "Customer", new { id = Session["UserId"] })>Informații personale</a></li>
+                                                <li><a class="dropdown-item" href=@Url.Action("List", "Cart", new { cusid = Session["UserId"] })>Istoric comenzi</a></li>
                                                 <li>
                                                     <a class="dropdown-item" href=@Url.Action("Logout", "Home") onclick="return confirm('Deconectați-mă')">
-                                                            <i class="bi bi-box-arrow-right me-2"></i>Deconectare
-                                                        </a>
+                                                        <i class="bi bi-box-arrow-right me-2"></i>Deconectare
+                                                    </a>
                                                 </li>
                                             </ul>
                                         </li>
                                     }
-                                    else
-                                    {
+                                    else 
+                                    { 
                                         <li style="float:right">
                                             <a href=@Url.Action("Login", "Home")><i class="bi bi-person-fill me-2"></i>Autentificare</a>
                                         </li>
@@ -75,7 +82,7 @@
         </div>
     </div>
 
-     @RenderBody() 
+    @RenderBody()
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2024 - Universitatea Tehnica a Moldovei - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>

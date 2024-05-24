@@ -24,15 +24,15 @@ namespace BeStreet.Controllers
 				TempData["ErrorMessage"] = "Valoarea necesară id.";
 				return RedirectToAction("Index");
 			}
-            if (Session["CusId"] == null)
+            if (Session["UserId"] == null)
             {
                 TempData["ErrorMessage"] = "Va rugam sa va logati.";
                 return RedirectToAction("Index");
             }
-            if ((int)Session["CusId"] != id)
+            if ((int)Session["UserId"] != id)
             {
                 TempData["ErrorMessage"] = "Nu aveți permisiunea de a accesa datele.";
-                return RedirectToAction("Show", new { id = Session["CusId"] });
+                return RedirectToAction("Show", new { id = Session["UserId"] });
 			}
 			var obj = _session.GetUserProf(id);
 
@@ -53,9 +53,9 @@ namespace BeStreet.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var cusId = _session.UserUpdateByUsername(obj, obj.CusLogin);
+                    var cusId = _session.UserUpdateByUsername(obj, obj.Login);
                     if (cusId == null) throw new Exception("Salvarea a esuat!");
-                    Session["CusName"] = obj.CusName;
+                    Session["UserName"] = obj.Name;
                     
                     TempData["SuccessMessage"] = "Salvat cu succes!";
                     return RedirectToAction("Show", "Customer", new { id = cusId });
@@ -68,7 +68,7 @@ namespace BeStreet.Controllers
             }
             
             ViewBag.ErrorMessage = "Corectarea erorii";
-            return RedirectToAction("Show", "Customer", new { id = (int)Session["CusId"] });
+            return RedirectToAction("Show", "Customer", new { id = (int)Session["UserId"] });
         }
     }
 }

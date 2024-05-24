@@ -1,12 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace BeStreet.Models
+namespace BeStreet.Domain.Entities.Items
 {
     public partial class Color
     {
-        public byte ColorId { get; set; }
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int ColorId { get; set; }
 
-        public string ColorName { get; set; } = null;
+        [Required]
+        [StringLength(30)]
+        public string ColorName { get; set; }
     }
 }

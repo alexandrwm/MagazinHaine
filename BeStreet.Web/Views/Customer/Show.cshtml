@@ -52,20 +52,20 @@
                                 @Html.ValidationMessage("ModelOnly", new { @class = "text-danger" })
                                 <div class="form-group  mb-2">
                                     <label class="control-label">Numele și prenumele </label>
-                                    @Html.TextBoxFor(m => m.CusName, new
+                                    @Html.TextBoxFor(m => m.Name, new
                                {
                                    @class = "form-control",
                                    placeholder = "Nume și prenume",
                                    required = true,
                                    type = "text"
                                })
-                                    @Html.ValidationMessageFor(m => m.CusName, "", new { @class = "text-danger" })
-                                    @*<input asp-for="CusName" class="form-control" placeholder="Nume și prenume" required />*@
-                                    @*<span asp-validation-for="CusName" class="text-danger"></span>*@
+                                    @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+                                    @*<input asp-for="Name" class="form-control" placeholder="Nume și prenume" required />*@
+                                    @*<span asp-validation-for="Name" class="text-danger"></span>*@
                                 </div>
                                 <div class="form-group mb-2">
                                     <label class="control-label">Username</label>
-                                    @Html.TextBoxFor(m => m.CusLogin, new
+                                    @Html.TextBoxFor(m => m.Login, new
                                {
                                    @class = "form-control",
                                    placeholder = "Username",
@@ -73,47 +73,47 @@
                                    required = true,
                                    type = "text"
                                })
-                                    @Html.ValidationMessageFor(m => m.CusLogin, "", new { @class = "text-danger" })
-                                    @*<input asp-for="CusLogin" class="form-control" disabled />*@
-                                    @*<span asp-validation-for="CusLogin" class="text-danger" placeholder="Username"></span>*@
-                                    @*<input type="hidden" asp-for="CusLogin" class="form-control" />*@
+                                    @Html.ValidationMessageFor(m => m.Login, "", new { @class = "text-danger" })
+                                    @*<input asp-for="Login" class="form-control" disabled />*@
+                                    @*<span asp-validation-for="Login" class="text-danger" placeholder="Username"></span>*@
+                                    @*<input type="hidden" asp-for="Login" class="form-control" />*@
                                 </div>
                                 <div class="form-group mb-2">
                                     <label class="control-label">Parola</label>
-                                    @Html.TextBoxFor(m => m.CusPass, new
+                                    @Html.TextBoxFor(m => m.Pass, new
                                {
                                    @class = "form-control",
                                    placeholder = "Parola",
                                    required = true,
                                    type = "password"
                                })
-                                    @Html.ValidationMessageFor(m => m.CusPass, "", new { @class = "text-danger" })
-                                    @*<input asp-for="CusPass" class="form-control" placeholder="Parola" required />*@
-                                    @*<span asp-validation-for="CusPass" class="text-danger"></span>*@
+                                    @Html.ValidationMessageFor(m => m.Pass, "", new { @class = "text-danger" })
+                                    @*<input asp-for="Pass" class="form-control" placeholder="Parola" required />*@
+                                    @*<span asp-validation-for="Pass" class="text-danger"></span>*@
                                 </div>
                                 <div class="form-group mb-2">
                                     <label class="control-label">Email</label>
-                                    @Html.TextBoxFor(m => m.CusEmail, new
+                                    @Html.TextBoxFor(m => m.Email, new
                                {
                                    @class = "form-control",
                                    placeholder = "Email",
                                    required = true,
                                    type = "email"
                                })
-                                    @Html.ValidationMessageFor(m => m.CusEmail, "", new { @class = "text-danger" })
-                                    @*<input type="email" asp-for="CusEmail" class="form-control" placeholder="Email" required />*@
-                                    @*<span asp-validation-for="CusEmail" class="text-danger"></span>*@
+                                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                                    @*<input type="email" asp-for="Email" class="form-control" placeholder="Email" required />*@
+                                    @*<span asp-validation-for="Email" class="text-danger"></span>*@
                                 </div>
                                 <div class="form-group mb-2">
                                     <label class="control-label">Adresa</label>
-                                    @Html.TextAreaFor(m => m.CusAdd, new
+                                    @Html.TextAreaFor(m => m.Add, new
                                {
                                    @class = "form-control",
                                    placeholder = "Adresa",
                                    rows = "4",
                                    type = "text"
                                })
-                                    @Html.ValidationMessageFor(m => m.CusAdd, "", new { @class = "text-danger" })
+                                    @Html.ValidationMessageFor(m => m.Add, "", new { @class = "text-danger" })
                                     @*<textarea asp-for="CusAdd" class="form-control" rows="4" placeholder="Adresa"></textarea>
         <span asp-validation-for="CusAdd" class="text-danger"></span>*@
                                 </div>

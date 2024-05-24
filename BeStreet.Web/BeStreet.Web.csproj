@@ -1962,7 +1962,6 @@
     <Compile Include="ViewModels\EmployeeVM.cs" />
     <Compile Include="ViewModels\Order.cs" />
     <Compile Include="ViewModels\OrderDtl.cs" />
-    <Compile Include="ViewModels\PdFilterVM.cs" />
     <Compile Include="ViewModels\PdVM.cs" />
     <Compile Include="ViewModels\ReportCusVM .cs" />
     <Compile Include="ViewModels\ReportPDVM.cs" />
@@ -1974,7 +1973,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\kids.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
-    <Content Include="Views\Home\men.cshtml" />
+    <Content Include="Views\Home\Men.cshtml" />
     <Content Include="Views\Home\Privacy.cshtml" />
     <Content Include="Views\Home\Register.cshtml" />
     <Content Include="Views\Home\Shop.cshtml" />
@@ -1988,8 +1987,6 @@
     <Content Include="Views\About\dev.cshtml" />
     <Content Include="Views\About\Index.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
-    <Content Include="Views\Admin\Login.cshtml" />
-    <Content Include="Views\Admin\Show.cshtml" />
     <Content Include="Views\Buying\Create.cshtml" />
     <Content Include="Views\Buying\CreateDtl.cshtml" />
     <Content Include="Views\Buying\Edit.cshtml" />

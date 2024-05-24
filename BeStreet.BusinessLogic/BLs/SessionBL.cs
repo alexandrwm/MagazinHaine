@@ -1,17 +1,13 @@
 ﻿using BeStreet.BusinessLogic.Core;
 using BeStreet.BusinessLogic.Interfaces;
+using BeStreet.Domain.Entities.Shared;
 using BeStreet.Domain.Entities.User;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace BeStreet.BusinessLogic
+namespace BeStreet.BusinessLogic.BLs
 {
     public class SessionBL : UserApi, ISession
     {
-        public ULoginResp UserLogin(ULoginData data)
+        public LoginResp UserLogin(ULoginData data)
         {
             return UserLoginAction(data);
         }

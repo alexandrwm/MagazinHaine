@@ -4,38 +4,36 @@ namespace BeStreet.ViewModels
 {
     public class PdFilterVM
     {
-        public string PdId { get; set; } = null;
+        public int PdId { get; set; }
 
-        public byte ColorId { get; set; }
+        public int ColorId { get; set; }
         public string ColorName { get; set; }
 
-        public byte SizeId { get; set; }
+        public int SizeId { get; set; }
         public string SizeName { get; set; }
 
-        public string PdName { get; set; } = null;
+        public string PdName { get; set; }
         public string PdDtls { get; set; }
 
         public double PdPrice { get; set; }
 
-        public double PdCost { get; set; }
-
         public int PdStk { get; set; }
 
-        public byte PdtId { get; set; }
+        public int PdtId { get; set; }
         public string PdtName { get; set; }
 
-        public byte StatusId { get; set; }
+        public int StatusId { get; set; }
 
         public string StatusName { get; set; }
 
 
 
-        public byte TargetId { get; set; }
+        public int TargetId { get; set; }
 
         public string TargetName { get; set; }
 
 
-        public byte  SupId { get; set; }
+        public int  SupId { get; set; }
 
     }
 }

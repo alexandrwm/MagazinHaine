@@ -1,8 +1,5 @@
-﻿@using Microsoft.AspNetCore.Http;
-@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor;
-
-@{
+﻿@{
     <div class="display-5 text-secondary">
-        Salut, @HttpContextAccessor.HttpContext.Session.GetString("StfName")
+        Salut, @Session["UserName"]
     </div>
 }

@@ -7,7 +7,7 @@ namespace BeStreet.Models
 {
     public class UserLogin
     {
-        public string CusLogin { get; set; }
-        public string CusPass { get; set; }
+        public string ULogin { get; set; }
+        public string UPass { get; set; }
     }
 }

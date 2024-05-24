@@ -56,20 +56,19 @@
     <Compile Include="Entities\Items\Cart.cs" />
     <Compile Include="Entities\Items\CartDtl.cs" />
     <Compile Include="Entities\Items\Color.cs" />
-    <Compile Include="Entities\Items\Customer.cs" />
-    <Compile Include="Entities\Items\Duty.cs" />
+    <Compile Include="Entities\User\User.cs" />
     <Compile Include="Entities\Items\Product.cs" />
     <Compile Include="Entities\Items\ProductType.cs" />
     <Compile Include="Entities\Items\Size.cs" />
-    <Compile Include="Entities\Items\Staff.cs" />
     <Compile Include="Entities\Items\Status.cs" />
     <Compile Include="Entities\Items\Supplier.cs" />
     <Compile Include="Entities\Items\Target.cs" />
-    <Compile Include="Entities\User\UDbTable.cs" />
     <Compile Include="Entities\User\ULoginData.cs" />
-    <Compile Include="Entities\User\ULoginResp.cs" />
+    <Compile Include="Entities\Shared\LoginResp.cs" />
     <Compile Include="Entities\User\URegData.cs" />
     <Compile Include="Entities\User\UserProfile.cs" />
+    <Compile Include="Entities\ViewModels\PdFilterVM.cs" />
+    <Compile Include="Enums\URole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

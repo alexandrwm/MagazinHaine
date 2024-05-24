@@ -8,11 +8,11 @@ namespace BeStreet.Domain.Entities.User
 {
     public class URegData
     {
-        public string CusName { get; set; }
-        public string CusLogin { get; set; }
-        public string CusPass { get; set; }
-        public string CusEmail { get; set; }
-        public string CusAdd { get; set; }
+        public string Name { get; set; }
+        public string Login { get; set; }
+        public string Pass { get; set; }
+        public string Email { get; set; }
+        public string Add { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime LastLogin { get; set; }
 

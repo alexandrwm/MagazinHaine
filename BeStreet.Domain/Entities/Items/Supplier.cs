@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace BeStreet.Models
+namespace BeStreet.Domain.Entities.Items
 {
     public partial class Supplier
     {

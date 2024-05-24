@@ -21,7 +21,7 @@ namespace BeStreet.Controllers
 			Console.WriteLine($"Quantity: {qty}");
 			var currentUrl = Session["CurrentUrl"];
 
-			if (Session["CusId"] == null)
+			if (Session["UserId"] == null)
             {
                 TempData["ErrorMessage"] = "Conectați-vă înainte de a cumpăra produse";
                 return RedirectToAction("Login", "Home");
@@ -51,7 +51,7 @@ namespace BeStreet.Controllers
             int rowCount = 0;
             int i = 0;
             string today;
-            string CusId = (string)Session["CusId"];
+            string CusId = (string)Session["UserId"];
 
             CultureInfo us = new CultureInfo("en-US");
             do
@@ -93,13 +93,13 @@ namespace BeStreet.Controllers
                 TempData["ErrorMessage"] = "Trebuie specificată valoarea Id cos.";
                 return RedirectToAction("Index");
             }
-            if (Session["CusId"] == null)
+            if (Session["UserId"] == null)
             {
                 TempData["ErrorMessage"] = "Va rugam sa va logati";
                 return RedirectToAction("Index");
             }
             
-            string cusid = (string)Session["CusId"];
+            string cusid = (string)Session["UserId"];
            
             //if (cart == null)
             //{
@@ -125,7 +125,7 @@ namespace BeStreet.Controllers
 
         public ActionResult Check()
         {
-            string cusid = (string)Session["CusId"];
+            string cusid = (string)Session["UserId"];
 
             //int rowCount = cart.Count();
             int rowCount = 0;
@@ -216,15 +216,15 @@ namespace BeStreet.Controllers
                 TempData["ErrorMessage"] = "Valoarea necesară pentru id.";
                 return RedirectToAction("Index");
             }
-            if (Session["CusId"] == null)
+            if (Session["UserId"] == null)
             {
                 TempData["ErrorMessage"] = "Va rugam sa va logati.";
                 return RedirectToAction("Index");
             }
-            if ((int)Session["CusId"] != cusid)
+            if ((int)Session["UserId"] != cusid)
             {
                 TempData["ErrorMessage"] = "Nu aveți permisiunea de a accesa datele.";
-                return RedirectToAction("List", new { cusid = (int)Session["CusId"] });
+                return RedirectToAction("List", new { cusid = (int)Session["UserId"] });
             }
             var cart = new List<Cart>();
             return View(cart);

@@ -1,12 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace BeStreet.Models
+namespace BeStreet.Domain.Entities.Items
 {
     public partial class Status
     {
-        public byte StatusId { get; set; }
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int StatusId { get; set; }
 
-        public string StatusName { get; set; } = null;
+        [Required]
+        [StringLength(10)]
+        public string StatusName { get; set; }
     }
 }

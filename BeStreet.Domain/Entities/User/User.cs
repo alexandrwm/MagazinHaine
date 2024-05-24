@@ -1,44 +1,47 @@
-﻿using System;
+﻿using BeStreet.Domain.Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BeStreet.Domain.Entities.Items
 {
-    public class Customer
+    public class User
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int CusId { get; set; }
+        public int Id { get; set; }
 
         [Required]
-        [Display(Name = "Customer Name")]
         [StringLength(20, MinimumLength = 1, ErrorMessage = "Sorry, First name too long.")]
-        public string CusName { get; set; }
+        public string Name { get; set; }
 
         [Required]
-        [Display(Name = "Username ID")]
+        [Display(Name = "Username")]
         [StringLength(30, MinimumLength = 5, ErrorMessage = "Must be between 5 and 30 characters.")]
-        public string CusLogin { get; set; }
+        public string Login { get; set; }
 
         [Required]
         [Display(Name = "Password")]
         [DataType(DataType.Password)]
         [StringLength(50, MinimumLength = 8, ErrorMessage = "Must be between 8 and 50 characters.")]
-        public string CusPass { get; set; }
+        public string Pass { get; set; }
 
         [Required]
         [Display(Name = "E-mail")]
         [StringLength(30)]
-        public string CusEmail { get; set; }
+        public string Email { get; set; }
 
         [Display(Name = "Address ")]
-        public string CusAdd { get; set; }
+        public string Add { get; set; }
 
         [Required]
         public DateTime StartDate { get; set; }
 
-        [DataType(DataType.Date)]
+        [Required]
         public DateTime LastLogin { get; set; }
+
+        [Required]
+        public URole Role { get; set; }
     }
 }

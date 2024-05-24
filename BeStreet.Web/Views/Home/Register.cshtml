@@ -45,46 +45,46 @@
                                 @Html.ValidationMessage("ModelOnly", new { @class = "text-danger" })
 
                                 <div class="form-group">
-                                    @Html.TextBoxFor(m => m.CusName, new
+                                    @Html.TextBoxFor(m => m.UName, new
                                         {
                                         @class = "form-control form-control-user",
                                         placeholder = "Introduce numele și prenumele",
                                         required = true,
                                         type = "text"
                                         })
-                                    @Html.ValidationMessageFor(m => m.CusName, "", new { @class = "text-danger" })
+                                    @Html.ValidationMessageFor(m => m.UName, "", new { @class = "text-danger" })
                                 </div>
                                 <div class="form-group">
-                                    @Html.TextBoxFor(m => m.CusLogin, new
+                                    @Html.TextBoxFor(m => m.ULogin, new
                                         {
                                         @class = "form-control form-control-user",
                                         placeholder = "Introduce Username Id",
                                         required = true,
                                         type = "text"
                                         })
-                                    @Html.ValidationMessageFor(m => m.CusLogin, "", new { @class = "text-danger" })
+                                    @Html.ValidationMessageFor(m => m.ULogin, "", new { @class = "text-danger" })
                                 </div>
                                 <div class="form-group">
 
-                                    @Html.TextBoxFor(m => m.CusPass, new
+                                    @Html.TextBoxFor(m => m.UPass, new
                                         {
                                         @class = "form-control form-control-user",
                                         placeholder = "Parola",
                                         required = true,
                                         type = "password"
                                         })
-                                    @Html.ValidationMessageFor(m => m.CusPass, "", new { @class = "text-danger" })
+                                    @Html.ValidationMessageFor(m => m.UPass, "", new { @class = "text-danger" })
                                 </div>
                                 <div class="form-group">
 
-                                    @Html.TextBoxFor(m => m.CusEmail, new
+                                    @Html.TextBoxFor(m => m.UEmail, new
                                         {
                                         @class = "form-control form-control-user",
                                         placeholder = "Introduce email",
                                         required = true,
                                         type = "text"
                                         })
-                                    @Html.ValidationMessageFor(m => m.CusEmail, "", new { @class = "text-danger" })
+                                    @Html.ValidationMessageFor(m => m.UEmail, "", new { @class = "text-danger" })
                                 </div>
 
                                 <div class="mb-3">

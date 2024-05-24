@@ -39,7 +39,7 @@
                 </div>
             }
 
-            @if (Session["CusId"] == null)
+            @if (Session["UserId"] == null)
             {
                 <div class="row justify-content-center">
                     <div class="col-xl-10 col-lg-12 col-md-9">
@@ -56,7 +56,7 @@
                                                 {
                                                     @Html.AntiForgeryToken()
                                                     <div class="form-group">
-                                                        @Html.TextBoxFor(m => m.CusLogin, new
+                                                        @Html.TextBoxFor(m => m.ULogin, new
                                                    {
                                                        @class = "form-control",
                                                        placeholder = "Username Id",
@@ -65,7 +65,7 @@
                                                    })
                                                     </div>
                                                     <div class="form-group">
-                                                        @Html.TextBoxFor(m => m.CusPass, new
+                                                        @Html.TextBoxFor(m => m.UPass, new
                                                    {
                                                        @class = "form-control",
                                                        placeholder = "Parola",
@@ -92,7 +92,7 @@
             }
             else
             {
-                <div class="display-4">Welcome @Session["CusName"]</div>
+                <div class="display-4">Welcome @Session["UserName"]</div>
             }
         </div>
 

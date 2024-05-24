@@ -45,16 +45,23 @@ namespace BeStreet.Controllers
             {
                 ULoginData data = new ULoginData()
                 {
-                    CusLogin = login.CusLogin,
-                    CusPass = login.CusPass,
+                    Login = login.ULogin,
+                    Pass = login.UPass,
                     LastLogin = DateTime.Now
                 };
                 var userLogin = _session.UserLogin(data);
                 if (userLogin.Status)
                 {
-                    Session["CusName"] = userLogin.CusName;
-                    Session["CusId"] = userLogin.CusId;
-                    return RedirectToAction("Index", "Home");
+                    Session["UserName"] = userLogin.Name;
+                    Session["UserId"] = userLogin.Id;
+                    if (userLogin.Role == Domain.Enums.URole.Customer)
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
+                    else if (userLogin.Role == Domain.Enums.URole.Admin)
+                    {
+                        return RedirectToAction("Index", "Admin");
+                    }
                 }
                 else
                 {
@@ -87,21 +94,20 @@ namespace BeStreet.Controllers
         }
         public ActionResult Men()
         {
-
-			return View();
+            return HttpNotFound();
         }
 
-		[HttpPost]
-		[ValidateAntiForgeryToken]
-        public ActionResult Men(string stext)
-		{
-			if (stext == null)
-			{
-				return RedirectToAction("men");
-			}
+		//[HttpPost]
+		//[ValidateAntiForgeryToken]
+  //      public ActionResult Men(string stext)
+		//{
+		//	if (stext == null)
+		//	{
+		//		return RedirectToAction("men");
+		//	}
 			
-			return View();
-		}
+		//	return View();
+		//}
 
         public ActionResult Women()
         {
@@ -130,10 +136,10 @@ namespace BeStreet.Controllers
                 {
                     URegData data = new URegData
                     {
-                        CusName = obj.CusName,
-                        CusLogin = obj.CusLogin,
-                        CusPass = obj.CusPass,
-                        CusEmail = obj.CusEmail,
+                        Name = obj.UName,
+                        Login = obj.ULogin,
+                        Pass = obj.UPass,
+                        Email = obj.UEmail,
                         StartDate = DateTime.Now,
                         LastLogin = DateTime.Now
                     };
