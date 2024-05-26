@@ -51,16 +51,43 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BLs\AdminBL.cs" />
+    <Compile Include="BLs\MgmtSupBL.cs" />
+    <Compile Include="BLs\ProdBL.cs" />
     <Compile Include="BusinesLogic.cs" />
-    <Compile Include="Core\AdminApi.cs" />
+    <Compile Include="Core\MgmtSupApi.cs" />
+    <Compile Include="Core\ProdApi.cs" />
     <Compile Include="Core\UserApi.cs" />
     <Compile Include="DbContexts\BeStreetContext.cs" />
-    <Compile Include="Interfaces\IAdmin.cs" />
+    <Compile Include="Interfaces\IMgmtSup.cs" />
+    <Compile Include="Interfaces\IProd.cs" />
     <Compile Include="Interfaces\ISession.cs" />
     <Compile Include="Migrations\202405241854014_InitialCreate.cs" />
     <Compile Include="Migrations\202405241854014_InitialCreate.Designer.cs">
       <DependentUpon>202405241854014_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202405242153448_AddEntitites.cs" />
+    <Compile Include="Migrations\202405242153448_AddEntitites.Designer.cs">
+      <DependentUpon>202405242153448_AddEntitites.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202405251725520_NullPdLastSale.cs" />
+    <Compile Include="Migrations\202405251725520_NullPdLastSale.Designer.cs">
+      <DependentUpon>202405251725520_NullPdLastSale.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202405251802346_AddSupliers.cs" />
+    <Compile Include="Migrations\202405251802346_AddSupliers.Designer.cs">
+      <DependentUpon>202405251802346_AddSupliers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202405251857170_SupIdtoInt.cs" />
+    <Compile Include="Migrations\202405251857170_SupIdtoInt.Designer.cs">
+      <DependentUpon>202405251857170_SupIdtoInt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202405252010204_RequiredSupAdd.cs" />
+    <Compile Include="Migrations\202405252010204_RequiredSupAdd.Designer.cs">
+      <DependentUpon>202405252010204_RequiredSupAdd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202405260929428_AddPdCode.cs" />
+    <Compile Include="Migrations\202405260929428_AddPdCode.Designer.cs">
+      <DependentUpon>202405260929428_AddPdCode.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -79,6 +106,24 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202405241854014_InitialCreate.resx">
       <DependentUpon>202405241854014_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202405242153448_AddEntitites.resx">
+      <DependentUpon>202405242153448_AddEntitites.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202405251725520_NullPdLastSale.resx">
+      <DependentUpon>202405251725520_NullPdLastSale.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202405251802346_AddSupliers.resx">
+      <DependentUpon>202405251802346_AddSupliers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202405251857170_SupIdtoInt.resx">
+      <DependentUpon>202405251857170_SupIdtoInt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202405252010204_RequiredSupAdd.resx">
+      <DependentUpon>202405252010204_RequiredSupAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202405260929428_AddPdCode.resx">
+      <DependentUpon>202405260929428_AddPdCode.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

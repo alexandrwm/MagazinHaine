@@ -10,14 +10,19 @@ namespace BeStreet.BusinessLogic
 {
     public class BusinesLogic
     {
-        public IAdmin GetAdminBL()
+        public IProd GetProdBL()
         {
-            return new AdminBL();
+            return new ProdBL();
         }
 
         public ISession GetSessionBL()
         {
             return new SessionBL();
+        }
+
+        public IMgmtSup GetMgmtSupBL()
+        {
+            return new MgmtSupBL();
         }
     }
 }

@@ -1,0 +1,103 @@
+﻿@model IEnumerable<BeStreet.Domain.Entities.ViewModels.PdVM>
+
+@{
+    Layout = "~/Views/Shared/_AdminLayoutEdit.cshtml";
+    <title>Lista produse </title>
+}
+
+@if (ViewBag.ErrorMessage != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @ViewBag.ErrorMessage;
+    </div>
+}
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success" role="alert">
+        @TempData.Peek("SuccessMessage")
+    </div>
+}
+
+@{
+    var stext = ViewBag.stext;
+}
+
+<div class="card shadow mb-4">
+    <div class="card-body">
+        <div class="row me-2 mb-2">
+            <div class="col-sm-6 col-md-8 col-lg-9">
+                <h1 class="h3 mb-2 text-gray-800">Lista produse</h1>
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-3 text-end">
+                <div class="position-absolute bottom-0 end-0">
+                    <a class="btn btn-outline-primary" href=@Url.Action("Create", "Product")>Add Product</a>
+                </div>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered display" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Imagine</th>
+                        <th>Nr Produs</th>
+                        <th>Nume</th>
+                        <th>Culoare</th>
+                        <th>Marime</th>
+                        <th>Categorie</th>
+                        <th>Țintă</th>
+                        <th>Cantitate in stock</th>
+                        <th>Preț</th>
+                        <th>Statut</th>
+                        <th>Furnizor</th>
+                        <th>Editeaza</th>
+                        <th>Sterge</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        var pdimg = "/wwwroot/imgpd/P" + item.PdId + item.ColorId + item.SizeId + ".png";
+
+                        <tr>
+                            <td class="text-center">
+                                <div class="mx-auto" style="width: 6rem;">
+                                    <img src="@pdimg" class="card-img-top" />
+                                </div> 
+                                
+                            </td>
+                            <td>@item.PdId</td>
+                            <td>@item.PdName</td>
+                            <td>@item.ColorName</td>
+                            <td>@item.SizeName</td>
+                            <td>@item.PdtName</td>
+                            <td>@item.TargetName</td>
+                            <td>@item.PdStk</td>
+                            <td>@item.PdPrice</td>
+                            <td>@item.StatusName</td>
+                            <td>@item.SupName</td>
+                        
+                            <td class="text-center">
+                                <a href=@Url.Action("Edit", "Product", new { id = item.PdId })>
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                            </td>
+
+                            <td class="text-center">
+                                <a href=@Url.Action("Delete", "Product", new { id = item.PdId })>
+                                    <i class="text-center fa fa-trash"></i>
+
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+
+

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BeStreet.ViewModels
+namespace BeStreet.Domain.Entities.ViewModels
 {
     public class PdFilterVM
     {

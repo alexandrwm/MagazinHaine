@@ -2,6 +2,8 @@
 using BeStreet.BusinessLogic.Interfaces;
 using BeStreet.Domain.Entities.Shared;
 using BeStreet.Domain.Entities.User;
+using BeStreet.Domain.Entities.ViewModels;
+using System.Collections.Generic;
 
 namespace BeStreet.BusinessLogic.BLs
 {
@@ -26,5 +28,7 @@ namespace BeStreet.BusinessLogic.BLs
         {
             return UserUpdatebyUsernameAction(profile, cusLogin);
         }
+
+
     }
 }

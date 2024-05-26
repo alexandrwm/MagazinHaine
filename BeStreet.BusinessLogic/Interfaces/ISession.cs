@@ -1,5 +1,6 @@
 ﻿using BeStreet.Domain.Entities.Shared;
 using BeStreet.Domain.Entities.User;
+using BeStreet.Domain.Entities.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;

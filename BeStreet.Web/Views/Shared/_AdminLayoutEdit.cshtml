@@ -1,17 +1,20 @@
-﻿@using Microsoft.AspNetCore.Http;
-@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor;
+﻿@{
+    //var CartId = Session["CartId"];
+    //var CartMoney = Session["CartMoney"];
+    //var CartQty = Session["CartQty"];
 
-@{
-    var CartId = HttpContextAccessor.HttpContext.Session.GetString("CartId");
-    var CartMoney = HttpContextAccessor.HttpContext.Session.GetString("CartMoney");
-    var CartQty = HttpContextAccessor.HttpContext.Session.GetString("CartQty");
+    //var CusId = Session["UserId"];
+    //var CusName = Session["UserName"];
 
-    var CusId = HttpContextAccessor.HttpContext.Session.GetString("UserId");
-    var CusName = HttpContextAccessor.HttpContext.Session.GetString("UserName");
-
-    var StfId = HttpContextAccessor.HttpContext.Session.GetString("StfId");
-    var StfName = HttpContextAccessor.HttpContext.Session.GetString("StfName");
-    var DutyId = HttpContextAccessor.HttpContext.Session.GetString("DutyId");
+    //var StfId = Session["StfId"];
+    //var StfName = Session["StfName"];
+    //var DutyId = Session["DutyId"];
+    var StfId = "1";
+    Session["StfId"] = StfId;
+    var StfName = "sanda";
+    Session["StfName"] = StfName;
+    var DutyId = "Admin";
+    Session["DutyId"] = DutyId;
 }
 
 
@@ -29,15 +32,15 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css" />
 
-    <link href="~/AdminTemplate/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="~/wwwroot/AdminTemplate/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
-    <link href="~/AdminTemplate/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="~/wwwroot/AdminTemplate/css/sb-admin-2.min.css" rel="stylesheet">
 
-    <link href="~/AdminTemplate/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="~/css/jquery.datetimepicker.min.css" />
+    <link href="~/wwwroot/AdminTemplate/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/wwwroot/css/jquery.datetimepicker.min.css" />
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
@@ -67,17 +70,17 @@
                 <div id="collapseProducts" class="collapse @(currentNav == "Product/Buying" ||currentNav == "Product/Create" || currentNav == "Product" ? "show" : "")" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Produs: </h6>
-                        <a class="collapse-item @(currentNav == "Product" ? "active" : "")" asp-area="" asp-controller="Product" asp-action="Index">Lista de produse</a>
-                        <a class="collapse-item @(currentNav == "Product/Create" ? "active" : "")" asp-area="" asp-controller="Product" asp-action="Create">Adauga produse</a>
+                        <a class="collapse-item @(currentNav == "Product" ? "active" : "")" href=@Url.Action("Index", "Product")>Lista de produse</a>
+                        <a class="collapse-item @(currentNav == "Product/Create" ? "active" : "")" href=@Url.Action("Create", "Product")>Adauga produse</a>
                         <h6 class="collapse-header">Buy Products:</h6>
-                        <a class="collapse-item @(currentNav == "Product/Buying" ? "active" : "")" asp-area="" asp-controller="Buying" asp-action="Index">Cumpără</a>
+                        <a class="collapse-item @(currentNav == "Product/Buying" ? "active" : "")" href=@Url.Action("Index", "Buying")>Cumpără</a>
                         <div class="collapse-divider"></div>
                     </div>
                 </div>
             </li>
-            
+
             <li class="nav-item @(currentNav == "Order" || currentNav == "Order" ? "active" : "")">
-                <a class="nav-link" asp-area="" asp-controller="Order" asp-action="index">
+                <a class="nav-link" href=@Url.Action("Index", "Order")>
                     <i class="fas fa-fw fa-solid fa-coins"></i>
                     <span>Comenzi</span>
                 </a>
@@ -89,27 +92,27 @@
                     <i class="fas fa-fw fa-solid fa-user"></i>
                     <span>Clienti si furnizori</span>
                 </a>
-                <div id="collapsePeople" class="collapse @(currentNav == "ManageCustomers/Create" || currentNav == "ManageCustomers" || 
-                currentNav=="ManageEmployee" || currentNav== "ManageEmployee/Create" || 
+                <div id="collapsePeople" class="collapse @(currentNav == "ManageCustomers/Create" || currentNav == "ManageCustomers" ||
+                currentNav=="ManageEmployee" || currentNav== "ManageEmployee/Create" ||
                 currentNav=="ManageSuppliers" || currentNav== "ManageSuppliers/Create" ? "show" : "")" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-        
+
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Clienti:</h6>
-                        <a class="collapse-item @(currentNav == "ManageCustomers" ? "active" : "")" asp-area="" asp-controller="ManageCustomers" asp-action="Index">Lista clienti</a>
-                        <a class="collapse-item @(currentNav == "ManageCustomers/Create" ? "active" : "")" asp-area="" asp-controller="ManageCustomers" asp-action="Create">Adauga client</a>
+                        <a class="collapse-item @(currentNav == "ManageCustomers" ? "active" : "")" href=@Url.Action("Index", "ManageCustomers")>Lista clienti</a>
+                        <a class="collapse-item @(currentNav == "ManageCustomers/Create" ? "active" : "")" href=@Url.Action("Create", "ManageCustomers")>Adauga client</a>
                         <div class="collapse-divider"></div>
 
                         @if (StfId != null && DutyId == "Admin")
                         {
                             <h6 class="collapse-header">Moderatori:</h6>
-                            <a class="collapse-item @(currentNav == "ManageEmployee" ? "active" : "")" asp-area="" asp-controller="ManageEmployee" asp-action="Index">Lista moderatori</a>
-                            <a class="collapse-item @(currentNav == "ManageEmployee/Create" ? "active" : "")" asp-area="" asp-controller="ManageEmployee" asp-action="Create">Adauga moderator</a>
+                            <a class="collapse-item @(currentNav == "ManageEmployee" ? "active" : "")" href=@Url.Action("Index", "ManageEmployee")>Lista moderatori</a>
+                            <a class="collapse-item @(currentNav == "ManageEmployee/Create" ? "active" : "")" href=@Url.Action("Create", "ManageEmployee")>Adauga moderator</a>
                         }
 
                         <h6 class="collapse-header">Furnizori:</h6>
-                        <a class="collapse-item @(currentNav == "ManageSuppliers" ? "active" : "")" asp-area="" asp-controller="ManageSuppliers" asp-action="Index">List furnizori</a>
-                        <a class="collapse-item @(currentNav == "ManageSuppliers/Create" ? "active" : "")" asp-area="" asp-controller="ManageSuppliers" asp-action="Create">Adauga furnizor</a>
-                        
+                        <a class="collapse-item @(currentNav == "ManageSuppliers" ? "active" : "")" href=@Url.Action("Index", "ManageSuppliers")>List furnizori</a>
+                        <a class="collapse-item @(currentNav == "ManageSuppliers/Create" ? "active" : "")" href=@Url.Action("Create", "ManageSuppliers")>Adauga furnizor</a>
+
                     </div>
                 </div>
             </li>
@@ -126,14 +129,14 @@
                 <div id="colapseReport" class="collapse @(currentNav == "Report/MonthlyPurchase" ||currentNav == "Report/Purchase" ||currentNav == "Report/Product" || currentNav == "Report/MonthlyProduct" ?"show":"") " aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Dupa Produs:</h6>
-                        <a class="collapse-item @(currentNav == "Report/Product" ? "active":"")" asp-area="" asp-controller="Report" asp-action="SalesDailyProducts">Top Produse pe zi</a>
-                        <a class="collapse-item @(currentNav == "Report/MonthlyProduct" ? "active":"")" asp-area="" asp-controller="Report" asp-action="SaleMonthlyProducts">Top Produse lunar</a>
+                        <a class="collapse-item @(currentNav == "Report/Product" ? "active":"")" href=@Url.Action("SalesDailyProducts", "Report")>Top Produse pe zi</a>
+                        <a class="collapse-item @(currentNav == "Report/MonthlyProduct" ? "active":"")" href=@Url.Action("SalesMonthlyProducts", "Report")>Top Produse lunar</a>
                         <div class="collapse-divider"></div>
                         <h6 class="collapse-header">Dupa Client:</h6>
-                        <a class="collapse-item @(currentNav == "Report/Purchase" ? "active":"")" asp-area="" asp-controller="Report" asp-action="SaleDailyCustomer">Top clienti pe zi</a>
-                        <a class="collapse-item @(currentNav == "Report/MonthlyPurchase" ? "active":"")" asp-area="" asp-controller="Report" asp-action="SaleMonthlyCustomer">Top clienti lunar</a>
+                        <a class="collapse-item @(currentNav == "Report/Purchase" ? "active":"")" href=@Url.Action("SalesDailyCustomer", "Report")>Top clienti pe zi</a>
+                        <a class="collapse-item @(currentNav == "Report/MonthlyPurchase" ? "active":"")" href=@Url.Action("SalesMonthlyCustomer", "Report")>Top clienti lunar</a>
                         <div class="collapse-divider"></div>
-                    </div >
+                    </div>
                 </div>
             </li>
 
@@ -178,17 +181,17 @@
                         <div class="topbar-divider d-none d-sm-block"></div>
 
                         <li class="nav-item dropdown no-arrow">
-                            @if (@HttpContextAccessor.HttpContext.Session.GetString("StfId") != null)
+                            @if (Session["StfId"] != null)
                             {
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <span class="mr-2 d-none d-lg-inline text-gray-600 small"> @DutyId : @StfName</span>
-                                    <img class="img-profile rounded-circle" src="~/AdminTemplate/img/undraw_profile.svg">
+                                    <img class="img-profile rounded-circle" src="~/wwwroot/AdminTemplate/img/undraw_profile.svg">
                                 </a>
                             }
 
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                                <a asp-controller="Admin" asp-action="Show" asp-route-id="@StfId" class="dropdown-item">
+                                <a href=@Url.Action("Show", "Customer", new { cid = 1}) class="dropdown-item">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profil
                                 </a>
@@ -211,7 +214,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>&copy; 2024 - Universitatea Tehnica a Moldovei - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a></span>
+                        <span>&copy; 2024 - Universitatea Tehnica a Moldovei - <a href=@Url.Action("Privacy", "Home")>Privacy</a></span>
                     </div>
                 </div>
             </footer>
@@ -235,21 +238,21 @@
                 <div class="modal-body">Selectați „Deconectare” de mai jos dacă sunteți gata să încheiați sesiunea curentă.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Anulare</button>
-                    <a class="btn btn-primary" asp-controller="Admin" asp-action="Logout">Ieșire</a>
+                    <a class="btn btn-primary" href=@Url.Action("Logout", "Home")>Ieșire</a>
                 </div>
             </div>
         </div>
     </div>
 
-    <script src="~/AdminTemplate/vendor/jquery/jquery.min.js"></script>
-    <script src="~/AdminTemplate/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="~/AdminTemplate/vendor/jquery-easing/jquery.easing.min.js"></script>
-    <script src="~/AdminTemplate/js/sb-admin-2.min.js"></script>
-    <script src="~/AdminTemplate/vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="~/AdminTemplate/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-    <script src="~/AdminTemplate/js/demo/datatables-demo.js"></script>
-    <script src="~/js/jquery.datetimepicker.full.min.js"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+    <script src="~/wwwroot/AdminTemplate/vendor/jquery/jquery.min.js"></script>
+    <script src="~/wwwroot/AdminTemplate/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/wwwroot/AdminTemplate/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="~/wwwroot/AdminTemplate/js/sb-admin-2.min.js"></script>
+    <script src="~/wwwroot/AdminTemplate/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/wwwroot/AdminTemplate/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="~/wwwroot/AdminTemplate/js/demo/datatables-demo.js"></script>
+    <script src="~/wwwroot/js/jquery.datetimepicker.full.min.js"></script>
+    @*@await RenderSectionAsync("Scripts", required: false)*@
 </body>
 
 </html>

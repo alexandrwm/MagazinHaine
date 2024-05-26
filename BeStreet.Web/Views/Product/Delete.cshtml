@@ -1,0 +1,214 @@
+﻿@model BeStreet.Domain.Entities.Items.Product
+
+@{
+    <title>Sterge produs</title>
+    Layout = "~/Views/Shared/_AdminLayoutEdit.cshtml";
+}
+
+@if (ViewBag.ErrorMessage != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @ViewBag.ErrorMessage;
+    </div>
+}
+
+<div class="d-sm-flex align-items-center justify-content-between mb-5">
+    <h1 class="h3 mb-0 text-gray-800">Sterge produs</h1>
+</div>
+
+<div class="row">
+    <div class="row mb-4">
+        <div class="col-xl-8 col-lg-7">
+
+        </div>
+        <div class="col-xl-4 col-lg-5">
+            <div class="position-absolute bottom-0 end-0">
+                @using (Html.BeginForm("DeletePost", "Product", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken();
+                    @Html.TextBoxFor(m => m.PdId, new { type = "hidden" })
+                    <input type="submit" value="Delete" class="btn btn-danger" />
+                }
+            </div>
+
+        </div>
+    </div>
+</div>
+
+    <div class="row">
+    @using (Html.BeginForm("Edit", "Product", FormMethod.Post))
+    {
+        <div class="col-xl-8 col-lg-7">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Informație produs</h6>
+                </div>
+
+                <div class="card-body">
+                    @Html.ValidationMessage("ModelOnly", new { @class = "text-danger" })
+                    <div class="form-group">
+                        <label for="PdId" class="control-label">Cod produs</label>
+                        @Html.TextBoxFor(m => m.PdId, new
+                   {
+                       @class = "form-control",
+                       disabled = true
+                   })
+                        @Html.ValidationMessageFor(m => m.PdId, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        <label for="PdName" class="control-label">Nume produs</label>
+                        @Html.TextBoxFor(m => m.PdName, new
+                   {
+                       @class = "form-control",
+                       disabled = true
+                   })
+                        @Html.ValidationMessageFor(m => m.PdName, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        <label for="PdDtls" class="control-label">Detalii</label>
+                        @Html.TextAreaFor(m => m.PdDtls, new
+                   {
+                       @class = "form-control",
+                       rows = "4",
+                       disabled = true
+                   })
+                        @Html.ValidationMessageFor(m => m.PdDtls, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Variante</h6>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="SizeId" class="control-label">Marime</label>
+                                @Html.DropDownListFor(m => m.SizeId, (IEnumerable<SelectListItem>)ViewData["Size"], "Selecteaza marimea", new { @class = "form-select", disabled = true })
+                                @Html.ValidationMessageFor(m => m.SizeId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="ColorId" class="control-label">Culoare</label>
+                                @Html.DropDownListFor(m => m.ColorId, (IEnumerable<SelectListItem>)ViewData["Color"], "Selecteaza culoarea", new { @class = "form-select", disabled = true })
+                                @Html.ValidationMessageFor(m => m.ColorId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Organizare</h6>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="TargetId" class="control-label">Tintă</label>
+                        @Html.DropDownListFor(m => m.TargetId, (IEnumerable<SelectListItem>)ViewData["Target"], "Selecteaza ținta produsului", new { @class = "form-select", disabled = true })
+                        @Html.ValidationMessageFor(m => m.TargetId, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        <label for="PdtId" class="control-label">Categorie</label>
+                        @Html.DropDownListFor(m => m.PdtId, (IEnumerable<SelectListItem>)ViewData["Pdt"], "Selecteaza categoria produsului", new { @class = "form-select", disabled = true })
+                        @Html.ValidationMessageFor(m => m.PdtId, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        <label for="SupId" class="control-label">Furnizori</label>
+                        @Html.DropDownListFor(m => m.SupId, (IEnumerable<SelectListItem>)ViewData["Suppliers"], "Selecteaza ținta produsului", new { @class = "form-select", disabled = true })
+                        @Html.ValidationMessageFor(m => m.SupId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Preț</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label asp-for="PdPrice" class="control-label">Preț</label>
+                                <input asp-for="PdPrice" class="form-control" placeholder="Preț" disabled />
+                                <span asp-validation-for="PdPrice" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="PdCost" class="control-label">Cost</label>
+                                <input asp-for="PdCost" class="form-control" placeholder="Cost" disabled />
+                                <span asp-validation-for="PdCost" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Stock</h6>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label asp-for="StatusId" class="control-label">Statut</label>
+                                <select asp-for="StatusId" class="form-select" disabled>
+                                    <option value="">Status</option>
+                                    @foreach (var supp in (IEnumerable<SelectListItem>)ViewData["Status"])
+                                    {
+                                        <option value="@supp.Value">@supp.Text</option>
+                                    }
+                                </select>
+                                <span asp-validation-for="StatusId" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="PdStk" class="control-label">Cantitate</label>
+                                <input asp-for="PdStk" class="form-control" placeholder="0" disabled />
+                                <span asp-validation-for="PdStk" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+        <div class="col-xl-4 col-lg-5">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Media</h6>
+                </div>
+                <div class="card-body">
+                    <div class="card" style="border: 1px dashed #9d9da0; border-spacing: 50px">
+                        <div class="card-body">
+                            <div class="mx-auto" style="width: 23rem">
+                                <img src="@ViewBag.ImgFile" class="card-img-top" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <form method="post" asp-area="" asp-controller="Product" asp-action="Index">
+                            <div class="mb-3">
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+    <br>
+    <br>
+    <br>
+

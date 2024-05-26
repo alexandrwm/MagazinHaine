@@ -1,12 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BeStreet.Domain.Entities.Items
 {
     public partial class Target
     {
-        public byte TargetId { get; set; }
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int TargetId { get; set; }
 
+        [Required]
+        [StringLength(50)]
         public string TargetName { get; set; }
     }
 }

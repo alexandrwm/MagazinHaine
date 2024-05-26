@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Linq;
 using System.Runtime.Remoting.Messaging;
 using System.Web.Mvc;
 using BeStreet.BusinessLogic;
+using BeStreet.BusinessLogic.DbContexts;
 using BeStreet.BusinessLogic.Interfaces;
 using BeStreet.Domain.Entities.User;
 using BeStreet.Models;
@@ -13,9 +15,11 @@ namespace BeStreet.Controllers
     public class HomeController : Controller
     {
         private readonly ISession _session;
+        private readonly IProd _prods;
         public HomeController()
         {
             _session = new BusinesLogic().GetSessionBL();
+            _prods = new BusinesLogic().GetProdBL();
         }
         public ActionResult Index()
         {
@@ -94,7 +98,21 @@ namespace BeStreet.Controllers
         }
         public ActionResult Men()
         {
-            return HttpNotFound();
+            using (var db = new BeStreetContext())
+            {
+                var FilterCategory = db.ProductTypes.ToList();
+                var FilterColor = db.Colors.ToList();
+                var FilterSize = db.Sizes.ToList();
+
+                var pdvm = _prods.GetProducts("Barbati");
+                if (pdvm == null) return HttpNotFound();
+                ViewBag.ErrorMessage = TempData["ErrorMessage"];
+                
+                ViewData["FilterCategory"] = FilterCategory;
+                ViewData["FilterColor"] = FilterColor;
+                ViewData["FilterSize"] = FilterSize;
+                return View(pdvm);
+            }
         }
 
 		//[HttpPost]

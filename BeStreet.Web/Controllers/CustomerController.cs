@@ -54,7 +54,12 @@ namespace BeStreet.Controllers
                 if (ModelState.IsValid)
                 {
                     var cusId = _session.UserUpdateByUsername(obj, obj.Login);
-                    if (cusId == null) throw new Exception("Salvarea a esuat!");
+                    if (cusId == null)
+                    {
+                        TempData["ErrorMessage"] = "Salvarea a esuat!";
+                        return RedirectToAction("Show", "Customer", new { id = Session["UserId"] });
+                    }
+                    //if (cusId == null) throw new Exception("Salvarea a esuat!");
                     Session["UserName"] = obj.Name;
                     
                     TempData["SuccessMessage"] = "Salvat cu succes!";

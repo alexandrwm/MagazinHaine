@@ -1,0 +1,159 @@
+﻿@model BeStreet.Domain.Entities.Items.Product
+
+@{
+    <title>Add Product </title>
+    Layout = "~/Views/Shared/_AdminLayoutEdit.cshtml";
+}
+
+@if (ViewBag.ErrorMessage != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @ViewBag.ErrorMessage;
+    </div>
+}
+
+@using (Html.BeginForm("Create", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken();
+    <div class="row">
+        <div class="row mb-4">
+            <div class="col-xl-8 col-lg-7">
+                <div class="d-sm-flex align-items-center justify-content-between mb-1">
+                    <h1 class="h4 mb-0 text-gray-800">Adauga produs nou</h1>
+                </div>
+            </div>
+            <div class="col-xl-4 col-lg-5">
+                <div class="position-absolute bottom-0 end-0">
+                    <a class="btn btn-outline-primary" href=@Url.Action("Index", "Product")>Inapoi la lista</a>
+                    <a class="btn btn-outline-primary" href=@Url.Action("Create", "Product")>Actualizare</a>
+                    <input type="submit" value="Save product" class="btn btn-success" />
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-8 col-lg-7">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Informații produs</h6>
+                </div>
+                <div class="card-body">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label for="PdName" class="control-label">Nume produs</label>
+                        @Html.TextBoxFor(m => m.PdName, new { @class = "form-control", placeholder = "Nume produs", required = true, type = "text" })
+                        @Html.ValidationMessageFor(m => m.PdName, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        <label for="PdDtls" class="control-label">Detalii produs</label>
+                        @Html.TextAreaFor(m => m.PdDtls, new { @class = "form-control", rows = "4", placeholder = "Descriere produs", required = true, type = "text" })
+                        @Html.ValidationMessageFor(m => m.PdDtls, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Media</h6>
+                </div>
+                <div class="card-body">
+                    <div class="card" style="border: 1px dashed #9d9da0; border-spacing: 50px">
+                        <div class="card-body">
+                            <div class="mx-auto" style="width: 23rem">
+                                <img src="~/wwwroot/imgpd/No_image2.png" class="card-img-top" />
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="col">
+                        <div class="mb-3">
+                            <label for="formFile" class="form-label">Selecteaza imaginea</label>
+                            <input class="form-control" type="file" id="formFile" name="formFile" accept="image/png">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Variante</h6>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="SizeId" class="control-label">Marime</label>
+                                @Html.DropDownListFor(m => m.SizeId, (IEnumerable<SelectListItem>)ViewData["Size"], "Selecteaza marimea", new { @class = "form-select", required = true })
+                                @Html.ValidationMessageFor(m => m.SizeId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="ColorId" class="control-label">Culoare</label>
+                                @Html.DropDownListFor(m => m.ColorId, (IEnumerable<SelectListItem>)ViewData["Color"], "Selecteaza culoarea", new { @class = "form-select", required = true })
+                                @Html.ValidationMessageFor(m => m.ColorId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-4 col-lg-5">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Preț</h6>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="PdPrice" class="control-label">Preț</label>
+                        @Html.TextBoxFor(m => m.PdPrice, new { @class = "form-control", placeholder = "Preț", required = true, type = "number" })
+                        @Html.ValidationMessageFor(m => m.PdPrice, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Organizare</h6>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="TargetId" class="control-label">Țintă</label>
+                        @Html.DropDownListFor(m => m.TargetId, (IEnumerable<SelectListItem>)ViewData["Target"], "Selectează ținta produsului", new { @class = "form-select" })
+                        @Html.ValidationMessageFor(m => m.TargetId, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label for="PdtId" class="control-label">Categorie</label>
+                        @Html.DropDownListFor(m => m.PdtId, (IEnumerable<SelectListItem>)ViewData["Pdt"], "Selecteaza categoria produsului", new { @class = "form-select" })
+                        @Html.ValidationMessageFor(m => m.PdtId, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label for="SupId" class="control-label">Furnizori</label>
+                        @Html.DropDownListFor(m => m.SupId, (IEnumerable<SelectListItem>)ViewData["Suppliers"], "Selecteaza furnizorii produsului", new { @class = "form-select" })
+                        @Html.ValidationMessageFor(m => m.SupId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Stock</h6>
+                </div>
+
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="StatusId" class="control-label">Statut</label>
+                        @Html.DropDownListFor(m => m.StatusId, (IEnumerable<SelectListItem>)ViewData["Status"], "Statut", new { @class = "form-select" })
+                        @Html.ValidationMessageFor(m => m.StatusId, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        <label for="PdStk" class="control-label">Cantitate</label>
+                        @Html.TextBoxFor(m => m.PdStk, new { @class = "form-control", placeholder = "0", type = "number" })
+                        @Html.ValidationMessageFor(m => m.PdStk, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

@@ -14,13 +14,6 @@ namespace BeStreet.BusinessLogic.DbContexts
         public virtual DbSet<Size> Sizes { get; set; }
         public virtual DbSet<Target> Targets { get; set; }
         public virtual DbSet<Status> Statuses { get; set; }
-
-        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        //{
-        //    modelBuilder.Entity<Product>()
-        //                .HasRequired<Color>(e => e.Product)
-
-        //    base.OnModelCreating(modelBuilder);
-        //}
+        public virtual DbSet<Supplier> Suppliers { get; set; }
     }
 }

@@ -1,0 +1,115 @@
+﻿@model BeStreet.Domain.Entities.Items.Supplier
+
+@{
+    Layout = "~/Views/Shared/_AdminLayoutEdit.cshtml";
+    <title>Sterge furnizor</title>
+}
+
+@{
+    var stext = ViewBag.stext;
+}
+
+<div class="d-sm-flex align-items-center justify-content-between mb-5">
+    <h1 class="h3 mb-2 text-gray-800">Sterge furnizor</h1>
+</div>
+
+<div class="row">
+    <div class="row mb-4">
+        <div class="col-xl-8 col-lg-7">
+
+        </div>
+        <div class="col-xl-4 col-lg-5">
+            <div class="position-absolute bottom-0 end-0">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xl-8 col-lg-9">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Informatie furnizor</h6>
+            </div>
+            <div class="card-body">
+                @using (Html.BeginForm("Delete", "ManageSuppliers"))
+                {
+                    @Html.ValidationMessage("ModelOnly", new { @class = "text-danger" })
+                    <div class="form-group">
+                        <label for="SupId" class="control-label">Id Furnizor</label>
+                        @Html.TextBoxFor(m => m.SupId, new { @class = "form-control", @readonly = true })
+                        @Html.ValidationMessageFor(m => m.SupId, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+
+                        <label for="SupName" class="control-label">Nume Furnizor</label>
+                        @Html.TextBoxFor(m => m.SupName, new
+                        {
+                            @class = "form-control form-control-user",
+                            placeholder = "Nume Furnizor",
+                            required = true,
+                            type = "text"
+                        })
+                        @Html.ValidationMessageFor(m => m.SupName, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label for="SupTel" class="control-label">Tel</label>
+                        @Html.TextBoxFor(m => m.SupTel, new
+                        {
+                            @class = "form-control form-control-user",
+                            placeholder = "Telefon",
+                            required = true,
+                            type = "text"
+                        })
+                        @Html.ValidationMessageFor(m => m.SupTel, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label for="SupEmail" class="control-label">Email</label>
+                        @Html.TextBoxFor(m => m.SupEmail, new
+                        {
+                            @class = "form-control form-control-user",
+                            placeholder = "Email",
+                            required = true,
+                            type = "email"
+                        })
+                        @Html.ValidationMessageFor(m => m.SupEmail, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label for="SupAdd" class="control-label">Adresa</label>
+                        @Html.TextBoxFor(m => m.SupAdd, new
+                        {
+                            @class = "form-control form-control-user",
+                            placeholder = "Adresa",
+                            required = true,
+                            type = "text"
+                        })
+                        @Html.ValidationMessageFor(m => m.SupAdd, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label for="SupRemark" class="control-label">Comentariu</label>
+                        @Html.TextBoxFor(m => m.SupRemark, new
+                        {
+                            @class = "form-control form-control-user",
+                            placeholder = "Remarca",
+                            type = "text"
+                        })
+                        @Html.ValidationMessageFor(m => m.SupRemark, "", new { @class = "text-danger" })
+                    </div>
+                }
+
+                <br>
+                <div class="mb-3">
+                    @using (Html.BeginForm("DeletePost", "ManageSuppliers", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <a class="btn btn-outline-primary" href=@Url.Action("Index", "ManageSuppliers")>Inapoi la lista</a>
+                        @Html.TextBoxFor(m => m.SupId, new { @class = "form-control", @readonly = true, hidden = true })
+                        <input type="submit" value="Sterge" class="btn btn-danger" />
+                    }
+                </div>
+                <br>
+            </div>
+        </div>
+    </div>
+</div>

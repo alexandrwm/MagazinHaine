@@ -31,10 +31,6 @@ namespace BeStreet.Domain.Entities.Items
         [Display(Name = "Price")]
         public double PdPrice { get; set; }
 
-        //[Required(ErrorMessage = "Required Cost")]
-        //[Display(Name = "Cost")]
-        //public double PdCost { get; set; }
-
         [Display(Name = "Inventories")]
         public int PdStk { get; set; }
 
@@ -48,10 +44,10 @@ namespace BeStreet.Domain.Entities.Items
         public int TargetId { get; set; }
 
         [Display(Name = "Suppliers")]
-        public string SupId { get; set; }
+        public int SupId { get; set; }
 
-        public DateTime PdLastBuy { get; set; }
+        //public string PdCode { get; set; }
 
-        public DateTime PdLastSale { get; set; }
+        public DateTime? PdLastSale { get; set; }
     }
 }

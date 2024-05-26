@@ -68,6 +68,8 @@
     <Compile Include="Entities\User\URegData.cs" />
     <Compile Include="Entities\User\UserProfile.cs" />
     <Compile Include="Entities\ViewModels\PdFilterVM.cs" />
+    <Compile Include="Entities\ViewModels\PdVM.cs" />
+    <Compile Include="Entities\ViewModels\SupplierVM.cs" />
     <Compile Include="Enums\URole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

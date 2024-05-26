@@ -1948,6 +1948,8 @@
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ManageSuppliersController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1962,7 +1964,6 @@
     <Compile Include="ViewModels\EmployeeVM.cs" />
     <Compile Include="ViewModels\Order.cs" />
     <Compile Include="ViewModels\OrderDtl.cs" />
-    <Compile Include="ViewModels\PdVM.cs" />
     <Compile Include="ViewModels\ReportCusVM .cs" />
     <Compile Include="ViewModels\ReportPDVM.cs" />
     <Compile Include="ViewModels\SupplierVM.cs" />
@@ -1999,6 +2000,15 @@
     <Content Include="Views\Customer\Show.cshtml" />
     <Content Include="Views\_ViewImports.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Product\Index.cshtml" />
+    <Content Include="Views\Product\Create.cshtml" />
+    <Content Include="Views\ManageSuppliers\Index.cshtml" />
+    <Content Include="Views\ManageSuppliers\Create.cshtml" />
+    <Content Include="Views\Product\Delete.cshtml" />
+    <Content Include="Views\Product\Edit.cshtml" />
+    <Content Include="Views\Product\Show.cshtml" />
+    <Content Include="Views\ManageSuppliers\Edit.cshtml" />
+    <Content Include="Views\ManageSuppliers\Delete.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
