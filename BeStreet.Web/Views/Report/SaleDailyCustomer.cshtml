@@ -1,0 +1,92 @@
+﻿
+@model IEnumerable<ClothesShop.ViewModels.ReportCusVM>
+@using System.Globalization;
+
+@{
+    Layout = "_AdminLayoutEdit";
+    <title>Raport Cumparatori Zilnici</title>
+}
+
+@{
+    CultureInfo us = new CultureInfo("en-US");
+    string theDate;
+
+    if (ViewBag.theDate != null)
+        theDate = ViewBag.theDate;
+    else
+        theDate = DateTime.Now.Date.ToString("yyyy-MM-dd", us);
+}
+
+@if (ViewBag.ErrorMessage != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @ViewBag.ErrorMessage;
+    </div>
+}
+
+@{
+    var stext = ViewBag.stext;
+}
+
+<div class="card shadow mb-4">
+    <div class="card-body">
+        <form asp-controller="Report" asp-action="SaleDailyCustomer">
+            <div class="row mt-1">
+                <div class="col-sm-6 col-md-8 col-lg-9">
+                    <h1 class="h1 mb-2 text-gray-800">Raport Cumpraratori Lunari</h1>
+                </div>
+                <div class="col text-end">
+                    <div class="input-group">
+                        <span class="input-group-text">Date</span>
+                        <input type="text" name="theDate" id="theDate" class="form-control" value="@theDate" />
+                        <button type="submit" class="btn btn-secondary">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="table-responsive">
+            <table class="table table-bordered display" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Client Id</th>
+                        <th>Client Nume/Prenume</th>
+                        <th>Cantitate</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        var i = 0;
+                    }
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.CusId</td>
+                            <td>@item.CusName</td>
+                            <td>@item.CdtlQty</td>
+                            <td>@item.CartMoney</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script>
+        $('#theDate').datetimepicker({
+            timepicker: false,
+            datepicker: true,
+            format: 'Y-m-d'
+        })
+    </script>
+}
+
+

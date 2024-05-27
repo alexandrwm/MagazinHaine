@@ -67,7 +67,7 @@ namespace BeStreet.Controllers
                         return RedirectToAction("Index", "Admin");
                     }
                 }
-                else
+                else 
                 {
                     TempData["ErrorMessage"] = "Numele de utilizator sau parola este incorecta.";
                     return RedirectToAction("Login");
