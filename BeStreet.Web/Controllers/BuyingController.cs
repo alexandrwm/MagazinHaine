@@ -1,5 +1,4 @@
 ﻿using BeStreet.Domain.Entities.Items;
-using BeStreet.Models;
 using System;
 using System.Dynamic;
 using System.Globalization;
@@ -9,7 +8,7 @@ namespace KuShop.Controllers
 {
     public class BuyingController : Controller
     {
-      
+
 
         public ActionResult Index()
         {
@@ -40,7 +39,7 @@ namespace KuShop.Controllers
                 return RedirectToAction("Login", "Home");
             }
 
-           
+
             return View();
         }
 
@@ -69,7 +68,7 @@ namespace KuShop.Controllers
 
             ViewBag.BuyId = theId;
 
-           
+
             return View();
         }
 
@@ -118,8 +117,8 @@ namespace KuShop.Controllers
                 TempData["ErrorMessage"] = "Trebuie să specificați numărul";
                 return RedirectToAction("Index");
             }
-           
-           
+
+
             ViewBag.theid = buyid;
 
             dynamic DyModel = new ExpandoObject();
@@ -142,7 +141,7 @@ namespace KuShop.Controllers
                 return RedirectToAction("Index");
             }
 
-           
+
             return View();
         }
 
@@ -183,7 +182,7 @@ namespace KuShop.Controllers
                 return RedirectToAction("Login", "Home");
             }
 
-          
+
             return RedirectToAction("Index");
         }
 
@@ -202,7 +201,7 @@ namespace KuShop.Controllers
                 return RedirectToAction("Show", new { buyid = buyid });
             }
 
-           
+
 
             ViewBag.BuyId = buyid;
             return View();
@@ -243,9 +242,9 @@ namespace KuShop.Controllers
                 return RedirectToAction("Login", "Home");
             }
 
-       
-           
-            
+
+
+
 
             return RedirectToAction("Show", "Buying", new { buyid = buyid });
         }

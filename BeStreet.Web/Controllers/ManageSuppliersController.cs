@@ -18,7 +18,7 @@ namespace BeStreet.Web.Controllers
             var SupplierVM = _mgmt.GetAllSuppliers();
 
             if (SupplierVM == null) return HttpNotFound();
-            
+
             ViewBag.ErrorMessage = TempData["ErrorMessage"];
             return View(SupplierVM);
         }
@@ -38,7 +38,6 @@ namespace BeStreet.Web.Controllers
                 if (ModelState.IsValid)
                 {
                     var supCreated = _mgmt.CreateSupplier(obj);
-                    //var existingCustomer = _db.Suppliers.FirstOrDefault(c => c.SupId == obj.SupId);
                     if (!supCreated)
                     {
                         ViewBag.ErrorMessage = "Furnizorul deja exista";
@@ -89,8 +88,9 @@ namespace BeStreet.Web.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var supUpdated = _mgmt.UpdateSupplier(obj);
+                    _mgmt.UpdateSupplier(obj);
                     //return RedirectToAction("Index");
+                    TempData["SuccessMessage"] = "Salvat cu succes!";
                     return RedirectToAction("Edit", "ManageSuppliers", new { id = obj.SupId });
                 }
             }
@@ -132,13 +132,13 @@ namespace BeStreet.Web.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var supDeleted = _mgmt.DeleteSuplierById(SupId);
+                    var supDeleted = _mgmt.DeleteSupplierById(SupId);
                     if (!supDeleted)
                     {
                         TempData["ErrorMessage"] = "Nu s-au șters datele.";
                         return RedirectToAction("Index");
                     }
-                    
+
                     TempData["SuccessMessage"] = "Delete SuccessMessage";
                     return RedirectToAction("Index");
                 }

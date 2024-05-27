@@ -1,27 +1,26 @@
-﻿using System.Globalization;
-using BeStreet.Domain.Entities.Items;
-using System.Dynamic;
-using System.Web.Mvc;
+﻿using BeStreet.Domain.Entities.Items;
 using System;
 using System.Collections.Generic;
-using BeStreet.Models;
+using System.Dynamic;
+using System.Globalization;
+using System.Web.Mvc;
 namespace BeStreet.Controllers
 {
     public class CartController : Controller
     {
-       
+
         public ActionResult Index()
         {
             return View();
         }
-        public ActionResult AddDtl(string pdid,int qty)
+        public ActionResult AddDtl(string pdid, int qty)
         {
-			Console.WriteLine("AddDetail Function");
-			Console.WriteLine($"Product Id: {pdid}");
-			Console.WriteLine($"Quantity: {qty}");
-			var currentUrl = Session["CurrentUrl"];
+            Console.WriteLine("AddDetail Function");
+            Console.WriteLine($"Product Id: {pdid}");
+            Console.WriteLine($"Quantity: {qty}");
+            var currentUrl = Session["CurrentUrl"];
 
-			if (Session["UserId"] == null)
+            if (Session["UserId"] == null)
             {
                 TempData["ErrorMessage"] = "Conectați-vă înainte de a cumpăra produse";
                 return RedirectToAction("Login", "Home");
@@ -35,16 +34,16 @@ namespace BeStreet.Controllers
 
             if (Session["CartId"] == null)
             {
-                return RedirectToAction("Add", new { pdid = pdid ,qty = qty});
+                return RedirectToAction("Add", new { pdid = pdid, qty = qty });
             }
 
             string CartId = (string)Session["CartId"];
 
-            
 
-			return Redirect((string)currentUrl);
 
-		}
+            return Redirect((string)currentUrl);
+
+        }
         public ActionResult Add(string pdid, int qty)
         {
             string theId;
@@ -60,8 +59,8 @@ namespace BeStreet.Controllers
                 today = DateTime.Now.ToString("'CT'yyyyMMdd");
                 theId = string.Concat(today, i.ToString("0000"));
 
-              
-             
+
+
             } while (rowCount != 0);
 
             try
@@ -79,8 +78,10 @@ namespace BeStreet.Controllers
                 Session["CartQty"] = "0";
                 Session["CartMoney"] = "0";
 
-                return RedirectToAction("AddDtl", new { pdid = pdid , qty = qty});
-            }catch (Exception ex) {
+                return RedirectToAction("AddDtl", new { pdid = pdid, qty = qty });
+            }
+            catch (Exception ex)
+            {
                 TempData["ErrorMessage"] = "Eroare de înregistrare.";
                 return RedirectToAction("Index", "Home");
             }
@@ -98,22 +99,22 @@ namespace BeStreet.Controllers
                 TempData["ErrorMessage"] = "Va rugam sa va logati";
                 return RedirectToAction("Index");
             }
-            
+
             string cusid = (string)Session["UserId"];
-           
+
             //if (cart == null)
             //{
             //    TempData["ErrorMessage"] = "Coșul specificat nu a fost găsit.";
             //    return RedirectToAction("Index", "Home");
             //}
-           
+
             //if (CartCheckID!.CusId != cusid)
             //{
             //    TempData["ErrorMessage"] = "Nu aveți permisiunea de a accesa datele.";
             //    return RedirectToAction("List", new { cusid = cusid });
             //}
 
-           
+
 
             dynamic DyModel = new ExpandoObject();
 
@@ -142,17 +143,18 @@ namespace BeStreet.Controllers
                 Session["CartQty"] = obj.CartQty.ToString();
                 Session["CartMoney"] = obj.CartMoney.ToString();
             }
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index", "Home");
         }
 
-        public ActionResult Delete(string cartid) {
-           
+        public ActionResult Delete(string cartid)
+        {
+
             //if(master == null)
             {
                 TempData["ErrorMessage"] = "Coșul nu a fost găsit.";
                 //return RedirectToAction("Show","Cart",new {cartid = cartid});
             }
-           
+
 
             Session.Remove("CartId");
             Session.Remove("CartQty");
@@ -161,15 +163,15 @@ namespace BeStreet.Controllers
             TempData["SuccessMessage"] = "Comanda anulata.";
             return RedirectToAction("Index", "Home");
         }
-        public ActionResult DeleteDtl(string pdid,string cartid)
+        public ActionResult DeleteDtl(string pdid, string cartid)
         {
-           
+
             //if(obj == null)
             {
                 TempData["ErrorMessage"] = "Nu au fost găsite informații.";
             }
-        
-          
+
+
             //if(cartqty == 0)
             {
 
@@ -194,7 +196,7 @@ namespace BeStreet.Controllers
         {
             var cartdtl = new List<object>();
             int rowCount = cartdtl.Count;
-            if(rowCount == 0)
+            if (rowCount == 0)
             {
                 TempData["ErrorMessage"] = "Eroare de confirmare.";
                 return RedirectToAction("show", "Cart", new { cartid = cartid });

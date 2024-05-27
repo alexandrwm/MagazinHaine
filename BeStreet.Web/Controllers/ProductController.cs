@@ -3,6 +3,7 @@ using BeStreet.BusinessLogic.DbContexts;
 using BeStreet.BusinessLogic.Interfaces;
 using BeStreet.Domain.Entities.Items;
 using BeStreet.Domain.Entities.ViewModels;
+using BeStreet.Web.Filters;
 using System;
 using System.IO;
 using System.Linq;
@@ -11,11 +12,13 @@ using System.Web.Mvc;
 
 namespace BeStreet.Web.Controllers
 {
-    public class ProductController : Controller
+    [AllowAdmin]
+    public class ProductController : BaseController
     {
         private readonly IProd _prods = new BusinesLogic().GetProdBL();
         public ActionResult Index()
         {
+            SessionStatus();
             ViewData["currentNav"] = "Product";
 
             var pdvm = _prods.GetAllProducts();
@@ -27,6 +30,7 @@ namespace BeStreet.Web.Controllers
 
         public ActionResult Create()
         {
+            SessionStatus();
             using (var db = new BeStreetContext())
             {
                 ViewData["Pdt"] = new SelectList(db.ProductTypes, "PdtId", "PdtName").ToList();
@@ -69,7 +73,7 @@ namespace BeStreet.Web.Controllers
                         var SaveFileName = FileName + FileExtension;
                         var SavePath = Path.Combine(Server.MapPath("~/wwwroot/"), "imgpd");
                         var SaveFilePath = Path.Combine(SavePath, SaveFileName);
-                        
+
                         formFile.SaveAs(SaveFilePath);
                     }
                     TempData["SuccessMessage"] = "Salvat cu succes!";
@@ -92,6 +96,7 @@ namespace BeStreet.Web.Controllers
         }
         public ActionResult Delete(int? id)
         {
+            SessionStatus();
             using (var db = new BeStreetContext())
             {
                 ViewData["Pdt"] = new SelectList(db.ProductTypes, "PdtId", "PdtName").ToList();
@@ -110,7 +115,7 @@ namespace BeStreet.Web.Controllers
                 return RedirectToAction("Index");
             }
             var obj = _prods.GetProductById(id);
-            
+
             if (obj == null)
             {
                 TempData["ErrorMessage"] = "Nu au fost găsite informații.";
@@ -146,7 +151,7 @@ namespace BeStreet.Web.Controllers
                         TempData["ErrorMessage"] = "Nu s-au șters datele.";
                         return RedirectToAction("Index");
                     }
-                    
+
                     TempData["SuccessMessage"] = "Delete SuccessMessage";
                     return RedirectToAction("Index");
                 }
@@ -161,8 +166,9 @@ namespace BeStreet.Web.Controllers
 
         public ActionResult Edit(int? id)
         {
+            SessionStatus();
             ViewData["currentNav"] = "Product";
-            
+
             using (var db = new BeStreetContext())
             {
                 ViewData["Pdt"] = new SelectList(db.ProductTypes, "PdtId", "PdtName").ToList();
@@ -209,7 +215,7 @@ namespace BeStreet.Web.Controllers
             ViewBag.formFile = formFile;
             ViewData["formFile"] = formFile;
             ViewData["currentNav"] = "Product";
-            
+
             using (var db = new BeStreetContext())
             {
                 ViewData["Pdt"] = new SelectList(db.ProductTypes, "PdtId", "PdtName").ToList();
@@ -224,7 +230,7 @@ namespace BeStreet.Web.Controllers
                 if (ModelState.IsValid)
                 {
                     var theid = obj.PdId;
-                    
+
                     _prods.UpdateProductById(theid, obj);
 
                     if (formFile?.ContentLength > 0)
@@ -257,7 +263,7 @@ namespace BeStreet.Web.Controllers
 
         public ActionResult Show(int? id)
         {
-
+            SessionStatus();
             if (id == null)
             {
                 TempData["ErrorMessage"] = "Specificați Id Nr.";
@@ -276,7 +282,7 @@ namespace BeStreet.Web.Controllers
             using (var db = new BeStreetContext())
             {
                 ViewData["Pdt"] = new SelectList(db.ProductTypes, "PdtId", "PdtName").ToList();
-            
+
                 //string[] parts = id.Split('-');
                 //string PrefixId = parts[0] + "-" + parts[1];
                 //string PrefixId = parts[0];
@@ -317,9 +323,9 @@ namespace BeStreet.Web.Controllers
 
                 var items = productFilter.ToList();
                 ViewData["item"] = items;
-            //ViewData["colors"] = colors.Distinct(); ;
+                //ViewData["colors"] = colors.Distinct(); ;
 
-            return View(obj);
+                return View(obj);
             }
         }
     }

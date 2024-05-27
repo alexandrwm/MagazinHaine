@@ -1,8 +1,7 @@
-﻿
-@model BeStreet.Models.Customer
+﻿@model BeStreet.Domain.Entities.User.Customer
 @{
 
-    Layout = "_AdminLayoutEdit";
+    Layout = "~/Views/Shared/_AdminLayoutEdit.cshtml";
     <title>Creare client</title>
 }
 
@@ -21,59 +20,72 @@
 <div class="card o-hidden border-0 shadow-lg my-5">
     <div class="card-body p-0">
         <div class="row">
-            <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+            <div class="col-lg-5 d-none d-lg-block bg-register-image">
+            </div>
             <div class="col-lg-7">
                 <div class="p-5">
                     <div class="text-center">
                         <h1 class="h4 text-gray-900 mb-4">Creare cont client</h1>
                     </div>
-                    <form class="user" asp-action="Create">
-                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    @using (Html.BeginForm("Create", "ManageCustomers", FormMethod.Post, new { @class = "user" }))
+                    {
+                        @Html.AntiForgeryToken();
+                        @Html.ValidationMessage("ModelOnly", new { @class = "text-danger" })
                         <div class="form-group">
-                            <input type="hidden" asp-for="CusId" value="CXXX" class="form-control " />
-                        </div>
-                        <div class="form-group">
-                            <input asp-for="CusName" class="form-control form-control-user" placeholder="Nume și prenume client" required>
-                            <span asp-validation-for="CusName" class="text-danger"></span>
-                        </div>
-
-                        <div class="form-group">
-                            <input asp-for="CusLogin" class="form-control form-control-user" placeholder="Username Id client" required />
-                            <span asp-validation-for="CusLogin" class="text-danger"></span>
-                        </div>
-
-                        <div class="form-group">
-                            <input asp-for="CusPass" class="form-control form-control-user" placeholder="Parola" required />
-                            <span asp-validation-for="CusPass" class="text-danger"></span>
+                            @Html.TextBoxFor(m => m.Name, new
+                            {
+                           @class = "form-control form-control-user",
+                           placeholder = "Nume și prenume client",
+                           required = true,
+                           type = "text"
+                       })
+                            @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
                         </div>
 
                         <div class="form-group">
-                            <input type="email" asp-for="CusEmail" class="form-control form-control-user" placeholder="Email" required />
-                            <span asp-validation-for="CusEmail" class="text-danger"></span>
+                            @Html.TextBoxFor(m => m.Login, new
+                            {
+@class = "form-control form-control-user",
+placeholder = "Username Id client",
+required = true,
+type = "text"
+})
+                            @Html.ValidationMessageFor(m => m.Login, "", new { @class = "text-danger" })
                         </div>
 
                         <div class="form-group">
-                            <input type="hidden" asp-for="StartDate" value="@DateTime.Today.ToString("yyyy-MM-dd")" class="form-control" />
-                            <span asp-validation-for="StartDate" class="text-danger"></span>
+                            @Html.TextBoxFor(m => m.Pass, new
+{
+@class = "form-control form-control-user",
+placeholder = "Parola",
+required = true,
+type = "password"
+})
+                            @Html.ValidationMessageFor(m => m.Pass, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group">
+                            @Html.TextBoxFor(m => m.Email, new
+{
+@class = "form-control form-control-user",
+placeholder = "Email",
+required = true,
+type = "email"
+})
+                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                         </div>
                         <br>
                         <div class="mb-3">
                             <input class="btn btn-success btn-user btn-block" type="submit" value="Creaza cont" />
                         </div>
                         <br>
-                    </form>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
+                    }
+                    <br>
+                    <br>
+                    <br>
+                    <br>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-@section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
-}

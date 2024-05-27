@@ -34,6 +34,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=10.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.10.1.1\lib\net461\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -43,6 +46,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -51,49 +55,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BLs\MgmtCusBL.cs" />
     <Compile Include="BLs\MgmtSupBL.cs" />
     <Compile Include="BLs\ProdBL.cs" />
     <Compile Include="BusinesLogic.cs" />
+    <Compile Include="Core\MgmtCusApi.cs" />
     <Compile Include="Core\MgmtSupApi.cs" />
     <Compile Include="Core\ProdApi.cs" />
     <Compile Include="Core\UserApi.cs" />
     <Compile Include="DbContexts\BeStreetContext.cs" />
+    <Compile Include="DbContexts\SessionContext.cs" />
+    <Compile Include="Interfaces\IMgmtCus.cs" />
     <Compile Include="Interfaces\IMgmtSup.cs" />
     <Compile Include="Interfaces\IProd.cs" />
     <Compile Include="Interfaces\ISession.cs" />
-    <Compile Include="Migrations\202405242032329_InitialCreate.cs" />
-    <Compile Include="Migrations\202405242032329_InitialCreate.Designer.cs">
-      <DependentUpon>202405242032329_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202405242107032_AddEntitites.cs" />
-    <Compile Include="Migrations\202405242107032_AddEntitites.Designer.cs">
-      <DependentUpon>202405242107032_AddEntitites.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202405242153448_AddEntitites.cs" />
-    <Compile Include="Migrations\202405242153448_AddEntitites.Designer.cs">
-      <DependentUpon>202405242153448_AddEntitites.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202405251725520_NullPdLastSale.cs" />
-    <Compile Include="Migrations\202405251725520_NullPdLastSale.Designer.cs">
-      <DependentUpon>202405251725520_NullPdLastSale.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202405251802346_AddSupliers.cs" />
-    <Compile Include="Migrations\202405251802346_AddSupliers.Designer.cs">
-      <DependentUpon>202405251802346_AddSupliers.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202405251857170_SupIdtoInt.cs" />
-    <Compile Include="Migrations\202405251857170_SupIdtoInt.Designer.cs">
-      <DependentUpon>202405251857170_SupIdtoInt.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202405252010204_RequiredSupAdd.cs" />
-    <Compile Include="Migrations\202405252010204_RequiredSupAdd.Designer.cs">
-      <DependentUpon>202405252010204_RequiredSupAdd.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202405260929428_AddPdCode.cs" />
-    <Compile Include="Migrations\202405260929428_AddPdCode.Designer.cs">
-      <DependentUpon>202405260929428_AddPdCode.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BLs\SessionBL.cs" />
   </ItemGroup>
@@ -102,36 +77,14 @@
       <Project>{4892F166-E954-4EB0-B167-CE4CA0AC2A1F}</Project>
       <Name>BeStreet.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BeStreet.Helpers\BeStreet.Helpers.csproj">
+      <Project>{03668e78-ff92-47f9-b73b-11a13610b91a}</Project>
+      <Name>BeStreet.Helpers</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\202405242032329_InitialCreate.resx">
-      <DependentUpon>202405242032329_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202405242107032_AddEntitites.resx">
-      <DependentUpon>202405242107032_AddEntitites.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202405242153448_AddEntitites.resx">
-      <DependentUpon>202405242153448_AddEntitites.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202405251725520_NullPdLastSale.resx">
-      <DependentUpon>202405251725520_NullPdLastSale.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202405251802346_AddSupliers.resx">
-      <DependentUpon>202405251802346_AddSupliers.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202405251857170_SupIdtoInt.resx">
-      <DependentUpon>202405251857170_SupIdtoInt.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202405252010204_RequiredSupAdd.resx">
-      <DependentUpon>202405252010204_RequiredSupAdd.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202405260929428_AddPdCode.resx">
-      <DependentUpon>202405260929428_AddPdCode.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

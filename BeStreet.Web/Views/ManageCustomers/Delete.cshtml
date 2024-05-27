@@ -1,7 +1,8 @@
-﻿@model BeStreet.Models.Customer
+﻿@model BeStreet.Domain.Entities.User.Customer
+
 @{
 
-    Layout = "_AdminLayoutEdit";
+    Layout = "~/Views/Shared/_AdminLayoutEdit.cshtml";
     <title>Delete Customers</title>
 }
 
@@ -21,11 +22,14 @@
         </div>
         <div class="col-xl-4 col-lg-5">
             <div class="position-absolute bottom-0 end-0">
-                <form asp-action="DeletePost">
-                    <a class="btn btn-outline-primary" asp-action="Index">Inapoi la lista</a>
-                    <input type="hidden" asp-for="CusId" /> @* CusId *@
+                @using (Html.BeginForm("DeletePost", "ManageCustomers", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken();
+                    <a class="btn btn-outline-primary" href=@Url.Action("Index", "ManageCustomers")>Inapoi la lista</a>
+                    @*@Html.TextBoxFor(m => m.PdId, new { type = "hidden" })*@
+                    @Html.HiddenFor(m => m.Id)
                     <input type="submit" value="Delete" class="btn btn-danger" />
-                </form>
+                }
             </div>
 
         </div>
@@ -50,7 +54,7 @@
                                 <div class="card" style="border: 1px dashed #9d9da0; border-spacing: 50px">
                                     <div class="card-body">
                                         <div class="mx-auto">
-                                               <img src="@ViewBag.ImgFile" class="card-img-top" />
+                                            <img src="@ViewBag.ImgFile" class="card-img-top" />
                                         </div>
                                     </div>
                                 </div>
@@ -62,58 +66,89 @@
                         <div class="d-sm-flex align-items-center justify-content-between mb-5">
                             <h1 class="h3 mb-2 text-gray-800">Forma client</h1>
                         </div>
-                        <form asp-action="Edit">
-                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        @using (Html.BeginForm("Edit", "ManageCustomers", FormMethod.Post))
+                        {
+                            @Html.ValidationMessage("ModelOnly", new { @class = "text-danger" })
                             <div class="form-group">
-                                <label asp-for="CusId" class="control-label">Client Id Nr</label>
-                                <input asp-for="CusId" class="form-control" disabled />
-                                <span asp-validation-for="CusId" class="text-danger"></span>
+                                <label for="Id" class="control-label">Client Id Nr</label>
+                                @Html.TextBoxFor(m => m.Id, new { @class = "form-control", @readonly = true })
+                                @Html.ValidationMessageFor(m => m.Id, "", new { @class = "text-danger" })
                             </div>
                             <div class="form-group">
-                                <label asp-for="CusName" class="control-label">Nume și prenume</label>
-                                <input asp-for="CusName" class="form-control" disabled />
-                                <span asp-validation-for="CusName" class="text-danger"></span>
+                                <label for="Name" class="control-label">Nume și prenume</label>
+                                @Html.TextBoxFor(m => m.Name, new
+                                {
+                                    @class = "form-control",
+                                    placeholder = "Nume și prenume",
+                                    required = true,
+                                    type = "text"
+                                })
+                                @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
                             </div>
-
                             <div class="form-group">
-                                <label asp-for="CusLogin" class="control-label">Username Id</label>
-                                <input asp-for="CusLogin" class="form-control" disabled />
-                                <span asp-validation-for="CusLogin" class="text-danger"></span>
-                            </div>
-
-                            <div class="form-group">
-                                <label asp-for="CusPass" class="control-label">Parola</label>
-                                <input asp-for="CusPass" class="form-control" disabled />
-                                <span asp-validation-for="CusPass" class="text-danger"></span>
-                            </div>
-
-                            <div class="form-group">
-                                <label asp-for="CusEmail" class="control-label">Email</label>
-                                <input asp-for="CusEmail" class="form-control" disabled />
-                                <span asp-validation-for="CusEmail" class="text-danger"></span>
-                            </div>
-
-                            <div class="form-group">
-                                <label asp-for="StartDate" class="control-label">Data inceput</label>
-                                <input asp-for="StartDate" class="form-control" placeholder="yyyy-MM-dd" disabled />
-                                <span asp-validation-for="StartDate" class="text-danger"></span>
+                                <label for="Login" class="control-label">Username Id</label>
+                                @Html.TextBoxFor(m => m.Login, new
+                                {
+                                    @class = "form-control",
+                                    @readonly = true,
+                                    type = "text"
+                                })
+                                @Html.ValidationMessageFor(m => m.Login, "", new { @class = "text-danger" })
                             </div>
 
                             <div class="form-group">
-                                <label asp-for="LastLogin" class="control-label">Data sfirsit</label>
-                                <input asp-for="LastLogin" class="form-control" placeholder="yyyy-MM-dd" disabled />
-                                <span asp-validation-for="LastLogin" class="text-danger"></span>
+                                <label for="Pass" class="control-label">Parola</label>
+                                @Html.TextBoxFor(m => m.Pass, new
+                                {
+                                    @class = "form-control",
+                                    @readonly = true,
+                                    type = "password"
+                                })
+                                @Html.ValidationMessageFor(m => m.Pass, "", new { @class = "text-danger" })
                             </div>
-                        </form>
+
+                            <div class="form-group">
+                                <label for="Email" class="control-label">Email</label>
+                                @Html.TextBoxFor(m => m.Email, new
+                               {
+                                   @class = "form-control",
+                                   placeholder = "Email",
+                                   required = true,
+                                   type = "email"
+                               })
+                                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group">
+                                <label for="StartDate" class="control-label">Data inceput</label>
+                                @Html.TextBoxFor(m => m.StartDate, new
+                                {
+                                    @class = "form-control",
+                                    placeholder = "Data inceput",
+                                    @readonly = true,
+                                })
+                                @Html.ValidationMessageFor(m => m.StartDate, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group">
+                                <label for="LastLogin" class="control-label">Data sfirsit</label>
+                                @Html.TextBoxFor(m => m.LastLogin, new
+                                {
+                                    @class = "form-control",
+                                    placeholder = "Data sfirsit",
+                                    @readonly = true,
+                                })
+                                @Html.ValidationMessageFor(m => m.LastLogin, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                <label for="Role" class="control-label">Nivelul de acces</label>
+                                @Html.EnumDropDownListFor(m => m.Role, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.Role, "", new { @class = "text-danger" })
+                            </div>
+                        }
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-@section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
-}

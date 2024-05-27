@@ -1,5 +1,4 @@
-﻿using BeStreet.ViewModels;
-using System;
+﻿using System;
 using System.Web.Mvc;
 
 namespace BeStreet.Controllers
@@ -21,19 +20,19 @@ namespace BeStreet.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult SalesDailyProducts(DateTime thedate)
         {
-            
 
-          //  ViewData["currentNav"] = "Report/Product";
-           
 
-          //  ViewBag.theDate = thedate.ToString("yyyy-MM-dd");
-          return View();
+            //  ViewData["currentNav"] = "Report/Product";
+
+
+            //  ViewBag.theDate = thedate.ToString("yyyy-MM-dd");
+            return View();
         }
         public ActionResult SaleMonthlyProducts()
         {
-           
 
-           // ViewData["currentNav"] = "Report/MonthlyProduct";
+
+            // ViewData["currentNav"] = "Report/MonthlyProduct";
 
             var theMonth = DateTime.Now.Month;
             var theYear = DateTime.Now.Year;
@@ -50,25 +49,25 @@ namespace BeStreet.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult SaleMonthlyProducts(DateTime sDate, DateTime eDate)
         {
-           
-          
+
+
             return View();
         }
         public ActionResult SaleDailyCustomer()
         {
-           
 
-           // ViewData["currentNav"] = "Report/Purchase";
+
+            // ViewData["currentNav"] = "Report/Purchase";
             DateTime thedate = DateTime.Now;
 
 
-           
+
             ViewBag.theDate = thedate.ToString("yyyy-MM-dd");
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult SaleDailyCustomer(DateTime  thedate)
+        public ActionResult SaleDailyCustomer(DateTime thedate)
         {
 
 
@@ -79,18 +78,18 @@ namespace BeStreet.Controllers
         }
         public ActionResult SaleMonthlyCustomer()
         {
-        
+
 
             ViewData["currentNav"] = "Report/MonthlyPurchase";
-            
+
             var theMonth = DateTime.Now.Month;
             var theYear = DateTime.Now.Year;
 
             DateTime sDate = new DateTime(theYear, theMonth, 1);
 
-            DateTime eDate = new DateTime   (theYear, theMonth, 1).AddMonths(1).AddDays(-1);
+            DateTime eDate = new DateTime(theYear, theMonth, 1).AddMonths(1).AddDays(-1);
 
-          
+
             ViewBag.sDate = sDate.ToString("yyyy-MM-dd");
             ViewBag.eDate = eDate.ToString("yyyy-MM-dd");
 
@@ -99,9 +98,9 @@ namespace BeStreet.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult SaleMonthlyCustomer(DateTime sDate, DateTime    eDate)
+        public ActionResult SaleMonthlyCustomer(DateTime sDate, DateTime eDate)
         {
-            
+
 
             ViewData["currentNav"] = "Report/MonthlyPurchase";
             ViewBag.sDate = sDate.ToString("yyyy-MM-dd");

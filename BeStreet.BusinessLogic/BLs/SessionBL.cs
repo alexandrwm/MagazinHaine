@@ -2,8 +2,7 @@
 using BeStreet.BusinessLogic.Interfaces;
 using BeStreet.Domain.Entities.Shared;
 using BeStreet.Domain.Entities.User;
-using BeStreet.Domain.Entities.ViewModels;
-using System.Collections.Generic;
+using System.Web;
 
 namespace BeStreet.BusinessLogic.BLs
 {
@@ -29,6 +28,14 @@ namespace BeStreet.BusinessLogic.BLs
             return UserUpdatebyUsernameAction(profile, cusLogin);
         }
 
+        public UserMinimal GetUserByCookie(string userCookie)
+        {
+            return GetUserByCookieAction(userCookie);
+        }
 
+        public HttpCookie GetCookie(string data)
+        {
+            return GetCookieAction(data);
+        }
     }
 }

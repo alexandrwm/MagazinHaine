@@ -42,6 +42,44 @@
             <div class="card shadow mb-4">
                 <div class="card-body">
                     <div class="row">
+                        <div class="col-lg-4 mr-4">
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-gray-800">Poza de profil</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="card" style="border: 1px dashed #9d9da0; border-spacing: 50px">
+                                        <div class="card-body">
+                                            @* <div class="card mx-auto" style="height: 23rem; width: 23rem"> *@
+                                            <div class="mx-auto">
+                                                <img src="@ViewBag.ImgFile" class="card-img-top" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr />
+                                    <div class="col">
+                                        <dev class="row">
+                                            @using (Html.BeginForm("ImgUpload", "Customer", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                            {
+                                                <div class="mb-3">
+                                                    <input type="hidden" name="theid" value="@Model.Id" />
+                                                    <label for="formFile" class="form-label">Selecteaza imagine</label>
+                                                    <input name="imgfiles" class="form-control" type="file" accept="image/png" required>
+                                                    <br>
+                                                    <input class="btn btn-success" type="submit" value="Incarca" />
+                                                </div>
+                                            }
+                                            <div class="mb-3">
+                                                <a class="btn btn-danger" onclick="return confirm('Confirmați ștergerea fotografiei')" href=@Url.Action("ImgDelete", "Customer", new { id = Model.Id })>
+                                                    Sterge
+                                                </a>
+                                            </div>
+                                        </dev>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="col-lg-6">
                             <div class="d-sm-flex align-items-center justify-content-between mb-2">
                                 <h1 class="h3 mb-2 text-muted">Detalii</h1>
@@ -115,14 +153,14 @@
                                })
                                     @Html.ValidationMessageFor(m => m.Add, "", new { @class = "text-danger" })
                                     @*<textarea asp-for="CusAdd" class="form-control" rows="4" placeholder="Adresa"></textarea>
-        <span asp-validation-for="CusAdd" class="text-danger"></span>*@
+                    <span asp-validation-for="CusAdd" class="text-danger"></span>*@
                                 </div>
                                 <br>
                                 <div class="mb-3">
                                     <input class="btn btn-success" type="submit" value="Salveaza" />
                                 </div>
                             }
-                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

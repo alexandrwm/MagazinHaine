@@ -1944,12 +1944,17 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\BuyingController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ManageCustomersController.cs" />
     <Compile Include="Controllers\ManageSuppliersController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
+    <Compile Include="Filters\AllowAdminAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1959,7 +1964,6 @@
     <Compile Include="ViewModels\BdVM.cs" />
     <Compile Include="ViewModels\BuyingVM.cs" />
     <Compile Include="ViewModels\CtdVM.cs" />
-    <Compile Include="ViewModels\CustomerVM.cs" />
     <Compile Include="ViewModels\DtlsVM.cs" />
     <Compile Include="ViewModels\EmployeeVM.cs" />
     <Compile Include="ViewModels\Order.cs" />
@@ -2009,6 +2013,18 @@
     <Content Include="Views\Product\Show.cshtml" />
     <Content Include="Views\ManageSuppliers\Edit.cshtml" />
     <Content Include="Views\ManageSuppliers\Delete.cshtml" />
+    <Content Include="Views\Report\SaleDailyCustomer.cshtml" />
+    <Content Include="Views\Report\SaleMonthlyCustomer.cshtml" />
+    <Content Include="Views\Report\SaleMonthlyProducts.cshtml" />
+    <Content Include="Views\Report\SalesDailyProducts.cshtml" />
+    <Content Include="Views\Order\index.cshtml" />
+    <Content Include="Views\Order\Show.cshtml" />
+    <Content Include="Views\ManageCustomers\Create.cshtml" />
+    <Content Include="Views\ManageCustomers\Delete.cshtml" />
+    <Content Include="Views\ManageCustomers\Edit.cshtml" />
+    <Content Include="Views\ManageCustomers\Index.cshtml" />
+    <Content Include="Views\Shared\_Header.cshtml" />
+    <Content Include="Views\Shared\_Header1.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

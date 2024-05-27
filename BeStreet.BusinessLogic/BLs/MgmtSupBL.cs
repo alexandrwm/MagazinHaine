@@ -2,11 +2,7 @@
 using BeStreet.BusinessLogic.Interfaces;
 using BeStreet.Domain.Entities.Items;
 using BeStreet.Domain.Entities.ViewModels;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BeStreet.BusinessLogic.BLs
 {
@@ -17,9 +13,9 @@ namespace BeStreet.BusinessLogic.BLs
             return CreateSupplierAction(obj);
         }
 
-        public bool DeleteSuplierById(int supId)
+        public bool DeleteSupplierById(int supId)
         {
-            return DeleteSuplierByIdAction(supId);
+            return DeleteSupplierByIdAction(supId);
         }
 
         public List<SupplierVM> GetAllSuppliers()

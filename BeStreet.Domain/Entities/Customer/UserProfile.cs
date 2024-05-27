@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace BeStreet.Domain.Entities.User
 {
     public class UserProfile
     {
+        public int Id { get; set; }
+
         [Required]
         [StringLength(20, MinimumLength = 1, ErrorMessage = "Sorry, Name too long.")]
         public string Name { get; set; }
-        
+
         [Required]
         [Display(Name = "Username")]
         [StringLength(30, MinimumLength = 5, ErrorMessage = "Must be between 5 and 30 characters.")]

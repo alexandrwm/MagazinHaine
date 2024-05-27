@@ -1,6 +1,6 @@
-﻿@model IEnumerable<BeStreet.ViewModels.CustomerVM>
+﻿@model IEnumerable<BeStreet.Domain.Entities.ViewModels.CustomerVM>
 @{
-    Layout = "_AdminLayoutEdit";
+    Layout = "~/Views/Shared/_AdminLayoutEdit.cshtml";
     <title>Manager de clienti</title>
 
 }
@@ -26,7 +26,7 @@
         </div>
         <div class="col-xl-4 col-lg-5">
             <div class="position-absolute bottom-0 end-0">
-                <a class="btn btn-outline-primary" asp-area="" asp-controller="ManageCustomers" asp-action="Create">Adauga client</a>
+                <a class="btn btn-outline-primary" href=@Url.Action("Create", "ManageCustomers")>Adauga client</a>
             </div>
         </div>
     </div>
@@ -43,11 +43,12 @@
                     <tr>
                         <th>Client Id Nr</th>
                         <th>Nume</th>
-                        <th>Username Id</th>
+                        <th>Username</th>
                         <th>Parola</th>
                         <th>Email</th>
+                        <th>Nivel</th>
                         <th>Data inceput</th>
-                        <th>Data ultima logare</th>
+                        <th>Ultima logare</th>
                         <th>Editare</th>
                         <th>Stergere</th>
                     </tr>
@@ -56,22 +57,23 @@
                     @foreach (var item in Model)
                     {
                         <tr>
-                            <td>@item.CusId</td>
-                            <td>@item.CusName</td>
-                            <td>@item.CusLogin</td>
-                            <td>@item.CusPass</td>
-                            <td>@item.CusEmail</td>
+                            <td>@item.Id</td>
+                            <td>@item.Name</td>
+                            <td>@item.Login</td>
+                            <td>@item.Pass</td>
+                            <td>@item.Email</td>
+                            <td>@item.Role</td>
                             <td>@item.StartDate</td>
                             <td>@item.LastLogin</td>
 
                             <td class="text-center">
-                                <a asp-action="Edit" asp-route-id="@item.CusId">
+                                <a href=@Url.Action("Edit", "ManageCustomers", new { id = item.Id })>
                                     <i class="fas fa-edit"></i>
 
                                 </a>
                             </td>
                             <td class="text-center">
-                                <a asp-action="Delete" asp-route-id="@item.CusId">
+                                <a href=@Url.Action("Delete", "ManageCustomers", new { id = item.Id })>
                                     <i class="text-center fa fa-trash"></i>
                                 </a>
                             </td>

@@ -1,5 +1,5 @@
-﻿@model BeStreet.Domain.Entities.Items.Product
-@using BeStreet.Domain.Entities.ViewModels
+﻿@using ClothesShop.ViewModels
+@model ClothesShop.Models.Product;
 @{
 	ViewData["Title"] = "Detalii produs";
 }
@@ -17,10 +17,11 @@
 @{
 	var PdId = Html.ValueFor(model => model.PdId);
 	var maxStk = Html.ValueFor(model => model.PdStk);
-	var pdimg = "/wwwroot/imgpd/P" + PdId + Model.ColorId + Model.SizeId + ".png";
-	//double PdStk = 0;
+	var pdimg = "/imgpd/" + PdId + ".png";
+	double PdStk = 0;
 
-	int PrefixId = Model.PdId;
+	string[] parts = PdId.Split('-');
+	string PrefixId = parts[0];
 
 	var items = (List<PdFilterVM>)ViewData["item"];
 
@@ -44,14 +45,13 @@
 			<h1>@Html.DisplayFor(model => model.PdName)</h1>
 			<p>Descriere: @Html.DisplayFor(model => model.PdDtls)</p>
 			<p>Pret: @Html.DisplayFor(model => model.PdPrice) euro</p>
-			@using (Html.BeginForm("AddDtl", "Cart", FormMethod.Post))
-			{
+			<form asp-action="AddDtl" asp-controller="Cart">
 				<div class="radio-tile-group">
 					@{
 						foreach (var size in sizes)
 						{
 							<div class="input-container">
-								@Html.RadioButton("radioSizes", size.SizeId, new { id = size.SizeName, @class = "radio-button", @onchange = $"updateStock('{PrefixId}')" })
+								<input type="radio" class="radio-button" id="@size.SizeName" value="@size.SizeId" name="radioSizes" onchange="updateStock('@PrefixId')">
 								<div class="radio-tile">
 									<label for="@size.SizeName" class="radio-tile-label">@size.SizeName</label>
 								</div>
@@ -68,8 +68,7 @@
 					@{foreach (var color in colors)
 						{
 							<div class="input-container">
-								@Html.RadioButton("radioColors", color.ColorId, new { id = color.ColorName, @class = "radio-button", @onchange = $"updateStock('{PrefixId}')" })
-								@*<input type="radio" class="radio-button" id="@color.ColorName" value="@color.ColorId" name="radioColors" onchange="updateStock('@PrefixId')">*@
+								<input type="radio" class="radio-button" id="@color.ColorName" value="@color.ColorId" name="radioColors" onchange="updateStock('@PrefixId')">
 								<div class="radio-tile">
 									<label for="@color.ColorName" class="radio-tile-label">@color.ColorName</label>
 								</div>
@@ -93,7 +92,7 @@
 				<div class="form-group">
 					<input type="submit" id="SendTocart" value="Adaugă in coş" class="btn btn-primary" />
 				</div>
-			}
+			</form>
 		</div>
 	</div>
 </div>

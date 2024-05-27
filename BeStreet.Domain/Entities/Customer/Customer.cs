@@ -1,12 +1,11 @@
 ﻿using BeStreet.Domain.Enums;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace BeStreet.Domain.Entities.Items
+namespace BeStreet.Domain.Entities.User
 {
-    public class User
+    public class Customer
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

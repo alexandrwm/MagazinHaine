@@ -1,12 +1,8 @@
 ﻿using BeStreet.BusinessLogic.DbContexts;
 using BeStreet.Domain.Entities.Items;
 using BeStreet.Domain.Entities.ViewModels;
-using System;
 using System.Collections.Generic;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BeStreet.BusinessLogic.Core
 {
@@ -57,7 +53,7 @@ namespace BeStreet.BusinessLogic.Core
 
         internal bool UpdateSupplierAction(Supplier obj)
         {
-            using(var db = new BeStreetContext())
+            using (var db = new BeStreetContext())
             {
                 var sup = db.Suppliers.FirstOrDefault(s => s.SupId == obj.SupId);
                 if (sup == null) return false;
@@ -68,13 +64,12 @@ namespace BeStreet.BusinessLogic.Core
                 sup.SupAdd = obj.SupAdd;
                 sup.SupRemark = obj.SupRemark;
 
-                db.Entry(sup).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
             }
             return true;
         }
 
-        internal bool DeleteSuplierByIdAction(int id)
+        internal bool DeleteSupplierByIdAction(int id)
         {
             using (var db = new BeStreetContext())
             {

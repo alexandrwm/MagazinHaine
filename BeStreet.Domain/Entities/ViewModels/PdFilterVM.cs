@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace BeStreet.Domain.Entities.ViewModels
+﻿namespace BeStreet.Domain.Entities.ViewModels
 {
     public class PdFilterVM
     {
@@ -33,7 +31,7 @@ namespace BeStreet.Domain.Entities.ViewModels
         public string TargetName { get; set; }
 
 
-        public int  SupId { get; set; }
+        public int SupId { get; set; }
 
     }
 }

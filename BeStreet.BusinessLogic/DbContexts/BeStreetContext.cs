@@ -1,4 +1,5 @@
 ﻿using BeStreet.Domain.Entities.Items;
+using BeStreet.Domain.Entities.User;
 using System.Data.Entity;
 
 namespace BeStreet.BusinessLogic.DbContexts
@@ -7,7 +8,7 @@ namespace BeStreet.BusinessLogic.DbContexts
     {
         public BeStreetContext() : base("name=BeStreet") { }
 
-        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<ProductType> ProductTypes { get; set; }
         public virtual DbSet<Color> Colors { get; set; }

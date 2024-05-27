@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace BeStreet.Domain.Entities.Items
+﻿namespace BeStreet.Domain.Entities.Items
 {
 
     public partial class Duty

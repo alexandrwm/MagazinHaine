@@ -2,11 +2,7 @@
 using BeStreet.BusinessLogic.Interfaces;
 using BeStreet.Domain.Entities.Items;
 using BeStreet.Domain.Entities.ViewModels;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BeStreet.BusinessLogic.BLs
 {
@@ -21,7 +17,7 @@ namespace BeStreet.BusinessLogic.BLs
         {
             return GetProductsAction(category);
         }
-        
+
         public List<PdVM> GetAllProducts()
         {
             return GetAllProductsAction();

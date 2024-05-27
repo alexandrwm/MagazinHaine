@@ -6,7 +6,7 @@ namespace BeStreet.Web.Controllers
     public class OrderController : Controller
     {
 
-        
+
         public ActionResult OrderToDay()
         {
             DateTime todayDate = DateTime.Now;
@@ -45,7 +45,7 @@ namespace BeStreet.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult UpdateVoid(string CartId, string CartVoid)
         {
-          
+
             return View();
         }
     }

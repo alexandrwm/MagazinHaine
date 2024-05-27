@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace BeStreet.Domain.Entities.ViewModels
+﻿namespace BeStreet.Domain.Entities.ViewModels
 {
     public class PdVM
     {

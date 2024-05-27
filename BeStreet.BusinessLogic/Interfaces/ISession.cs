@@ -1,11 +1,6 @@
 ﻿using BeStreet.Domain.Entities.Shared;
 using BeStreet.Domain.Entities.User;
-using BeStreet.Domain.Entities.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
 
 namespace BeStreet.BusinessLogic.Interfaces
 {
@@ -15,5 +10,7 @@ namespace BeStreet.BusinessLogic.Interfaces
         bool UserReg(URegData data);
         UserProfile GetUserProf(int? id);
         int? UserUpdateByUsername(UserProfile profile, string cusLogin);
+        UserMinimal GetUserByCookie(string value);
+        HttpCookie GetCookie(string data);
     }
 }

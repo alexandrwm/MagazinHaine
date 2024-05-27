@@ -1,10 +1,5 @@
 ﻿using BeStreet.BusinessLogic.BLs;
 using BeStreet.BusinessLogic.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BeStreet.BusinessLogic
 {
@@ -23,6 +18,11 @@ namespace BeStreet.BusinessLogic
         public IMgmtSup GetMgmtSupBL()
         {
             return new MgmtSupBL();
+        }
+
+        public IMgmtCus GetMgmtCusBL()
+        {
+            return new MgmtCusBL();
         }
     }
 }

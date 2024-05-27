@@ -1,14 +1,13 @@
 ﻿using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BeStreet.Domain.Entities.Items
 {
     // HAS FOREIGN KEY CUSID
     public class Cart
     {
-         public string CartId { get; set; } = null;
+        public string CartId { get; set; } = null;
 
         public string CusId { get; set; }
 

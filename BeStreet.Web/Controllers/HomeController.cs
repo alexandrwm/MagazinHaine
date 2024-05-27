@@ -1,31 +1,25 @@
-﻿using System;
-using System.Linq;
-using System.Runtime.Remoting.Messaging;
-using System.Web.Mvc;
-using BeStreet.BusinessLogic;
+﻿using BeStreet.BusinessLogic;
 using BeStreet.BusinessLogic.DbContexts;
 using BeStreet.BusinessLogic.Interfaces;
 using BeStreet.Domain.Entities.User;
 using BeStreet.Models;
-using BeStreet.ViewModels;
+using BeStreet.Web.Controllers;
+using System;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
 
 
 namespace BeStreet.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
-        private readonly ISession _session;
-        private readonly IProd _prods;
-        public HomeController()
-        {
-            _session = new BusinesLogic().GetSessionBL();
-            _prods = new BusinesLogic().GetProdBL();
-        }
+        private readonly IProd _prods = new BusinesLogic().GetProdBL();
+
         public ActionResult Index()
         {
+            SessionStatus();
             ViewData["NoContainerClass"] = true;
-            //var recommend = _session.GetRecommendation();
-
             ViewBag.ErrorMessage = TempData["ErrorMessage"];
             return View();
             //return RedirectToAction("Shop");
@@ -33,11 +27,13 @@ namespace BeStreet.Controllers
 
         public ActionResult Privacy()
         {
+            SessionStatus();
             return View();
         }
 
         public ActionResult Login()
         {
+            SessionStatus();
             return View();
         }
 
@@ -56,18 +52,24 @@ namespace BeStreet.Controllers
                 var userLogin = _session.UserLogin(data);
                 if (userLogin.Status)
                 {
+
+                    HttpCookie cookie = _session.GetCookie(login.ULogin);
+
+                    ControllerContext.HttpContext.Response.Cookies.Add(cookie);
+
                     Session["UserName"] = userLogin.Name;
                     Session["UserId"] = userLogin.Id;
+
                     if (userLogin.Role == Domain.Enums.URole.Customer)
                     {
                         return RedirectToAction("Index", "Home");
                     }
                     else if (userLogin.Role == Domain.Enums.URole.Admin)
                     {
-                        return RedirectToAction("Index", "Admin");
+                        return RedirectToAction("Index", "Product");
                     }
                 }
-                else 
+                else
                 {
                     TempData["ErrorMessage"] = "Numele de utilizator sau parola este incorecta.";
                     return RedirectToAction("Login");
@@ -80,7 +82,9 @@ namespace BeStreet.Controllers
         }
         public ActionResult Logout()
         {
+            EatCookie();
             HttpContext.Session.Clear();
+            HttpContext.Session.Abandon();
             return RedirectToAction("Index");
         }
 
@@ -88,16 +92,17 @@ namespace BeStreet.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Shop(string stext)
         {
-                return RedirectToAction("Index");
+            return RedirectToAction("Index");
         }
 
         public ActionResult Shop()
         {
-         
+            SessionStatus();
             return View();
         }
         public ActionResult Men()
         {
+            SessionStatus();
             using (var db = new BeStreetContext())
             {
                 var FilterCategory = db.ProductTypes.ToList();
@@ -107,7 +112,7 @@ namespace BeStreet.Controllers
                 var pdvm = _prods.GetProducts("Barbati");
                 if (pdvm == null) return HttpNotFound();
                 ViewBag.ErrorMessage = TempData["ErrorMessage"];
-                
+
                 ViewData["FilterCategory"] = FilterCategory;
                 ViewData["FilterColor"] = FilterColor;
                 ViewData["FilterSize"] = FilterSize;
@@ -115,32 +120,34 @@ namespace BeStreet.Controllers
             }
         }
 
-		//[HttpPost]
-		//[ValidateAntiForgeryToken]
-  //      public ActionResult Men(string stext)
-		//{
-		//	if (stext == null)
-		//	{
-		//		return RedirectToAction("men");
-		//	}
-			
-		//	return View();
-		//}
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //      public ActionResult Men(string stext)
+        //{
+        //	if (stext == null)
+        //	{
+        //		return RedirectToAction("men");
+        //	}
+
+        //	return View();
+        //}
 
         public ActionResult Women()
         {
-			
-			return View();
+            SessionStatus();
+            return View();
         }
 
         public ActionResult Kids()
         {
-			
-			return View();
+
+            SessionStatus();
+            return View();
         }
 
         public ActionResult Register()
         {
+            SessionStatus();
             return View();
         }
 
@@ -186,4 +193,3 @@ namespace BeStreet.Controllers
         }
     }
 }
-    
