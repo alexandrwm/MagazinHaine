@@ -58,9 +58,13 @@
     <Compile Include="DbContexts\BeStreetContext.cs" />
     <Compile Include="Interfaces\IAdmin.cs" />
     <Compile Include="Interfaces\ISession.cs" />
-    <Compile Include="Migrations\202405241854014_InitialCreate.cs" />
-    <Compile Include="Migrations\202405241854014_InitialCreate.Designer.cs">
-      <DependentUpon>202405241854014_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\202405242032329_InitialCreate.cs" />
+    <Compile Include="Migrations\202405242032329_InitialCreate.Designer.cs">
+      <DependentUpon>202405242032329_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202405242107032_AddEntitites.cs" />
+    <Compile Include="Migrations\202405242107032_AddEntitites.Designer.cs">
+      <DependentUpon>202405242107032_AddEntitites.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -77,8 +81,11 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202405241854014_InitialCreate.resx">
-      <DependentUpon>202405241854014_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202405242032329_InitialCreate.resx">
+      <DependentUpon>202405242032329_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202405242107032_AddEntitites.resx">
+      <DependentUpon>202405242107032_AddEntitites.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

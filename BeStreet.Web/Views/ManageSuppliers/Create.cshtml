@@ -1,0 +1,73 @@
+﻿
+@model BeStreet.Domain.Entities.Items.Supplier
+
+@{
+    Layout = "_AdminLayoutEdit";
+    <title>Adauga Furnizor</title>
+}
+
+@if (ViewBag.ErrorMessage != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @ViewBag.ErrorMessage;
+    </div>
+}
+
+@{
+    var stext = ViewBag.stext;
+}
+
+<div class="d-sm-flex align-items-center justify-content-between mb-5">
+    <h1 class="h3 mb-2 text-gray-800">Adauga Furnizor</h1>
+</div>
+
+<div class="row">
+    <div class="col-xl-8 col-lg-9">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Informatie furnizor</h6>
+            </div>
+            <div class="card-body w-75 p-3">
+                <form class="user" asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <input type="hidden" asp-for="SupId" value="SPXXX" class="form-control" />
+                        <span asp-validation-for="SupId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input asp-for="SupName" class="form-control form-control-user" placeholder="Nume Furnizor" required />
+                        <span asp-validation-for="SupName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input asp-for="SupContact" class="form-control form-control-user" placeholder="Contact" required />
+                        <span asp-validation-for="SupContact" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input asp-for="SupTel" class="form-control form-control-user" placeholder="Telefon" required />
+                        <span asp-validation-for="SupTel" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input asp-for="SupEmail" class="form-control form-control-user" placeholder="Email" required />
+                        <span asp-validation-for="SupEmail" class="text-danger"></span>
+                    </div>
+                    <br>
+                    <div class="mb-3 w-50">
+                        <input class="btn btn-success btn-user btn-block" type="submit" value="Create Suppliers" />
+                    </div>
+                    <br>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

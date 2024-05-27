@@ -15,46 +15,46 @@
                 @Html.ValidationMessage("ModelOnly", new { @class = "text-danger" })
                 <div class="form-group">
                     <label class="control-label">Numele și prenumele </label>
-                    @Html.TextBoxFor(m => m.CusName, new
+                    @Html.TextBoxFor(m => m.Name, new
                {
                    @class = "form-control",
                })
-                    @Html.ValidationMessageFor(m => m.CusName, "", new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
                 </div>
                 <div class="form-group">
                     <label class="control-label">Username</label>
-                    @Html.TextBoxFor(m => m.CusLogin, new
+                    @Html.TextBoxFor(m => m.Login, new
                {
                    @class = "form-control",
                    disabled = true,
                })
-                    @Html.ValidationMessageFor(m => m.CusLogin, "", new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(m => m.Login, "", new { @class = "text-danger" })
                 </div>
                 <div class="form-group">
                     <label class="control-label">Parola</label>
-                    @Html.TextBoxFor(m => m.CusPass, new
+                    @Html.TextBoxFor(m => m.Pass, new
                {
                    @class = "form-control",
                    type = "password"
                })
-                    @Html.ValidationMessageFor(m => m.CusPass, "", new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(m => m.Pass, "", new { @class = "text-danger" })
                 </div>
                 <div class="form-group">
                     <label class="control-label">Email</label>
-                    @Html.TextBoxFor(m => m.CusEmail, new
+                    @Html.TextBoxFor(m => m.Email, new
                {
                    @class = "form-control",
                    type = "email"
                })
-                    @Html.ValidationMessageFor(m => m.CusEmail, "", new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                 </div>
                 <div class="form-group">
                     <label class="control-label">Adresa</label>
-                    @Html.TextAreaFor(m => m.CusAdd, new
+                    @Html.TextAreaFor(m => m.Add, new
                {
                    @class = "form-control",
                })
-                    @Html.ValidationMessageFor(m => m.CusAdd, "", new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(m => m.Add, "", new { @class = "text-danger" })
                 </div>
                 <div class="form-group mt-2">
                     <input type="submit" value="Salveaza" class="btn btn-primary" onclick="return confirm('Informatia este corecta?')" />

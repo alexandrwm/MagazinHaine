@@ -56,6 +56,10 @@
     <Compile Include="Entities\Items\Cart.cs" />
     <Compile Include="Entities\Items\CartDtl.cs" />
     <Compile Include="Entities\Items\Color.cs" />
+    <Compile Include="Entities\Items\Customer.cs" />
+    <Compile Include="Entities\Items\Duty.cs" />
+    <Compile Include="Entities\Items\ErrorViewModel.cs" />
+    <Compile Include="Entities\Items\Staff.cs" />
     <Compile Include="Entities\User\User.cs" />
     <Compile Include="Entities\Items\Product.cs" />
     <Compile Include="Entities\Items\ProductType.cs" />

@@ -1948,6 +1948,10 @@
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ManageCustomersController.cs" />
+    <Compile Include="Controllers\ManageEmployeeController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1999,6 +2003,29 @@
     <Content Include="Views\Customer\Show.cshtml" />
     <Content Include="Views\_ViewImports.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\ManageSuppliers\Create.cshtml" />
+    <Content Include="Views\ManageSuppliers\Delete.cshtml" />
+    <Content Include="Views\ManageSuppliers\Edit.cshtml" />
+    <Content Include="Views\ManageSuppliers\Index.cshtml" />
+    <Content Include="Views\ManageCustomers\Create.cshtml" />
+    <Content Include="Views\ManageCustomers\Delete.cshtml" />
+    <Content Include="Views\ManageCustomers\Edit.cshtml" />
+    <Content Include="Views\ManageCustomers\Index.cshtml" />
+    <Content Include="Views\ManageEmployee\Create.cshtml" />
+    <Content Include="Views\ManageEmployee\Delete.cshtml" />
+    <Content Include="Views\ManageEmployee\Edit.cshtml" />
+    <Content Include="Views\ManageEmployee\Index.cshtml" />
+    <Content Include="Views\Order\index.cshtml" />
+    <Content Include="Views\Order\Show.cshtml" />
+    <Content Include="Views\Product\Create.cshtml" />
+    <Content Include="Views\Product\Delete.cshtml" />
+    <Content Include="Views\Product\Edit.cshtml" />
+    <Content Include="Views\Product\Index.cshtml" />
+    <Content Include="Views\Product\show.cshtml" />
+    <Content Include="Views\Report\SaleDailyCustomer.cshtml" />
+    <Content Include="Views\Report\SaleMonthlyCustomer.cshtml" />
+    <Content Include="Views\Report\SaleMonthlyProducts.cshtml" />
+    <Content Include="Views\Report\SalesDailyProducts.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

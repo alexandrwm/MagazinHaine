@@ -6,7 +6,7 @@ using BeStreet.ViewModels;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-
+//
 namespace BeStreet.BusinessLogic.Core
 {
     public class UserApi
