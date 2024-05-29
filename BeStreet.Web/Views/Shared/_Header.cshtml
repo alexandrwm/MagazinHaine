@@ -16,77 +16,39 @@
         Instrumente de management
     </div>
 
-    <li class="nav-item @(currentNav == "Product/Buying" || currentNav == "Product/Create" || currentNav == "Product" ? "active" : "")">
-        <a class="@(currentNav == "Product/Buying" || currentNav == "Product/Create" || currentNav == "Product" ? "nav-link" : "nav-link collapsed")" href="#" data-toggle="collapse" data-target="#collapseProducts"
+    <li class="nav-item @( currentNav == "Product/Create" || currentNav == "Product" ? "active" : "")">
+        <a class="@( currentNav == "Product/Create" || currentNav == "Product" ? "nav-link" : "nav-link collapsed")" href="#" data-toggle="collapse" data-target="#collapseProducts"
            aria-expanded="true" aria-controls="collapsePages">
             <i class="fas fa-fw fa-shopping-cart"></i>
             <span>Produse</span>
         </a>
-        <div id="collapseProducts" class="collapse @(currentNav == "Product/Buying" ||currentNav == "Product/Create" || currentNav == "Product" ? "show" : "")" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+        <div id="collapseProducts" class="collapse @(currentNav == "Product/Create" || currentNav == "Product" ? "show" : "")" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Produs: </h6>
                 <a class="collapse-item @(currentNav == "Product" ? "active" : "")" href=@Url.Action("Index", "Product")>Lista de produse</a>
                 <a class="collapse-item @(currentNav == "Product/Create" ? "active" : "")" href=@Url.Action("Create", "Product")>Adauga produse</a>
-                <h6 class="collapse-header">Buy Products:</h6>
-                <a class="collapse-item @(currentNav == "Product/Buying" ? "active" : "")" href=@Url.Action("Index", "Buying")>Cumpără</a>
                 <div class="collapse-divider"></div>
             </div>
         </div>
-    </li>
-
-    <li class="nav-item @(currentNav == "Order" || currentNav == "Order" ? "active" : "")">
-        <a class="nav-link" href=@Url.Action("Index", "Order")>
-            <i class="fas fa-fw fa-solid fa-coins"></i>
-            <span>Comenzi</span>
-        </a>
     </li>
 
     <li class="nav-item @(currentNav == "ManageCustomers/Create" || currentNav == "ManageCustomers" ? "active" : "")">
         <a class="@(currentNav == "ManageCustomers/Create" || currentNav == "ManageCustomers" ? "nav-link" : "nav-link collapsed")" href="#" data-toggle="collapse" data-target="#collapsePeople"
            aria-expanded="true" aria-controls="collapsePages">
             <i class="fas fa-fw fa-solid fa-user"></i>
-            <span>Clienti si furnizori</span>
+            <span>Clienti</span>
         </a>
-        <div id="collapsePeople" class="collapse @(currentNav == "ManageCustomers/Create" || currentNav == "ManageCustomers" ||
-                currentNav=="ManageEmployee" || currentNav== "ManageEmployee/Create" ||
-                currentNav=="ManageSuppliers" || currentNav== "ManageSuppliers/Create" ? "show" : "")" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+        <div id="collapsePeople" class="collapse @(currentNav == "ManageCustomers/Create" || currentNav == "ManageCustomers" ? "show" : "")" aria-labelledby="headingPages" data-parent="#accordionSidebar">
 
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Clienti:</h6>
                 <a class="collapse-item @(currentNav == "ManageCustomers" ? "active" : "")" href=@Url.Action("Index", "ManageCustomers")>Lista clienti</a>
                 <a class="collapse-item @(currentNav == "ManageCustomers/Create" ? "active" : "")" href=@Url.Action("Create", "ManageCustomers")>Adauga client</a>
                 <div class="collapse-divider"></div>
-
-                <h6 class="collapse-header">Furnizori:</h6>
-                <a class="collapse-item @(currentNav == "ManageSuppliers" ? "active" : "")" href=@Url.Action("Index", "ManageSuppliers")>List furnizori</a>
-                <a class="collapse-item @(currentNav == "ManageSuppliers/Create" ? "active" : "")" href=@Url.Action("Create", "ManageSuppliers")>Adauga furnizor</a>
-
             </div>
         </div>
     </li>
 
-    <li class="nav-item @(currentNav == "Report/MonthlyPurchase" ||currentNav == "Report/Purchase" ||currentNav == "Report/Product" || currentNav == "Report/MonthlyProduct"? "active":"")">
-        <a class=" @(currentNav == "Report/MonthlyPurchase" ||currentNav == "Report/Purchase" ||currentNav == "Report/Product" || currentNav == "Report/MonthlyProduct" ? "nav-link":"nav-link collapsed")" href="#"
-           data-toggle="collapse" data-target="#colapseReport" aria-expanded="true" aria-controls="collapsePages">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-bar-graph-fill" viewBox="0 0 16 16">
-                <path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2m-2 11.5v-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5m-2.5.5a.5.5 0 0 1-.5-.5v-4a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5zm-3 0a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5z" />
-            </svg>
-
-            <span>Raport de vanzari </span>
-        </a>
-        <div id="colapseReport" class="collapse @(currentNav == "Report/MonthlyPurchase" ||currentNav == "Report/Purchase" ||currentNav == "Report/Product" || currentNav == "Report/MonthlyProduct" ?"show":"") " aria-labelledby="headingPages" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Dupa Produs:</h6>
-                <a class="collapse-item @(currentNav == "Report/Product" ? "active":"")" href=@Url.Action("SalesDailyProducts", "Report")>Top Produse pe zi</a>
-                <a class="collapse-item @(currentNav == "Report/MonthlyProduct" ? "active":"")" href=@Url.Action("SalesMonthlyProducts", "Report")>Top Produse lunar</a>
-                <div class="collapse-divider"></div>
-                <h6 class="collapse-header">Dupa Client:</h6>
-                <a class="collapse-item @(currentNav == "Report/Purchase" ? "active":"")" href=@Url.Action("SalesDailyCustomer", "Report")>Top clienti pe zi</a>
-                <a class="collapse-item @(currentNav == "Report/MonthlyPurchase" ? "active":"")" href=@Url.Action("SalesMonthlyCustomer", "Report")>Top clienti lunar</a>
-                <div class="collapse-divider"></div>
-            </div>
-        </div>
-    </li>
 
     <hr class="sidebar-divider d-none d-md-block">
 

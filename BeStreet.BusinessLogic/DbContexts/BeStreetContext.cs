@@ -14,7 +14,7 @@ namespace BeStreet.BusinessLogic.DbContexts
         public virtual DbSet<Color> Colors { get; set; }
         public virtual DbSet<Size> Sizes { get; set; }
         public virtual DbSet<Target> Targets { get; set; }
-        public virtual DbSet<Status> Statuses { get; set; }
-        public virtual DbSet<Supplier> Suppliers { get; set; }
+        public virtual DbSet<Cart> Carts { get; set; }
+        public virtual DbSet<CartDtl> CartDtls { get; set;}
     }
 }

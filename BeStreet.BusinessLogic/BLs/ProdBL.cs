@@ -37,5 +37,20 @@ namespace BeStreet.BusinessLogic.BLs
         {
             return UpdateProductByIdAction(id, obj);
         }
+
+        public List<TEntity> GetFilter<TEntity>() where TEntity : class
+        {
+            return GetFilterAction<TEntity>();
+        }
+
+        public List<PdFilterVM> GetFilteredProducts(int[] typeIds, int[] sizeIds, int[] colorIds, string targetName)
+        {
+            return GetFilteredProductsAction(typeIds, sizeIds, colorIds, targetName);
+        }
+
+        public List<PdFilterVM> GetDetailedProductById(int id)
+        {
+            return GetDetailedProductByIdAction(id);
+        }
     }
 }

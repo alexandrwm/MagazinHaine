@@ -120,12 +120,6 @@
                         @Html.DropDownListFor(m => m.PdtId, (IEnumerable<SelectListItem>)ViewData["Pdt"], "Selecteaza categoria produsului", new { @class = "form-select", disabled = true })
                         @Html.ValidationMessageFor(m => m.PdtId, "", new { @class = "text-danger" })
                     </div>
-
-                    <div class="form-group">
-                        <label for="SupId" class="control-label">Furnizori</label>
-                        @Html.DropDownListFor(m => m.SupId, (IEnumerable<SelectListItem>)ViewData["Suppliers"], "Selecteaza ținta produsului", new { @class = "form-select", disabled = true })
-                        @Html.ValidationMessageFor(m => m.SupId, "", new { @class = "text-danger" })
-                    </div>
                 </div>
             </div>
 
@@ -141,12 +135,6 @@
                                 <input asp-for="PdPrice" class="form-control" placeholder="Preț" disabled />
                                 <span asp-validation-for="PdPrice" class="text-danger"></span>
                             </div>
-
-                            <div class="form-group">
-                                <label asp-for="PdCost" class="control-label">Cost</label>
-                                <input asp-for="PdCost" class="form-control" placeholder="Cost" disabled />
-                                <span asp-validation-for="PdCost" class="text-danger"></span>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -158,18 +146,6 @@
                         </div>
 
                         <div class="card-body">
-                            <div class="form-group">
-                                <label asp-for="StatusId" class="control-label">Statut</label>
-                                <select asp-for="StatusId" class="form-select" disabled>
-                                    <option value="">Status</option>
-                                    @foreach (var supp in (IEnumerable<SelectListItem>)ViewData["Status"])
-                                    {
-                                        <option value="@supp.Value">@supp.Text</option>
-                                    }
-                                </select>
-                                <span asp-validation-for="StatusId" class="text-danger"></span>
-                            </div>
-
                             <div class="form-group">
                                 <label asp-for="PdStk" class="control-label">Cantitate</label>
                                 <input asp-for="PdStk" class="form-control" placeholder="0" disabled />

@@ -43,7 +43,7 @@
                                             <a href="#"><i class="bi bi-person-fill me-2"></i>@Session["UserName"]</a>
                                             <ul class="sub-menu" style="z-index:9999; position:absolute;">
                                                 <li><a class="dropdown-item"  href=@Url.Action("Show", "Customer", new {id = Session["UserId"] })>Informații personale</a></li>
-                                                <li><a class="dropdown-item"  href=@Url.Action("List", "Cart", new { cusid = Session["UserId"] })>Istoric comenzi</a></li>
+                                                <li><a class="dropdown-item"  href=@Url.Action("List", "Cart")>Istoric comenzi</a></li>
                                                 <li>
                                                     <a class="dropdown-item"  href=@Url.Action("Logout") onclick="return confirm('Deconectați-mă')">
                                                         <i class="bi bi-box-arrow-right me-2"></i>Deconectare
@@ -61,7 +61,7 @@
                                     @if (Session["CartId"] != null)
                                     {
                                         <li style="float:right">
-                                            <a  href=@Url.Action("Show", "Cart") asp-route-cartid="@Session["CartId"]">
+                                            <a  href=@Url.Action("Show", "Cart")>
                                                 <i class="bi bi-bag-fill"></i>
                                                 Cos de cumpărături [@Session["CartMoney"]][@Session["CartQty"]]
                                             </a>

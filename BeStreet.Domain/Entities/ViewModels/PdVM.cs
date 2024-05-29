@@ -12,11 +12,7 @@
         public double PdPrice { get; set; }
         public int PdStk { get; set; }
         public string PdtName { get; set; }
-        public int StatusId { get; set; }
-        public string StatusName { get; set; }
         public int TargetId { get; set; }
         public string TargetName { get; set; }
-        public int SupId { get; set; }
-        public string SupName { get; set; }
     }
 }

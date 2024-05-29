@@ -35,13 +35,13 @@
                                         <a href=@Url.Action("Index", "Home")>Acasă</a>
                                     </li>
                                     <li>
-                                        <a href=@Url.Action("Men", "Home")>Barbați</a>
+                                        <a href=@Url.Action("Men", "Home")>Bărbați</a>
                                     </li>
                                     <li>
-                                        <a href=@Url.Action("women", "Home")>Femei</a>
+                                        <a href=@Url.Action("Women", "Home")>Femei</a>
                                     </li>
                                     <li>
-                                        <a @Url.Action("kids", "Home")>Copii</a>
+                                        <a href=@Url.Action("Kids", "Home")>Copii</a>
                                     </li>
 
                                     @if (Session["UserId"] != null)
@@ -50,7 +50,7 @@
                                             <a href="#"><i class="bi bi-person-fill me-2"></i>@Session["UserName"]</a>
                                             <ul class="sub-menu">
                                                 <li><a class="dropdown-item" href=@Url.Action("Show", "Customer", new { id = Session["UserId"] })>Informații personale</a></li>
-                                                <li><a class="dropdown-item" href=@Url.Action("List", "Cart", new { cusid = Session["UserId"] })>Istoric comenzi</a></li>
+                                                <li><a class="dropdown-item" href=@Url.Action("List", "Cart")>Istoric comenzi</a></li>
                                                 <li>
                                                     <a class="dropdown-item" href=@Url.Action("Logout", "Home") onclick="return confirm('Deconectați-mă')">
                                                         <i class="bi bi-box-arrow-right me-2"></i>Deconectare
@@ -68,7 +68,7 @@
                                     @if (Session["CartId"] != null)
                                     {
                                         <li style="float:right">
-                                            <a asp-controller="Cart" asp-action="Show" asp-route-cartid="">
+                                            <a href=@Url.Action("Show", "Cart")>
                                                 <i class="bi bi-bag-fill"></i>
                                             </a>
                                         </li>

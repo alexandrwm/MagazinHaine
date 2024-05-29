@@ -1,13 +1,11 @@
-﻿@model IEnumerable<ClothesShop.ViewModels.PdFilterVM>
-@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor;
+﻿@model IEnumerable<BeStreet.Domain.Entities.ViewModels.PdFilterVM>
 @{
 	ViewData["Title"] = "Femeie";
 }
 
 @{
 	var stext = ViewBag.stext;
-	HttpContextAccessor.HttpContext.Session.SetString("CurrentUrl", "/Home/women");
-
+	Session["CurrentUrl"] = "/Home/Women";
 }
 
 <div class="mt-2" style="margin-left:5vw;">
@@ -17,7 +15,7 @@
 
 <div class="container-fluid mt-5">
 	<h3 class="text-center text-muted">Haine pentru femei</h3>
-	<input id="TargetProduct" type="hidden" value="femeie" />
+	<input id="TargetProduct" type="hidden" value="Femei" />
 	<div class="row">
 		<div class="col-xl-2 col-lg-3 col-md-12">
 			<div class="cardSidebar">
@@ -72,8 +70,8 @@
 							@foreach (var color in ViewBag.FilterColor)
 							{
 								<label class="form-check">
-									<input type="checkbox" class="form-check-input" name="colors" value="@color.colorId" id="size=@color.colorId">
-									<span class="form-check-label">@color.colorName</span>
+									<input type="checkbox" class="form-check-input" name="colors" value="@color.ColorId" id="size=@color.ColorId">
+									<span class="form-check-label">@color.ColorName</span>
 								</label>
 							}
 						</div>
@@ -83,58 +81,53 @@
 
 		</div>
 		<div class="col-xl-10 col-lg-8 col-md-12 col-sm-12">
-			<div id="CardProduct-Filter" class="row">
-				@{
-					var modelList = Model.ToList();
+            <div id="CardProduct-Filter" class="row">
+                @{
+                    var modelList = Model.ToList();
+                    HashSet<int> displayedIds = new HashSet<int>();
+                }
+                @foreach (var item in modelList)
+                {
+                    var pdimg = "/wwwroot/imgpd/P" + item.PdId + item.ColorId + item.SizeId + ".png";
 
-					HashSet<string> displayedIds = new HashSet<string>();
-				}
-				@foreach (var item in modelList)
-				{
+                    if (!displayedIds.Contains(item.PdId))
+                    {
+                        displayedIds.Add(item.PdId);
+                    }
+                    else
+                    {
+                        continue;
+                    }
 
-					var pdimg = "/imgpd/" + item.PdId + ".png";
-					string[] parts = item.PdId.ToString().Split('-');
-					string id = parts[0];
+                    List<string> size = new List<string>();
+                    List<string> colors = new List<string>();
 
-					if (!displayedIds.Contains(id))
-					{
-						displayedIds.Add(id);
-					}
-					else
-					{
-						continue;
-					}
+                    foreach (var otherItem in modelList)
+                    {
+                        if (otherItem.PdId == item.PdId)
+                        {
+                            size.Add(otherItem.SizeName);
+                            colors.Add(otherItem.ColorName);
+                        }
+                    }
 
-					List<string> size = new List<string>();
-					List<string> colors = new List<string>();
 
-					foreach (var otherItem in modelList)
-					{
-						string[] otherParts = otherItem.PdId.ToString().Split('-');
-						string otherId = otherParts[0];
-						if (otherId == id)
-						{
-							size.Add(otherItem.SizeName);
-							colors.Add(otherItem.ColorName);
-						}
-					}
+                    <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 mt-3">
+                        <div class="card px-3 py-3">
+                            <img src="@pdimg" class="card-img-top img-fluid object-fit-cover" style="height:30vh" alt="...">
+                            <hr />
+                            <div class="card-body">
+                                <h5 class="card-title text-truncate">@item.PdName</h5>
+                                <p class="card-subtitle text-muted">Culoare: @string.Join(",", colors.Distinct())</p>
+                                <p class="card-subtitle text-muted">Marime: @string.Join(",", size.Distinct())</p>
 
-					<div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 mt-3">
-						<div class="card px-3 py-3">
-							<img src="@pdimg" class="card-img-top img-fluid object-fit-cover" style="height:30vh" alt="...">
-							<hr />
-							<div class="card-body">
-								<h5 class="card-title text-truncate">@item.PdName</h5>
-								<p class="card-subtitle text-muted">สี: @string.Join(",", colors.Distinct())</p>
-								<p class="card-subtitle text-muted">ขนาด: @string.Join(",", size.Distinct())</p>
-
-								<a class="btn btn-btn-link" asp-action="show" asp-controller="Product" asp-route-id="@item.PdId">Detalii</a>
-								<a asp-action="AddDtl" asp-controller="Cart" asp-route-pdid="@item.PdId" asp-route-qty="1" class="text-danger float-end"><i class="bi bi-cart-plus-fill"></i></a>
-							</div>
-						</div>
-					</div>
-				}
-			</div>
+                                <a class="btn btn-btn-link" href=@Url.Action("Show", "Product", new { id = item.PdId})>Detalii</a>
+                                <a href=@Url.Action("AddDtl", "Cart", new { pdid = item.PdId, qty = 1 }) class="text-danger float-end"><i class="bi bi-cart-plus-fill"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
 		</div>
 	</div>
 </div>

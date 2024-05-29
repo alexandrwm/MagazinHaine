@@ -1,8 +1,11 @@
-﻿using BeStreet.BusinessLogic.DbContexts;
+﻿using Abp.Linq.Expressions;
+using BeStreet.BusinessLogic.DbContexts;
 using BeStreet.Domain.Entities.Items;
 using BeStreet.Domain.Entities.ViewModels;
+using JetBrains.Annotations;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web.Mvc;
 
 namespace BeStreet.BusinessLogic.Core
 {
@@ -24,7 +27,7 @@ namespace BeStreet.BusinessLogic.Core
         {
             using (var db = new BeStreetContext())
             {
-                var pdvm = from p in db.Products
+                var pdvm = from p in db.Products where p.PdStk > 0
 
                            join pt in db.ProductTypes on p.PdtId equals pt.PdtId into join_p_pt
 
@@ -38,9 +41,6 @@ namespace BeStreet.BusinessLogic.Core
 
                            join target in db.Targets on p.TargetId equals target.TargetId into join_p_target
                            from p_target in join_p_target.DefaultIfEmpty()
-
-                           join status in db.Statuses on p.StatusId equals status.StatusId into join_p_status
-                           from p_status in join_p_status.DefaultIfEmpty()
 
                            where p_target.TargetName.Equals(category)
 
@@ -56,7 +56,6 @@ namespace BeStreet.BusinessLogic.Core
                                PdtName = p_pt.PdtName,
                                PdPrice = p.PdPrice,
                                PdStk = p.PdStk,
-                               StatusName = p_status.StatusName,
                            };
 
                 return pdvm.ToList();
@@ -77,15 +76,8 @@ namespace BeStreet.BusinessLogic.Core
                            join size in db.Sizes on p.SizeId equals size.SizeId into join_p_size
                            from p_size in join_p_size.DefaultIfEmpty()
 
-
                            join target in db.Targets on p.TargetId equals target.TargetId into join_p_target
                            from p_target in join_p_target.DefaultIfEmpty()
-
-                           join status in db.Statuses on p.StatusId equals status.StatusId into join_p_status
-                           from p_status in join_p_status.DefaultIfEmpty()
-
-                           join Sup in db.Suppliers on p.SupId equals Sup.SupId into join_p_Sup
-                           from p_Sup in join_p_Sup.DefaultIfEmpty()
 
                            select new PdVM
                            {
@@ -99,8 +91,6 @@ namespace BeStreet.BusinessLogic.Core
                                PdtName = p_pt.PdtName,
                                PdPrice = p.PdPrice,
                                PdStk = p.PdStk,
-                               StatusName = p_status.StatusName,
-                               SupName = p_Sup.SupName
                            };
 
                 return pdvm.ToList();
@@ -149,6 +139,107 @@ namespace BeStreet.BusinessLogic.Core
                 db.SaveChanges();
             }
             return true;
+        }
+    
+        internal List<TEntity> GetFilterAction<TEntity>() where TEntity : class
+        {
+            using (var db = new BeStreetContext())
+            {
+                return db.Set<TEntity>().ToList();
+            }
+        }
+    
+        internal List<PdFilterVM> GetFilteredProductsAction(int[] typeIds, int[] sizeIds, int[] colorIds, string targetName)
+        {
+            var pr = PredicateBuilder.New<Product>();
+
+            if (!(typeIds == null))
+            {
+                pr = pr.And(p => typeIds.Contains(p.PdtId));
+            }
+            if (!(sizeIds == null))
+            {
+                pr = pr.And(p => sizeIds.Contains(p.SizeId));
+            }
+            if (!(colorIds == null))
+            {
+                pr = pr.And(p => colorIds.Contains(p.ColorId));
+            }
+            pr.And(p => true);
+
+            using (var db = new BeStreetContext())
+            {
+                var productFilter = from p in db.Products.Where(pr)
+                                    join pt in db.ProductTypes on p.PdtId equals pt.PdtId into join_p_pt
+                                    from p_pt in join_p_pt.DefaultIfEmpty()
+
+                                    join color in db.Colors on p.ColorId equals color.ColorId into join_p_color
+                                    from p_color in join_p_color.DefaultIfEmpty()
+
+                                    join size in db.Sizes on p.SizeId equals size.SizeId into join_p_size
+                                    from p_size in join_p_size.DefaultIfEmpty()
+
+                                    join target in db.Targets on p.TargetId equals target.TargetId into join_p_target
+                                    from p_target in join_p_target.DefaultIfEmpty()
+
+                                    where p_target.TargetName == targetName
+
+                                    select new PdFilterVM
+                                    {
+                                        PdId = p.PdId,
+                                        ColorId = p.ColorId,
+                                        ColorName = p_color.ColorName,
+                                        SizeId = p.SizeId,
+                                        SizeName = p_size.SizeName,
+                                        TargetId = p.TargetId,
+                                        TargetName = p_target.TargetName,
+                                        PdName = p.PdName,
+                                        PdtId = p.PdtId,
+                                        PdtName = p_pt.PdtName,
+                                        PdPrice = p.PdPrice,
+                                        PdStk = p.PdStk,
+                                    };
+                return productFilter.ToList();
+            }
+        }
+
+        internal List<PdFilterVM> GetDetailedProductByIdAction(int id)
+        {
+            using (var db = new BeStreetContext())
+            {
+                var productFilter = from p in db.Products
+                                    join pt in db.ProductTypes on p.PdtId equals pt.PdtId into join_p_pt
+                                    from p_pt in join_p_pt.DefaultIfEmpty()
+
+                                    join color in db.Colors on p.ColorId equals color.ColorId into join_p_color
+                                    from p_color in join_p_color.DefaultIfEmpty()
+
+                                    join size in db.Sizes on p.SizeId equals size.SizeId into join_p_size
+                                    from p_size in join_p_size.DefaultIfEmpty()
+
+                                    join target in db.Targets on p.TargetId equals target.TargetId into join_p_target
+                                    from p_target in join_p_target.DefaultIfEmpty()
+
+                                    where p.PdId == id
+
+                                    select new PdFilterVM
+                                    {
+                                        PdId = p.PdId,
+                                        ColorId = p.ColorId,
+                                        ColorName = p_color.ColorName,
+                                        SizeId = p.SizeId,
+                                        SizeName = p_size.SizeName,
+                                        TargetId = p.TargetId,
+                                        TargetName = p_target.TargetName,
+                                        PdName = p.PdName,
+                                        PdtId = p.PdtId,
+                                        PdtName = p_pt.PdtName,
+                                        PdPrice = p.PdPrice,
+                                        PdStk = p.PdStk,
+                                    };
+
+                return productFilter.ToList();
+            }
         }
     }
 }

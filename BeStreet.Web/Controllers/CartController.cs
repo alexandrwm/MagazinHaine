@@ -1,24 +1,27 @@
-﻿using BeStreet.Domain.Entities.Items;
+﻿using BeStreet.BusinessLogic.DbContexts;
+using BeStreet.Domain.Entities.Items;
 using System;
-using System.Collections.Generic;
+using System.Linq;
+using System.Data.Entity;
 using System.Dynamic;
 using System.Globalization;
 using System.Web.Mvc;
+using BeStreet.Domain.Entities.ViewModels;
+using BeStreet.BusinessLogic.Interfaces;
+using BeStreet.BusinessLogic;
+using BeStreet.Web.Controllers;
 namespace BeStreet.Controllers
 {
-    public class CartController : Controller
+    public class CartController : BaseController
     {
-
+        private readonly ICart _cart = new BusinesLogic().GetCartBL();
         public ActionResult Index()
         {
             return View();
         }
-        public ActionResult AddDtl(string pdid, int qty)
+        public ActionResult AddDtl(int? pdid, int qty)
         {
-            Console.WriteLine("AddDetail Function");
-            Console.WriteLine($"Product Id: {pdid}");
-            Console.WriteLine($"Quantity: {qty}");
-            var currentUrl = Session["CurrentUrl"];
+            var currentUrl = (string)Session["CurrentUrl"];
 
             if (Session["UserId"] == null)
             {
@@ -34,128 +37,81 @@ namespace BeStreet.Controllers
 
             if (Session["CartId"] == null)
             {
-                return RedirectToAction("Add", new { pdid = pdid, qty = qty });
+                return RedirectToAction("Add", new { pdid, qty });
             }
 
-            string CartId = (string)Session["CartId"];
+            var resp = _cart.AddItemToCart((int)Session["CartId"], (int)pdid, qty);
+            
+            Session["CartQty"] = resp.CartQty.ToString();
+            Session["CartMoney"] = resp.CartMoney.ToString();
 
-
-
-            return Redirect((string)currentUrl);
-
+            return Redirect(currentUrl);
         }
-        public ActionResult Add(string pdid, int qty)
+
+        public ActionResult Add(int pdid, int qty)
         {
-            string theId;
-            int rowCount = 0;
-            int i = 0;
-            string today;
-            string CusId = (string)Session["UserId"];
-
-            CultureInfo us = new CultureInfo("en-US");
-            do
-            {
-                i++;
-                today = DateTime.Now.ToString("'CT'yyyyMMdd");
-                theId = string.Concat(today, i.ToString("0000"));
-
-
-
-            } while (rowCount != 0);
-
+            int CusId = (int)Session["UserId"];
+            
             try
             {
-                Cart obj = new Cart();
-                obj.CartId = theId;
-                obj.CusId = CusId;
-                obj.CartDate = (DateTime.Now.Date);
-
-                obj.CartQty = 0;
-                obj.CartMoney = 0;
-
-
-                Session["CartId"] = theId;
+                Session["CartId"] = _cart.GetCurrentCart(CusId).Cart.CartId;
                 Session["CartQty"] = "0";
                 Session["CartMoney"] = "0";
 
-                return RedirectToAction("AddDtl", new { pdid = pdid, qty = qty });
+                return RedirectToAction("AddDtl", new { pdid, qty });
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 TempData["ErrorMessage"] = "Eroare de înregistrare.";
                 return RedirectToAction("Index", "Home");
             }
         }
 
-        public ActionResult Show(string cartid)
+        public ActionResult Show(int? cartid)
         {
-            if (cartid == null)
-            {
-                TempData["ErrorMessage"] = "Trebuie specificată valoarea Id cos.";
-                return RedirectToAction("Index");
-            }
             if (Session["UserId"] == null)
             {
                 TempData["ErrorMessage"] = "Va rugam sa va logati";
-                return RedirectToAction("Index");
+                return RedirectToAction("Login", "Home");
             }
 
-            string cusid = (string)Session["UserId"];
-
-            //if (cart == null)
-            //{
-            //    TempData["ErrorMessage"] = "Coșul specificat nu a fost găsit.";
-            //    return RedirectToAction("Index", "Home");
-            //}
-
-            //if (CartCheckID!.CusId != cusid)
-            //{
-            //    TempData["ErrorMessage"] = "Nu aveți permisiunea de a accesa datele.";
-            //    return RedirectToAction("List", new { cusid = cusid });
-            //}
+            int cusid = (int)Session["UserId"];
 
 
+            var cart = (cartid == null) ? 
+                _cart.GetCurrentCart(cusid).Cart : 
+                _cart.GetCartById((int)cartid, cusid);
+            
+            if (cart == null)
+            {
+                TempData["ErrorMessage"] = "Coșul specificat nu a fost găsit.";
+                return RedirectToAction("Index", "Home");
+            }
+
+            var cartdtl = _cart.GetAllItems(cart.CartId);
 
             dynamic DyModel = new ExpandoObject();
 
-            //DyModel.Master = cart;
-            //DyModel.Detail = cartdtl;
+            DyModel.Master = cart;
+            DyModel.Detail = cartdtl;
 
             return View(DyModel);
         }
 
-        public ActionResult Check()
+        public ActionResult Delete()
         {
-            string cusid = (string)Session["UserId"];
-
-            //int rowCount = cart.Count();
-            int rowCount = 0;
-            Console.WriteLine($"===========================");
-            Console.WriteLine($"CountRow: {rowCount}");
-            if (rowCount > 0)
+            if (Session["UserId"] == null)
             {
-                Cart obj = new Cart();
-                //foreach(var item in cart)
-                //{
-                //    obj = item;
-                //}
-                Session["CartId"] = obj.CartId;
-                Session["CartQty"] = obj.CartQty.ToString();
-                Session["CartMoney"] = obj.CartMoney.ToString();
+                TempData["ErrorMessage"] = "Va rugam sa va logati";
+                return RedirectToAction("Login", "Home");
             }
-            return RedirectToAction("Index", "Home");
-        }
 
-        public ActionResult Delete(string cartid)
-        {
-
-            //if(master == null)
+            var deleted = _cart.DeleteCart((int)Session["UserId"]);
+            if (!deleted)
             {
                 TempData["ErrorMessage"] = "Coșul nu a fost găsit.";
-                //return RedirectToAction("Show","Cart",new {cartid = cartid});
+                return RedirectToAction("Show", "Cart");
             }
-
-
             Session.Remove("CartId");
             Session.Remove("CartQty");
             Session.Remove("CartMoney");
@@ -163,91 +119,99 @@ namespace BeStreet.Controllers
             TempData["SuccessMessage"] = "Comanda anulata.";
             return RedirectToAction("Index", "Home");
         }
-        public ActionResult DeleteDtl(string pdid, string cartid)
-        {
 
-            //if(obj == null)
+        public ActionResult DeleteDtl(int pdid)
+        {
+            if (Session["UserId"] == null)
+            {
+                TempData["ErrorMessage"] = "Va rugam sa va logati";
+                return RedirectToAction("Login", "Home");
+            }
+
+            var cart = _cart.GetCurrentCart((int)Session["UserId"]);
+            var resp = _cart.DeleteItemFromCart(cart.Cart.CartId, pdid);
+
+            if (!resp.Status)
             {
                 TempData["ErrorMessage"] = "Nu au fost găsite informații.";
             }
-
-
-            //if(cartqty == 0)
+            if (resp.CartQty <= 0)
             {
-
-                HttpContext.Session.Remove("CartId");
-                HttpContext.Session.Remove("CartQty");
-                HttpContext.Session.Remove("CartMoney");
+                Session.Remove("CartId");
+                Session.Remove("CartQty");
+                Session.Remove("CartMoney");
 
                 TempData["SuccessMessage"] = "Comanda anulata.";
                 return RedirectToAction("Index", "Home");
-
             }
-            //else
+            else
             {
-
-                //HttpContext.Session.SetString("CartMoney", cartmoney.ToString());
-                //HttpContext.Session.SetString("CartQty", cartqty.ToString());
-                //return RedirectToAction("Show","Cart",new {cartid = cartid});
+                Session["CartMoney"] = resp.CartMoney.ToString();
+                Session["CartQty"] = resp.CartQty.ToString();
+                return RedirectToAction("Show", "Cart");
             }
         }
 
-        public ActionResult Confirm(string cartid)
+        public ActionResult Confirm()
         {
-            var cartdtl = new List<object>();
-            int rowCount = cartdtl.Count;
-            if (rowCount == 0)
+            if (Session["UserId"] == null)
             {
-                TempData["ErrorMessage"] = "Eroare de confirmare.";
-                return RedirectToAction("show", "Cart", new { cartid = cartid });
+                TempData["ErrorMessage"] = "Va rugam sa va logati";
+                return RedirectToAction("Login", "Home");
             }
 
+            var cusid = (int)Session["UserId"];
+            var confirm = _cart.ConfirmCart(cusid);
+
+            if (!confirm)
+            {
+                TempData["ErrorMessage"] = "Eroare de confirmare.";
+                return RedirectToAction("Show", "Cart");
+            }
 
             HttpContext.Session.Remove("CartId");
             HttpContext.Session.Remove("CartQty");
             HttpContext.Session.Remove("CartMoney");
 
             TempData["SuccessMessage"] = "Comandă confirmată.";
-            //return RedirectToAction("List", "Cart", new { cusid = master.CusId });
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("List", "Cart");
+            //return RedirectToAction("Index", "Home");
         }
-        public ActionResult List(int? cusid)
+
+        public ActionResult List()
         {
-            if (cusid == null)
-            {
-                TempData["ErrorMessage"] = "Valoarea necesară pentru id.";
-                return RedirectToAction("Index");
-            }
-            if (Session["UserId"] == null)
+            var user = _session.GetUserByCookie(Request.Cookies["UserCookie"].Value);
+            if (user == null)
             {
                 TempData["ErrorMessage"] = "Va rugam sa va logati.";
-                return RedirectToAction("Index");
+                return RedirectToAction("Login", "Home");
             }
-            if ((int)Session["UserId"] != cusid)
-            {
-                TempData["ErrorMessage"] = "Nu aveți permisiunea de a accesa datele.";
-                return RedirectToAction("List", new { cusid = (int)Session["UserId"] });
-            }
-            var cart = new List<Cart>();
+
+            var cart = _cart.GetCartHistory(user.Id);
             return View(cart);
         }
-        public ActionResult Paid(string cartid)
+
+        public ActionResult Paid(int cartid)
         {
-            var cartdtl = new List<CartDtl>();
-            int rowCount = cartdtl.Count;
-            if (rowCount == 0)
+            var user = _session.GetUserByCookie(Request.Cookies["UserCookie"].Value);
+            if (user == null)
             {
-                TempData["ErrorMessage"] = "Plata eșuată.";
-                return RedirectToAction("show", "Cart", new { cartid = cartid });
+                TempData["ErrorMessage"] = "Va rugam sa va logati.";
+                return RedirectToAction("Login", "Home");
             }
 
-            //update cart for Paid
-            var master = new Cart();
+            var cart = _cart.GetCartById(cartid, user.Id);
 
+            var hasItems = _cart.PayCart(cart.CartId);
+            if (!hasItems)
+            {
+                TempData["ErrorMessage"] = "Plata eșuată.";
+                return RedirectToAction("Show", "Cart");
+            }
 
 
             TempData["SuccessMessage"] = "Plată efectuată";
-            return RedirectToAction("List", "Cart", new { cusid = master.CusId });
+            return RedirectToAction("Show", "Cart", new { cartid = cart.CartId });
         }
     }
 }

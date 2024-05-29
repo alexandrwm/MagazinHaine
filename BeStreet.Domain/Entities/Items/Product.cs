@@ -36,16 +36,8 @@ namespace BeStreet.Domain.Entities.Items
         [Display(Name = "Type")]
         public int PdtId { get; set; }
 
-        [Display(Name = "Status")]
-        public int StatusId { get; set; }
-
         [Display(Name = "Target")]
         public int TargetId { get; set; }
-
-        [Display(Name = "Suppliers")]
-        public int SupId { get; set; }
-
-        //public string PdCode { get; set; }
 
         public DateTime? PdLastSale { get; set; }
     }

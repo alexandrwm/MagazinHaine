@@ -15,14 +15,14 @@ namespace BeStreet.BusinessLogic
             return new SessionBL();
         }
 
-        public IMgmtSup GetMgmtSupBL()
-        {
-            return new MgmtSupBL();
-        }
-
         public IMgmtCus GetMgmtCusBL()
         {
             return new MgmtCusBL();
+        }
+
+        public ICart GetCartBL()
+        {
+            return new CartBL();
         }
     }
 }

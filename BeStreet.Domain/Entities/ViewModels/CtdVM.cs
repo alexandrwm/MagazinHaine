@@ -1,10 +1,10 @@
-﻿namespace BeStreet.ViewModels
+﻿namespace BeStreet.Domain.Entities.ViewModels
 {
     public class CtdVM
     {
-        public string CartId { get; set; } = null;
+        public int CartId { get; set; }
 
-        public string PdId { get; set; } = null;
+        public int PdId { get; set; }
 
         public string PdName { get; set; }
         public string ColorName { get; set; }

@@ -39,7 +39,7 @@
             <tr>
                 <td>@i</td>
                 <td>
-                    <a asp-action="Show" asp-route-cartid="@item.CartId">@item.CartId</a>
+                    <a href=@Url.Action("Show", "Cart", new { cartid = item.CartId })>@item.CartId</a>
                 </td>
                 <td>@item.CartDate</td>
                 <td class="text-end">@item.CartQty</td>
@@ -47,7 +47,7 @@
                 @* <td class="text-center">@(@item.CartCf == "Y" ? "Yes" : "No") </td> *@
                 <td class="text-center">@(@item.CartPay == "Y" ? "Da" : "Nu")</td>
                 <td class="text-center">
-                    @(item.CartSend == null ? "Nu a fost încă plătit" : item.CartSend)
+                    @(item.CartSend == "N" ? "Nu a fost încă plătit" : "Pregătirea produselor")
                 </td>
             </tr>
         }

@@ -48,8 +48,6 @@
                         <th>Țintă</th>
                         <th>Cantitate in stock</th>
                         <th>Preț</th>
-                        <th>Statut</th>
-                        <th>Furnizor</th>
                         <th>Editeaza</th>
                         <th>Sterge</th>
                     </tr>
@@ -74,8 +72,6 @@
                             <td>@item.TargetName</td>
                             <td>@item.PdStk</td>
                             <td>@item.PdPrice</td>
-                            <td>@item.StatusName</td>
-                            <td>@item.SupName</td>
                         
                             <td class="text-center">
                                 <a href=@Url.Action("Edit", "Product", new { id = item.PdId })>

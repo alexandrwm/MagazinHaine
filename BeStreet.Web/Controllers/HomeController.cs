@@ -1,6 +1,7 @@
 ﻿using BeStreet.BusinessLogic;
 using BeStreet.BusinessLogic.DbContexts;
 using BeStreet.BusinessLogic.Interfaces;
+using BeStreet.Domain.Entities.Items;
 using BeStreet.Domain.Entities.User;
 using BeStreet.Models;
 using BeStreet.Web.Controllers;
@@ -15,7 +16,7 @@ namespace BeStreet.Controllers
     public class HomeController : BaseController
     {
         private readonly IProd _prods = new BusinesLogic().GetProdBL();
-
+        private readonly ICart _cart = new BusinesLogic().GetCartBL();
         public ActionResult Index()
         {
             SessionStatus();
@@ -59,6 +60,15 @@ namespace BeStreet.Controllers
 
                     Session["UserName"] = userLogin.Name;
                     Session["UserId"] = userLogin.Id;
+                    
+                    var resp = _cart.GetCurrentCart(userLogin.Id);
+                    if (resp.AlreadyExists)
+                    {
+                        var cart = resp.Cart;
+                        Session["CartId"] = cart.CartId;
+                        Session["CartMoney"] = cart.CartMoney;
+                        Session["CartQty"] = cart.CartQty;
+                    }
 
                     if (userLogin.Role == Domain.Enums.URole.Customer)
                     {
@@ -88,13 +98,6 @@ namespace BeStreet.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Shop(string stext)
-        {
-            return RedirectToAction("Index");
-        }
-
         public ActionResult Shop()
         {
             SessionStatus();
@@ -103,46 +106,45 @@ namespace BeStreet.Controllers
         public ActionResult Men()
         {
             SessionStatus();
-            using (var db = new BeStreetContext())
-            {
-                var FilterCategory = db.ProductTypes.ToList();
-                var FilterColor = db.Colors.ToList();
-                var FilterSize = db.Sizes.ToList();
 
-                var pdvm = _prods.GetProducts("Barbati");
-                if (pdvm == null) return HttpNotFound();
-                ViewBag.ErrorMessage = TempData["ErrorMessage"];
+            var pdvm = _prods.GetProducts("Barbati");
+            if (pdvm == null) return HttpNotFound();
+            ViewBag.ErrorMessage = TempData["ErrorMessage"];
 
-                ViewData["FilterCategory"] = FilterCategory;
-                ViewData["FilterColor"] = FilterColor;
-                ViewData["FilterSize"] = FilterSize;
-                return View(pdvm);
-            }
+            ViewData["FilterCategory"] = _prods.GetFilter<ProductType>();
+            ViewData["FilterColor"] = _prods.GetFilter<Color>();
+            ViewData["FilterSize"] = _prods.GetFilter<Size>();
+            return View(pdvm);
         }
-
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //      public ActionResult Men(string stext)
-        //{
-        //	if (stext == null)
-        //	{
-        //		return RedirectToAction("men");
-        //	}
-
-        //	return View();
-        //}
 
         public ActionResult Women()
         {
             SessionStatus();
-            return View();
+
+            var pdvm = _prods.GetProducts("Femei");
+            if (pdvm == null) return HttpNotFound();
+            ViewBag.ErrorMessage = TempData["ErrorMessage"];
+
+            ViewData["FilterCategory"] = _prods.GetFilter<ProductType>();
+            ViewData["FilterColor"] = _prods.GetFilter<Color>();
+            ViewData["FilterSize"] = _prods.GetFilter<Size>();
+            
+            return View(pdvm);
         }
 
         public ActionResult Kids()
         {
-
             SessionStatus();
-            return View();
+
+            var pdvm = _prods.GetProducts("Copii");
+            if (pdvm == null) return HttpNotFound();
+            ViewBag.ErrorMessage = TempData["ErrorMessage"];
+
+            ViewData["FilterCategory"] = _prods.GetFilter<ProductType>();
+            ViewData["FilterColor"] = _prods.GetFilter<Color>();
+            ViewData["FilterSize"] = _prods.GetFilter<Size>();
+
+            return View(pdvm);
         }
 
         public ActionResult Register()

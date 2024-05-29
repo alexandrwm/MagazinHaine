@@ -127,11 +127,6 @@
                         @Html.DropDownListFor(m => m.PdtId, (IEnumerable<SelectListItem>)ViewData["Pdt"], "Selecteaza categoria produsului", new { @class = "form-select" })
                         @Html.ValidationMessageFor(m => m.PdtId, "", new { @class = "text-danger" })
                     </div>
-                    <div class="form-group">
-                        <label for="SupId" class="control-label">Furnizori</label>
-                        @Html.DropDownListFor(m => m.SupId, (IEnumerable<SelectListItem>)ViewData["Suppliers"], "Selecteaza furnizorii produsului", new { @class = "form-select" })
-                        @Html.ValidationMessageFor(m => m.SupId, "", new { @class = "text-danger" })
-                    </div>
                 </div>
             </div>
 
@@ -141,12 +136,6 @@
                 </div>
 
                 <div class="card-body">
-                    <div class="form-group">
-                        <label for="StatusId" class="control-label">Statut</label>
-                        @Html.DropDownListFor(m => m.StatusId, (IEnumerable<SelectListItem>)ViewData["Status"], "Statut", new { @class = "form-select" })
-                        @Html.ValidationMessageFor(m => m.StatusId, "", new { @class = "text-danger" })
-                    </div>
-
                     <div class="form-group">
                         <label for="PdStk" class="control-label">Cantitate</label>
                         @Html.TextBoxFor(m => m.PdStk, new { @class = "form-control", placeholder = "0", type = "number" })
